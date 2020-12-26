@@ -67,6 +67,32 @@ namespace OilToolsPlantform.Data.BLL
             }
             return response;
         }
+
+        public DTO.PSLogQuery LogQuery(DTO.PQLogQuery request)
+        {
+            DTO.PSLogQuery response = new DTO.PSLogQuery();
+            try
+            {
+                DAL.cOtherDAL dal = new DAL.cOtherDAL(con);
+                dal.LogQueryBuild(request);
+                response.data = dal.Query<DTO.LLog>();
+                int num = dal.Count();
+                response.Page = request.Page;
+                response.MaxNum = num;
+                response.count = num;
+                response.MaxPage = MathExpansion.CaculatPage(num, request.PageRow);
+
+                response.ErrorMessage = rm.GetString(response.ErrorCode);
+                response.code = response.ErrorCode == "A_0" ? "0" : response.ErrorCode;
+                response.msg = response.ErrorMessage;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error("cOtherBLL.LogQuery！", ex);
+                throw;
+            }
+            return response;
+        }
         #endregion
     }
 }

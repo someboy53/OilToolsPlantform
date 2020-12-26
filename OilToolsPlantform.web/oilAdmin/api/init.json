@@ -97,7 +97,7 @@
           "child": [
             {
               "title": "日志监测",
-              "href": "",
+              "href": "page/log.html",
               "icon": "fa fa-file",
               "target": "_self"
             }

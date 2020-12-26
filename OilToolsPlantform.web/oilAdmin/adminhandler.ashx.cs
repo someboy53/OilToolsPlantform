@@ -126,7 +126,7 @@ namespace OilToolsPlantform.oilAdmin
         {
             //Hashtable user = GetUser();
             //if (user.role == "admin" && methodName == "remove") throw .    
-            if (methodName == "login")
+            if (methodName == "login" || methodName == "passwordModify")
                 return;
             foreach (string method in methodList)
             {
@@ -239,6 +239,17 @@ namespace OilToolsPlantform.oilAdmin
             Data.DTO.PSUserView response = new Data.DTO.PSUserView();
             Data.BLL.cUserBLL client = new Data.BLL.cUserBLL();
             response = client.UserView(request);
+            string strResponse = this.Obj2Json(response);
+            return strResponse;
+        }
+
+        public string passwordModify()
+        {
+            Data.DTO.PQPasswordModify request = new Data.DTO.PQPasswordModify();
+            request = this.Json2Obj(jsonStr, request.GetType()) as Data.DTO.PQPasswordModify;
+            Data.DTO.PSPasswordModify response = new Data.DTO.PSPasswordModify();
+            Data.BLL.cUserBLL client = new Data.BLL.cUserBLL();
+            response = client.PasswordModify(request);
             string strResponse = this.Obj2Json(response);
             return strResponse;
         }
@@ -373,6 +384,32 @@ namespace OilToolsPlantform.oilAdmin
             Data.DTO.PSWelcomeView response = new Data.DTO.PSWelcomeView();
             Data.BLL.cOtherBLL client = new Data.BLL.cOtherBLL();
             response = client.WelcomeView(request);
+            string strResponse = this.Obj2Json(response);
+            return strResponse;
+        }
+        #endregion
+
+        #region 微信处理
+        public string fansQuery()
+        {
+            Data.DTO.PQWechatFanQuery request = new Data.DTO.PQWechatFanQuery();
+            request = this.Json2Obj(jsonStr, request.GetType()) as Data.DTO.PQWechatFanQuery;
+            Data.DTO.PSWechatFanQuery response = new Data.DTO.PSWechatFanQuery();
+            Data.BLL.cOtherBLL client = new Data.BLL.cOtherBLL();
+            response = client.WechatFanQuery(request);
+            string strResponse = this.Obj2Json(response);
+            return strResponse;
+        }
+        #endregion
+
+        #region 日志处理
+        public string logQuery()
+        {
+            Data.DTO.PQLogQuery request = new Data.DTO.PQLogQuery();
+            request = this.Json2Obj(jsonStr, request.GetType()) as Data.DTO.PQLogQuery;
+            Data.DTO.PSLogQuery response = new Data.DTO.PSLogQuery();
+            Data.BLL.cOtherBLL client = new Data.BLL.cOtherBLL();
+            response = client.LogQuery(request);
             string strResponse = this.Obj2Json(response);
             return strResponse;
         }

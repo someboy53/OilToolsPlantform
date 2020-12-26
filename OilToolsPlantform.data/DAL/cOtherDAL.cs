@@ -49,23 +49,45 @@ namespace OilToolsPlantform.Data.DAL
         {
             this.AppendInit();
             this.AppendFieldRownum("wf.WechatFanID");
-            this.AppendFieldStr("openid");
-            this.AppendFieldStr("subscribe");
-            this.AppendFieldStr("nickname");
-            this.AppendFieldStr("sex");
-            this.AppendFieldStr("city");
-            this.AppendFieldStr("country");
-            this.AppendFieldStr("province");
-            this.AppendFieldStr("language");
-            this.AppendFieldStr("subscribe_time");
-            this.AppendFieldStr("unionid");
-            this.AppendFieldStr("remark");
-            this.AppendFieldStr("groupid");
-            this.AppendFieldStr("tagid_list");
-            this.AppendFieldStr("subscribe_scene");
-            this.AppendFieldStr("qr_scene");
-            this.AppendFieldStr("qr_scene_str");
+            this.AppendFieldStr("wf.openid");
+            this.AppendFieldStr("wf.subscribe");
+            this.AppendFieldStr("wf.nickname");
+            this.AppendFieldStr("wf.sex");
+            this.AppendFieldStr("wf.city");
+            this.AppendFieldStr("wf.country");
+            this.AppendFieldStr("wf.province");
+            this.AppendFieldStr("wf.language");
+            this.AppendFieldStr("wf.subscribe_time");
+            this.AppendFieldStr("wf.unionid");
+            this.AppendFieldStr("wf.remark");
+            this.AppendFieldStr("wf.groupid");
+            this.AppendFieldStr("wf.tagid_list");
+            this.AppendFieldStr("wf.subscribe_scene");
+            this.AppendFieldStr("wf.qr_scene");
+            this.AppendFieldStr("wf.qr_scene_str");
             this.AppendFromStr("from tbWechatFan wf");
+            this.AppendComplete(request.Page, request.PageRow);
+        }
+
+        internal void LogQueryBuild(PQLogQuery request)
+        {
+            this.AppendInit();
+            this.AppendFieldRownum("l.[LogID] desc");
+            this.AppendFieldStr("l.[LogID]");
+            this.AppendFieldStr("l.[AccountNumber]");
+            this.AppendFieldStr("l.[UserID]");
+            this.AppendFieldStr("l.[Request]");
+            this.AppendFieldStr("l.[Response]");
+            this.AppendFieldStr("l.[Description]");
+            this.AppendFieldTime("l.[HappenDate]");
+            this.AppendFromStr("from tbLog l where 1=1");
+            this.AppendWhereContains("l.[AccountNumber]", request.Account);
+            string endDate = string.Empty;
+            if (!string.IsNullOrWhiteSpace(request.HappenDate))
+            {
+                endDate = DateTime.Parse(request.HappenDate).AddDays(1).ToString("yyyy-MM-dd");
+            }
+            this.AppendWhereDate("l.[HappenDate]", request.HappenDate,endDate);
             this.AppendComplete(request.Page, request.PageRow);
         }
     }

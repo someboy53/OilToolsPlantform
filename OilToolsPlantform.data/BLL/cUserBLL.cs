@@ -421,6 +421,8 @@ namespace OilToolsPlantform.Data.BLL
                             o.Description = request.Description;
                             o.CreateTime = DateTime.Now;
                             o.UpdateTime = DateTime.Now;
+                            o = con.tbOrg.Add(o);
+                            con.SaveChanges();
                             Models.tbOrg p = con.tbOrg.Find(request.ParentID);
                             if (p != null)
                             {
@@ -434,7 +436,6 @@ namespace OilToolsPlantform.Data.BLL
                                 o.RealPath = "/" + o.OrgID + "/";
                                 o.FullPath = "/" + o.OrgName + "/";
                             }
-                            con.tbOrg.Add(o);
                         }
                         else
                         {

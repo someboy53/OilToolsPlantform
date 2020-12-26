@@ -251,6 +251,7 @@
     <Content Include="oilAdmin\page\404.html" />
     <Content Include="oilAdmin\page\case.html" />
     <Content Include="oilAdmin\page\catquery.html" />
+    <Content Include="oilAdmin\page\chpwd.html" />
     <Content Include="oilAdmin\page\log.html" />
     <Content Include="oilAdmin\page\menu.html" />
     <Content Include="oilAdmin\page\org.html" />

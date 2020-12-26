@@ -200,6 +200,9 @@
     <Compile Include="Models\tbWechatFan.cs">
       <DependentUpon>OilToolsPlantformModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\LLog.cs" />
+    <Compile Include="DTO\PQLogQuery.cs" />
+    <Compile Include="DTO\PSLogQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
