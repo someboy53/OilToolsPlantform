@@ -15,7 +15,7 @@ namespace OilToolsPlantform.oilAdmin
     {
         #region 内部处理
 
-        //upload不记录
+        //upload不记录20201226
         private static List<string> methodList = new List<string>() { "Query","Modify","View","Audit","login" };
 
         private string jsonStr;
