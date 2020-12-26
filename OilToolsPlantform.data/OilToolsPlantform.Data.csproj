@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9BA45BAD-E07D-4DC0-AE1D-3FF94140654B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OilToolsPlantform.Data</RootNamespace>
+    <AssemblyName>OilToolsPlantform.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="PluSoft_Net4, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PluSoft_Net4\PluSoft_Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLL\BllBase.cs" />
+    <Compile Include="BLL\cToolBLL.cs" />
+    <Compile Include="BLL\cOtherBLL.cs" />
+    <Compile Include="BLL\cUserBLL.cs" />
+    <Compile Include="DAL\cOtherDAL.cs" />
+    <Compile Include="DTO\LCountAna.cs" />
+    <Compile Include="DTO\LOrg.cs" />
+    <Compile Include="DTO\LRole.cs" />
+    <Compile Include="DTO\LRight.cs" />
+    <Compile Include="DTO\PQCatSQuery.cs" />
+    <Compile Include="DTO\PQUploadImg.cs" />
+    <Compile Include="DTO\PQTokenView.cs" />
+    <Compile Include="DTO\PSCatSQuery.cs" />
+    <Compile Include="DTO\PSTokenView.cs" />
+    <Compile Include="DTO\PQOrgModify.cs" />
+    <Compile Include="DTO\PQOrgQuery.cs" />
+    <Compile Include="DTO\PQOrgView.cs" />
+    <Compile Include="DTO\PSOrgModify.cs" />
+    <Compile Include="DTO\PSOrgQuery.cs" />
+    <Compile Include="DTO\PSOrgView.cs" />
+    <Compile Include="DTO\PQUserView.cs" />
+    <Compile Include="DTO\PSUserView.cs" />
+    <Compile Include="DTO\PQUserModify.cs" />
+    <Compile Include="DTO\PSUserModify.cs" />
+    <Compile Include="DTO\PQUserQuery.cs" />
+    <Compile Include="DTO\PSUserQuery.cs" />
+    <Compile Include="DTO\PQLogin.cs" />
+    <Compile Include="DTO\PQToolView.cs" />
+    <Compile Include="DTO\PQCatQuery.cs" />
+    <Compile Include="DTO\PQToolQuery.cs" />
+    <Compile Include="DTO\PSCatQuery.cs" />
+    <Compile Include="DTO\PSLogin.cs" />
+    <Compile Include="DTO\PSToolQuery.cs" />
+    <Compile Include="DAL\cToolDAL.cs" />
+    <Compile Include="DTO\LCatQuery.cs" />
+    <Compile Include="DTO\LPicture.cs" />
+    <Compile Include="DTO\LToolQuery.cs" />
+    <Compile Include="DTO\LToolDetail.cs" />
+    <Compile Include="DTO\PSToolView.cs" />
+    <Compile Include="DTO\PQToolModify.cs" />
+    <Compile Include="DTO\PQToolEnable.cs" />
+    <Compile Include="DTO\PSToolModify.cs" />
+    <Compile Include="DTO\PQCatEnable.cs" />
+    <Compile Include="DTO\PQCatCreate.cs" />
+    <Compile Include="DTO\PSCatCreate.cs" />
+    <Compile Include="DTO\PQPasswordModify.cs" />
+    <Compile Include="DTO\PSPasswordModify.cs" />
+    <Compile Include="DTO\Base\ViewResponseBase.cs" />
+    <Compile Include="DTO\Base\CountQueryBase.cs" />
+    <Compile Include="DAL\cUserDAL.cs" />
+    <Compile Include="DTO\Base\QueryBase.cs" />
+    <Compile Include="DAL\DalBase.cs" />
+    <Compile Include="DTO\Base\ListRequestBase.cs" />
+    <Compile Include="DTO\Base\ListResponseBase.cs" />
+    <Compile Include="DTO\Base\RequestBase.cs" />
+    <Compile Include="DTO\Base\ResponseBase.cs" />
+    <Compile Include="DTO\LUser.cs" />
+    <Compile Include="ErrorCode.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ErrorCode.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OilToolsPlantform.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OilToolsPlantform.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OilToolsPlantformModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OilToolsPlantformModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OilToolsPlantformModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OilToolsPlantformModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbCatF.cs">
+      <DependentUpon>OilToolsPlantformModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbCatFPic.cs">
+      <DependentUpon>OilToolsPlantformModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbCatS.cs">
+      <DependentUpon>OilToolsPlantformModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbCatSPic.cs">
+      <DependentUpon>OilToolsPlantformModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbCountAna.cs">
+      <DependentUpon>OilToolsPlantformModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbLog.cs">
+      <DependentUpon>OilToolsPlantformModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbOrg.cs">
+      <DependentUpon>OilToolsPlantformModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbPic.cs">
+      <DependentUpon>OilToolsPlantformModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbRole.cs">
+      <DependentUpon>OilToolsPlantformModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbRoleDetail.cs">
+      <DependentUpon>OilToolsPlantformModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbToken.cs">
+      <DependentUpon>OilToolsPlantformModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbTool.cs">
+      <DependentUpon>OilToolsPlantformModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbToolDetail.cs">
+      <DependentUpon>OilToolsPlantformModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbToolExt.cs">
+      <DependentUpon>OilToolsPlantformModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbToolPic.cs">
+      <DependentUpon>OilToolsPlantformModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbUser.cs">
+      <DependentUpon>OilToolsPlantformModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\PQRightQuery.cs" />
+    <Compile Include="DTO\PSRightQuery.cs" />
+    <Compile Include="DTO\PQRightView.cs" />
+    <Compile Include="DTO\PSRightView.cs" />
+    <Compile Include="DTO\PQRightModify.cs" />
+    <Compile Include="DTO\PSRightModify.cs" />
+    <Compile Include="DTO\PQRoleModify.cs" />
+    <Compile Include="DTO\PSRoleModify.cs" />
+    <Compile Include="DTO\PQLogModify.cs" />
+    <Compile Include="DTO\PSLogModify.cs" />
+    <Compile Include="DTO\PQWelcomeView.cs" />
+    <Compile Include="DTO\PSWelcomeView.cs" />
+    <Compile Include="DTO\PQWechatFanQuery.cs" />
+    <Compile Include="DTO\PSWechatFanQuery.cs" />
+    <Compile Include="DTO\LWechatFanQuery.cs" />
+    <Compile Include="Models\tbWechatFan.cs">
+      <DependentUpon>OilToolsPlantformModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="Models\OilToolsPlantform.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OilToolsPlantform.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\InitData\data.xlsx" />
+    <None Include="Models\OilToolsPlantformModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>OilToolsPlantformModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Models\OilToolsPlantformModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>OilToolsPlantformModel.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\Partial\" />
+    <Folder Include="Models\Procedures\" />
+    <Folder Include="OilToolsPlantform\Data\DTO\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BLL\readme.txt" />
+    <Content Include="DAL\readme.txt" />
+    <Content Include="DTO\readme.txt" />
+    <Content Include="Models\Functions\dbo.fn_getPy.sql" />
+    <Content Include="Models\Functions\dbo.fn_getPying.sql" />
+    <Content Include="Models\InitData\datascript.sql" />
+    <Content Include="Models\InitData\test.sql" />
+    <Content Include="Models\SQL\updateV0.2.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\com.Origin.CommonLibrary.Framework\com.Origin.CommonLibrary.Framework.csproj">
+      <Project>{E91A12AF-E8A1-464E-AD61-225085F52696}</Project>
+      <Name>com.Origin.CommonLibrary.Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ErrorCode.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorCode.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

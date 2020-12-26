@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>useredit</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../css/public.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="layui-form layuimini-form" lay-filter="formdata">
+        <div class="layui-form-item">
+            <button class="layui-btn layui-btn-normal" id="btnAddRole">增加角色</button>
+        </div>
+        <div class="layui-form-item">
+            <blockquote class="layui-elem-quote"><label name="FunctionCode" lay-filter="formdata"></label></blockquote>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选择角色</label>
+            <div class="layui-input-block" name="chklist">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button id="saveBtn" class="layui-btn layui-btn-normal" lay-submit lay-filter="formdata">确认保存</button>
+            </div>
+        </div>
+    </div>
+    <script src="../../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+    <script src="../../js/other.js?v=20201222" type="text/javascript"></script>
+    <script>
+        layui.use(['form', 'laydate'], function () {
+            var $ = layui.jquery,
+                form = layui.form,
+                layer = layui.layer;
+
+            var api = function (data, func, url) {
+                url = url + '&token=' + getMainParam('token');
+                $.ajax({
+                    type: "post",
+                    data: data,
+                    url: url,
+                    async: true,
+                    dataType: "json",
+                    success: function (res) {
+                        func && func(res);
+                        console.log(res);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            };
+
+            var id = getParam('id');
+            if (id == null || id == '') {
+                layer.msg('错误的参数');
+                closeCurrent();
+                return;
+            }
+
+            var postdata = {};
+            postdata.FunctionCode = id;
+            $('label[name="FunctionCode"]').html(id);
+            var data = {
+                json: encodeURI(JSON.stringify(postdata))
+            };
+            api(data, function (res) {
+                if (res.ErrorCode == 'A_0') {
+                    res.Roles.forEach(function (item) {
+                        $('[name="chklist"]').append('<input type="checkbox" name="role" title="' + item.RoleName + '" value="' + item.RoleID + '" lay-filter="formdata">');
+                    });
+                    res.RoleIDs.forEach(function (item) {
+                        $("input:checkbox[name='role']").each(function (i) {
+                            if ($(this).attr("value") == item) {
+                                $(this).attr("checked", true);
+                            }
+                        });
+                    });
+                    form.render('checkbox');
+                } else {
+                    layer.msg('获取数据失败' + res.ErrorMessage, function () {
+                        closeCurrent();
+                    });
+                }
+                return;
+            }, '../../adminhandler.ashx?method=rightView');
+
+            form.on('submit(formdata)', function (data) {
+                var formData = data.field;
+                formData.FunctionCode = $('label[name="FunctionCode"]').html();
+                formData.RoleIDs = [];
+                $("input:checkbox[name='role']").each(function (i) {
+                    if ($(this).is(":checked"))
+                        formData.RoleIDs.push({ key: $(this).attr("value"), value: '1' });
+                    else
+                        formData.RoleIDs.push({ key: $(this).attr("value"), value: '0' });
+                });
+                var jdata = {
+                    json: encodeURI(JSON.stringify(formData))
+                };
+                api(jdata, function (res) {
+                    if (res.ErrorCode == 'A_0') {
+                        layer.msg('修改成功', function () {
+                            closeCurrent(true);
+                        });
+                    } else {
+                        layer.msg('修改失败' + res.ErrorMessage);
+                        closeCurrent(false);
+                    }
+                }, '../../adminhandler.ashx?method=rightModify');
+                return false;
+            });
+
+            $('#btnAddRole').on('click', function () {
+                layer.prompt({
+                    formType: 0,
+                    value: '',
+                    title: '请输入角色名'
+                }, function (value, index, elem) {
+                    if (value != '') {
+                        if (value == '' || value == null) {
+                            layer.msg('不能为空');
+                            layer.close(index);
+                        }
+                        var postdata = {};
+                        postdata.RoleName = value;
+                        postdata.RoleID = 0;
+                        postdata.RoleType = '0';
+                        api({ json: encodeURI(JSON.stringify(postdata)) }, function (res) {
+                            if (res.ErrorCode == 'A_0') {
+                                layer.msg('增加成功', function () {
+                                    $('[name="chklist"]').append('<input type="checkbox" name="role" title="' + res.RoleName + '" value="' + res.RoleID + '" lay-filter="formdata">');
+                                    form.render('checkbox');
+                                });
+                            } else {
+                                layer.msg('增加失败' + res.ErrorMessage);
+                            }
+                        }, '../../adminhandler.ashx?method=roleModify');
+                    }
+                    layer.close(index);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

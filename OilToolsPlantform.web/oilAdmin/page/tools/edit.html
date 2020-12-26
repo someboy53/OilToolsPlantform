@@ -1,0 +1,387 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>useredit</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../css/public.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="layui-form layuimini-form" lay-filter="formdata">
+        <div class="layui-form-item">
+            <label class="layui-form-label required">工具ID</label>
+            <div class="layui-input-block">
+                <input type="text" name="ToolID" lay-verify="required" readonly="readonly" value="" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">工具名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="Name" lay-verify="required" lay-reqtext="工具名称不能为空" placeholder="请输入工具名称" value="" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">工具描述</label>
+            <div class="layui-input-block">
+                <textarea name="Description" placeholder="请输入内容" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">一类目录</label>
+            <div class="layui-input-block">
+                <select name="CatFID" value="" class="layui-input" lay-filter="formdata" lay-verify="required" id="optCatF">
+                    <option value="-1" selected>请选择一类目录</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">二类目录</label>
+            <div class="layui-input-block">
+                <select name="CatSID" value="" class="layui-input" lay-filter="formdata" lay-verify="required" id="optCatS">
+                    <option value="-1" selected>请选择二类目录</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">工具图片</label>
+            <div class="layui-input-block">
+                <blockquote class="layui-elem-quote"><img id="ToolPic" src="" lay-filter="formdata" /></blockquote>
+                <button type="button" class="layui-btn" id="btnUploadPic">
+                    <i class="layui-icon">&#xe67c;</i>上传图片
+                </button>
+            </div>
+        </div>
+        <div class="layui-tab layui-tab-brief" lay-filter="formdata">
+            <ul class="layui-tab-title">
+                <li class="layui-this">工具介绍</li>
+                <li>功能特点</li>
+                <li>技术参数</li>
+                <li>应用案例</li>
+                <li>库存情况</li>
+                <li>联系我们</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">是否显示</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" name="ShowIntro" lay-skin="switch" lay-filter="formdata">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">内容</label>
+                        <div class="layui-input-block">
+                            <textarea id="IntroDesc" name="IntroDesc" placeholder="请输入内容" readonly="readonly" class="layui-textarea" lay-filter="formdata"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">是否显示</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" name="ShowFunc" lay-skin="switch" lay-filter="formdata">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">内容</label>
+                        <div class="layui-input-block">
+                            <textarea id="FuncDesc"  name="FuncDesc" placeholder="请输入内容" readonly="readonly" class="layui-textarea" lay-filter="formdata"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">是否显示</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" name="ShowParam" lay-skin="switch" lay-filter="formdata">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">内容</label>
+                        <div class="layui-input-block">
+                            <textarea id="ParamDesc" name="ParamDesc" placeholder="请输入内容" readonly="readonly" class="layui-textarea" lay-filter="formdata"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">是否显示</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" name="ShowCase" lay-skin="switch" lay-filter="formdata">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">内容</label>
+                        <div class="layui-input-block">
+                            <textarea id="CaseDesc" name="CaseDesc" placeholder="请输入内容" readonly="readonly" class="layui-textarea" lay-filter="formdata"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">是否显示</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" name="ShowStock" lay-skin="switch" lay-filter="formdata">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">内容</label>
+                        <div class="layui-input-block">
+                            <textarea id="StockDesc" name="StockDesc" placeholder="请输入内容" readonly="readonly" class="layui-textarea" lay-filter="formdata"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">是否显示</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" name="ShowContact" lay-skin="switch" lay-filter="formdata">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">内容</label>
+                        <div class="layui-input-block">
+                            <textarea id="ContactDesc" name="ContactDesc" placeholder="请输入内容" readonly="readonly" class="layui-textarea" lay-filter="formdata"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button id="saveBtn" class="layui-btn layui-btn-normal" lay-submit lay-filter="formdata">确认保存</button>
+            </div>
+        </div>
+    </div>
+    <script src="../../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+    <script src="../../js/other.js?v=20201222" type="text/javascript"></script>
+    <script>
+        layui.use(['form', 'laydate', 'upload', 'element'], function () {
+            var $ = layui.jquery,
+                form = layui.form,
+                layer = layui.layer,
+                upload = layui.upload,
+                element = layui.element;
+
+            var api = function (data, func, url) {
+                url = url + '&token=' + getMainParam('token');
+                $.ajax({
+                    type: "post",
+                    data: data,
+                    url: url,
+                    async: true,
+                    dataType: "json",
+                    success: function (res) {
+                        func && func(res);
+                        console.log(res);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            };
+
+            var id = getParam('id');
+            if (id <= 0) {
+                layer.msg('错误的参数');
+                closeCurrent();
+                return;
+            }
+
+            var postdata = {};
+            postdata.ToolID = id;
+            var data = {
+                json: encodeURI(JSON.stringify(postdata))
+            };
+            api(data, function (res) {
+                if (res.ErrorCode == 'A_0') {
+                    res.CatFList.forEach(function (item) {
+                        $('#optCatF').append('<option value="' + item.Key.toString() + '">' + item.Value + '</option>');
+                    });
+                    res.CatSList.forEach(function (item) {
+                        $('#optCatS').append('<option value="' + item.Key.toString() + '">' + item.Value + '</option>');
+                    });
+                    //开始处理详情
+                    res.ShowIntro = false;
+                    res.ShowFunc = false;
+                    res.ShowParam = false;
+                    res.ShowCase = false;
+                    res.ShowStock = false;
+                    res.ShowContact = false;
+                    res.ToolDetailList.forEach(function (item) {
+                        switch (item.IconName) {
+                            case "intro.png":
+                                res.ShowIntro = true;
+                                layui.sessionData('detail', { key: 'intro', value: item.ToolDetailID });
+                                res.IntroDesc = item.Description;
+                                $("#IntroDesc").removeAttr("readonly");
+                                break;
+                            case "func.png":
+                                res.ShowFunc = true;
+                                layui.sessionData('detail', { key: 'func', value: item.ToolDetailID });
+                                res.FuncDesc = item.Description;
+                                $("#FuncDesc").removeAttr("readonly");
+                                break;
+                            case "param.png":
+                                res.ShowParam = true;
+                                layui.sessionData('detail', { key: 'param', value: item.ToolDetailID });
+                                res.ParamDesc = item.Description;
+                                $("#ParamDesc").removeAttr("readonly");
+                                break;
+                            case "case.png":
+                                res.ShowCase = true;
+                                layui.sessionData('detail', { key: 'case', value: item.ToolDetailID });
+                                res.CaseDesc = item.Description;
+                                $("#CaseDesc").removeAttr("readonly");
+                                break;
+                            case "stock.png":
+                                res.ShowStock = true;
+                                layui.sessionData('detail', { key: 'stock', value: item.ToolDetailID });
+                                res.StockDesc = item.Description;
+                                $("#StockDesc").removeAttr("readonly");
+                                break;
+                            case "contact.png":
+                                res.ShowContact = true;
+                                layui.sessionData('detail', { key: 'contact', value: item.ToolDetailID });
+                                res.ContactDesc = item.Description;
+                                $("#ContactDesc").removeAttr("readonly");
+                                break;
+                        }
+                    });
+                    form.val('formdata', res);
+                    form.render('select'); //刷新select选择框渲染
+                    //准备图片
+                    $('#ToolPic').attr('src', res.PictureList[0].Path + res.PictureList[0].StoreName);
+                    layui.sessionData('ToolPic', { key: 'pics', value: res.PictureList });
+                } else {
+                    layer.msg('获取数据失败' + res.ErrorMessage, function () {
+                        closeCurrent();
+                    });
+                }
+                return;
+            }, '../../adminhandler.ashx?method=toolView');
+
+            //渲染upload
+            var uploadInst = upload.render({
+                elem: '#btnUploadPic' //绑定元素
+                , data: { json: encodeURI('{ID:' + id + ',Type:"t"}') }
+                , accept: 'images' //只允许上传图片
+                , acceptMime: 'image/*' //只筛选图片
+                , size: 1024 * 10 //限定大小
+                , url: '../../adminhandler.ashx?method=uploadImg&token=' + getMainParam('token') //上传接口
+                , done: function (res) {
+                    //上传完毕回调
+                    if (res.ErrorCode == "A_0") {
+                        $('#ToolPic').attr('src', res.files[0].Path + res.files[0].StoreName);
+                        layui.sessionData('ToolPic', null);
+                        layui.sessionData('ToolPic', { key: 'pics', value: [{ PicID: layui.sessionData('ToolPic').PicID, StoreName: res.files[0].StoreName,Path:res.files[0].Path}]});
+                    }
+                    else {
+                        layer.msg("上传失败" + res.ErrorMessage);
+                    }
+                }
+                , error: function () {
+                    //请求异常回调
+                    layer.msg("上传失败");
+                }
+            });
+
+            form.on('select(formdata)', function (data) {
+                if (data.elem.id != 'optCatF')
+                    return;
+                var postdata = {};
+                postdata.CatFID = data.value;
+                api({ json: encodeURI(JSON.stringify(postdata)) }, function (res) {
+                    if (res.ErrorCode == 'A_0') {
+                        $('#optCatS').html('<option value="-1">请选择二类目录</option>');
+                        res.data.forEach(function (item) {
+                            $('#optCatS').append('<option value="' + item.Key.toString() + '">' + item.Value + '</option>');
+                        });
+                        $('#optCatS').val(-1);
+                        form.render('select');
+                    }
+                    else {
+                        layer.msg('修改失败' + res.ErrorMessage);
+                    }
+                }, '../../adminhandler.ashx?method=catSQuery');
+            });
+
+            form.on('switch(formdata)', function (data) {
+                switch (data.elem.name) {
+                    case "ShowIntro":
+                        if (data.elem.checked)
+                            $("#IntroDesc").removeAttr("readonly");
+                        else
+                            $("#IntroDesc").attr("readonly", "readonly");
+                        break;
+                    case "ShowFunc":
+                        if (data.elem.checked)
+                            $("#FuncDesc").removeAttr("readonly");
+                        else
+                            $("#FuncDesc").attr("readonly", "readonly");
+                        break;
+                    case "ShowParam":
+                        if (data.elem.checked)
+                            $("#ParamDesc").removeAttr("readonly");
+                        else
+                            $("#ParamDesc").attr("readonly", "readonly");
+                        break;
+                    case "ShowCase":
+                        if (data.elem.checked)
+                            $("#CaseDesc").removeAttr("readonly");
+                        else
+                            $("#CaseDesc").attr("readonly", "readonly");
+                        break;
+                    case "ShowStock":
+                        if (data.elem.checked)
+                            $("#StockDesc").removeAttr("readonly");
+                        else
+                            $("#StockDesc").attr("readonly", "readonly");
+                        break;
+                    case "ShowContact":
+                        if (data.elem.checked)
+                            $("#ContactDesc").removeAttr("readonly");
+                        else
+                            $("#ContactDesc").attr("readonly", "readonly");
+                        break;
+                }
+            });
+
+            form.on('submit(formdata)', function (data) {
+                var formData = data.field;
+                formData.Pictures = layui.sessionData('ToolPic').pics;
+                formData.IntroID = layui.sessionData('detail').intro;
+                formData.FuncID = layui.sessionData('detail').func;
+                formData.ParamID = layui.sessionData('detail').param;
+                formData.CaseID = layui.sessionData('detail').case;
+                formData.StockID = layui.sessionData('detail').stock;
+                formData.ContactID = layui.sessionData('detail').contact;
+
+                var jdata = {
+                    json: encodeURI(JSON.stringify(formData))
+                };
+                api(jdata, function (res) {
+                    if (res.ErrorCode == 'A_0') {
+                        layer.msg('修改成功', function () {
+                            parent.document.getElementById("btnSearch").click();
+                            closeCurrent(true);
+                        });
+                    } else {
+                        layer.msg('修改失败' + res.ErrorMessage);
+                        closeCurrent(false);
+                    }
+                }, '../../adminhandler.ashx?method=toolModify');
+                return false;
+            });
+        });
+    </script>
+</body>
+</html>

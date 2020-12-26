@@ -1,0 +1,240 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>user</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css" media="all">
+</head>
+<body>
+    <div class="layuimini-container">
+        <div class="layuimini-main">
+            <fieldset class="table-search-fieldset">
+                <legend>搜索信息</legend>
+                <div style="margin: 10px 10px 10px 10px">
+                    <div class="layui-form layui-form-pane" lay-filter="searchdata">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">
+                                    用户姓名
+                                </label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="UserName" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">
+                                    帐号
+                                </label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="UserAccount" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">
+                                    所在部门
+                                </label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="OrgName" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">
+                                    电话号码
+                                </label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="Cellphone" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">
+                                    工号
+                                </label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="WorkNumber" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <button type="submit" class="layui-btn layui-btn-primary" id="btnSearch" lay-submit
+                                        lay-filter="data-search-btn">
+                                    <i class="layui-icon"></i> 搜 索
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <script type="text/html" id="toolbarDemo">
+                <div class="layui-btn-container">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加 </button>
+                </div>
+            </script>
+            <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter">
+            </table>
+            <script type="text/html" id="currentTableBar">
+                <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
+                <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="repwd">重置密码</a>
+                <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+            </script>
+        </div>
+    </div>
+    <script src="../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+    <script src="../js/other.js?v=20201222" type="text/javascript"></script>
+    <script>
+        layui.use(['form', 'table'], function () {
+            var $ = layui.jquery,
+                form = layui.form,
+                table = layui.table;
+
+            var api = function (data, func, url) {
+                url = url + '&token=' + getMainParam('token');
+                $.ajax({
+                    type: "post",
+                    data: data,
+                    url: url,
+                    async: true,
+                    dataType: "json",
+                    success: function (res) {
+                        func && func(res);
+                        console.log(res);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            };
+
+            table.render({
+                elem: '#currentTableId',
+                url: '../adminhandler.ashx?method=userQuery&token=' + getMainParam('token'),
+                toolbar: '#toolbarDemo',
+                defaultToolbar: ['filter', 'exports', {
+                    title: '提示',
+                    layEvent: 'LAYTABLE_TIPS',
+                    icon: 'layui-icon-tips'
+                }],
+                cellMinWidth: 100,
+                cols: [[
+                    { type: "checkbox", width: 50 },
+                    { field: 'UserID', width: 100, title: 'ID', sort: true },
+                    { field: 'UserAccount', width: 100, title: '帐号' },
+                    { field: 'UserName', width: 100, title: '用户名' },
+                    { field: 'StartDate', width: 120, title: '开始日期' },
+                    { field: 'EndDate', width: 120, title: '结束日期' },
+                    { field: 'FullPath', title: '部门', minWidth: 150 },
+                    { field: 'RoleName', width: 100, title: '角色名' },
+                    { field: 'CellPhone', width: 100, title: '手机' },
+                    { field: 'Email', width: 100, title: '电子邮箱' },
+                    { field: 'WorkNumber', width: 100, title: '工号' },
+                    { title: '操作', minWidth: 120, maxWidth: 120, toolbar: '#currentTableBar', align: "center", fixed: 'right' }
+                ]],
+                limits: [10, 15, 20, 25, 50, 100],
+                limit: 20,
+                page: true,
+                skin: 'line'
+            });
+
+            var _funcList = {
+                doSearch: function () {
+                    var result = encodeURI(JSON.stringify(form.val('searchdata')));
+                    //执行搜索重载
+                    table.reload('currentTableId', {
+                        page: {
+                            curr: 1
+                        }
+                        , where: {
+                            json: result
+                        }
+                    }, 'data');
+                }
+            }
+            window.funcList = _funcList;
+            
+            // 监听搜索操作
+            $("#btnSearch").on('click', function () {
+                _funcList.doSearch();
+            });
+
+            /**
+             * toolbar监听事件
+             */
+            table.on('toolbar(currentTableFilter)', function (obj) {
+                if (obj.event === 'add') {  // 监听添加操作
+                    var index = layer.open({
+                        title: '添加用户',
+                        type: 2,
+                        shade: 0.2,
+                        maxmin: true,
+                        shadeClose: true,
+                        area: ['100%', '100%'],
+                        content: '../page/user/add.html?t='+Math.random(),
+                    });
+                    $(window).on("resize", function () {
+                        layer.full(index);
+                    });
+                } 
+            });
+
+            //监听表格复选框选择
+            //table.on('checkbox(currentTableFilter)', function (obj) {
+            //    console.log(obj)
+            //});
+
+            table.on('tool(currentTableFilter)', function (obj) {
+                var data = obj.data;
+                if (obj.event === 'edit') {
+
+                    var index = layer.open({
+                        title: '编辑用户',
+                        type: 2,
+                        shade: 0.2,
+                        maxmin: true,
+                        shadeClose: true,
+                        area: ['100%', '100%'],
+                        content: '../page/user/edit.html?t=' + Math.random() + '&id=' + data.UserID,
+                    });
+                    $(window).on("resize", function () {
+                        layer.full(index);
+                    });
+                    return false;
+                } else if (obj.event === 'delete') {
+                    layer.confirm('真的删除此用户吗', function (index) {
+                        var postdata = {};
+                        postdata.IsDel = '1';
+                        postdata.UserID = data.UserID;
+                        var jdata = { json: encodeURI(JSON.stringify(postdata)) };
+                        api(jdata, function (res) {
+                            if (res.ErrorCode == 'A_0') {
+                                obj.del();
+                                layer.msg('删除成功');
+                            }
+                            else
+                                layer.msg('删除失败,原因为' + res.ErrorMessage);
+                        }, '../adminhandler.ashx?method=userModify');
+                        layer.close(index);
+                    });
+                } else if (obj.event === 'repwd') {
+                    layer.confirm('真的重置此用户的密码吗', function (index) {
+                        var postdata = {};
+                        postdata.IsDel = '2';
+                        postdata.UserID = data.UserID;
+                        var jdata = { json: encodeURI(JSON.stringify(postdata)) };
+                        api(jdata, function (res) {
+                            if (res.ErrorCode == 'A_0') {
+                                layer.msg('重置成功，默认密码为123456');
+                            }
+                            else
+                                layer.msg('删除失败,原因为' + res.ErrorMessage);
+                        }, '../adminhandler.ashx?method=userModify');
+                        layer.close(index);
+                    });
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>

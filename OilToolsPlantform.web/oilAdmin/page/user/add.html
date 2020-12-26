@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>useredit</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../css/public.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="layui-form layuimini-form" lay-filter="formdata">
+        <div class="layui-form-item">
+            <label class="layui-form-label required">用户ID</label>
+            <div class="layui-input-block">
+                <input type="text" name="UserID" lay-verify="required" readonly="readonly" value="" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">姓名</label>
+            <div class="layui-input-block">
+                <input type="text" name="UserName" lay-verify="required" lay-reqtext="用户姓名不能为空" placeholder="请输入用户姓名" value="" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">用户名</label>
+            <div class="layui-input-block">
+                <input type="text" name="UserAccount" lay-verify="required" lay-reqtext="用户名不能为空" placeholder="请输入用户名" value="" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">开始日期</label>
+            <div class="layui-input-block">
+                <input type="text" name="StartDate" lay-verify="required" value="" class="layui-input" id="startDate">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">部门</label>
+            <div class="layui-input-block">
+                <select name="OrgID" value="" class="layui-input" lay-filter="formdata" lay-verify="required" id="optOrg">
+                    <option value="-1" selected>请选择一个部门</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">手机</label>
+            <div class="layui-input-block">
+                <input type="number" name="CellPhone" placeholder="请输入手机" value="" class="layui-input" lay-verify="phone">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">邮箱</label>
+            <div class="layui-input-block">
+                <input type="email" name="Email" placeholder="请输入邮箱" value="" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">工号</label>
+            <div class="layui-input-block">
+                <input type="text" name="WorkNumber" placeholder="请输入工号" value="" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">角色</label>
+            <div class="layui-input-block">
+                <select name="RoleID" value="" class="layui-input" lay-filter="formdata" lay-verify="required" id="optRole">
+                    <option value="-1" selected>请选择一个角色</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button id="saveBtn" class="layui-btn layui-btn-normal" lay-submit lay-filter="formdata">确认保存</button>
+            </div>
+        </div>
+    </div>
+    <script src="../../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+    <script src="../../js/other.js?v=20201222" type="text/javascript"></script>
+    <script>
+        layui.use(['form', 'laydate'], function () {
+            var $ = layui.jquery,
+                form = layui.form,
+                layer = layui.layer,
+                laydate = layui.laydate;
+            
+            var api = function (data, func, url) {
+                url = url + '&token=' + getMainParam('token');
+                $.ajax({
+                    type: "post",
+                    data: data,
+                    url: url,
+                    async: true,
+                    dataType: "json",
+                    success: function (res) {
+                        func && func(res);
+                        console.log(res);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            };
+
+            laydate.render({ elem: '#startDate', type: 'date' });
+
+            var postdata = {};
+            postdata.UserID = 0;
+            var data = {
+                json: encodeURI(JSON.stringify(postdata))
+            };
+            api(data, function (res) {
+                if (res.ErrorCode == 'A_0') {
+                    res.OrgList.forEach(function (item) {
+                        $('#optOrg').append('<option value="' + item.Key.toString() + '">' + item.Value + '</option>');
+                    });
+                    res.OrgID = -1;
+                    res.RoleList.forEach(function (item) {
+                        $('#optRole').append('<option value="' + item.Key.toString() + '">' + item.Value + '</option>');
+                    });
+                    res.RoleID = -1;
+                    form.val('formdata', res);
+                    form.render('select'); //刷新select选择框渲染
+                } else {
+                    layer.msg('获取数据失败' + res.ErrorMessage, function () {
+                        closeCurrent();
+                    });
+                }
+                return;
+            }, '../../adminhandler.ashx?method=userView');
+
+            form.on('submit(formdata)', function (data) {
+                var formData = data.field;
+                if (formData.OrgID == "-1") {
+                    layer.msg('部门必填');
+                    return false;
+                }
+                if (formData.RoleID == "-1") {
+                    layer.msg('角色必填');
+                    return false;
+                }
+                var jdata = {
+                    json: encodeURI(JSON.stringify(formData))
+                };
+                api(jdata, function (res) {
+                    if (res.ErrorCode == 'A_0') {
+                        layer.msg('修改成功', function () {
+                            closeCurrent(true);
+                        });
+                    } else {
+                        layer.msg('修改失败' + res.ErrorMessage);
+                        closeCurrent(false);
+                    }
+                }, '../../adminhandler.ashx?method=userModify');
+                return false;
+            });
+        });
+    </script>
+</body>
+</html>

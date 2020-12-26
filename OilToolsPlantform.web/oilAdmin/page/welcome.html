@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>welcome</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="../lib/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" href="../css/public.css" media="all">
+    <style>
+        .layui-top-box {
+            padding: 40px 20px 20px 20px;
+            color: #fff
+        }
+
+        .panel {
+            margin-bottom: 17px;
+            background-color: #fff;
+            border: 1px solid transparent;
+            border-radius: 3px;
+            -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .05)
+        }
+
+        .panel-body {
+            padding: 15px
+        }
+
+        .panel-title {
+            margin-top: 0;
+            margin-bottom: 0;
+            font-size: 14px;
+            color: inherit
+        }
+
+        .label {
+            display: inline;
+            padding: .2em .6em .3em;
+            font-size: 75%;
+            font-weight: 700;
+            line-height: 1;
+            color: #fff;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: .25em;
+            margin-top: .3em;
+        }
+
+        .layui-red {
+            color: red
+        }
+
+        .main_btn > p {
+            height: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layuimini-container">
+        <div class="layui-row">
+            <div class="layuimini-main layui-col-space30">
+                <div class="layui-col-md4">
+                    <div class="col-xs-6 col-md-3">
+                        <div class="panel layui-bg-cyan">
+                            <div class="panel-body">
+                                <div class="panel-title">
+                                    <span class="label pull-right layui-bg-blue">实时</span>
+                                    <h5>工具总数</h5>
+                                </div>
+                                <div class="panel-content">
+                                    <h1 class="no-margins" id="toolCount">1234</h1>
+                                    <!-- <div class="stat-percent font-bold text-gray"><i class="fa fa-commenting"></i> 1234</div>
+                                    <small>当前总记录数</small> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md4">
+                    <div class="col-xs-6 col-md-3">
+                        <div class="panel layui-bg-blue">
+                            <div class="panel-body">
+                                <div class="panel-title">
+                                    <span class="label pull-right layui-bg-cyan">实时</span>
+                                    <h5>粉丝总数</h5>
+                                </div>
+                                <div class="panel-content">
+                                    <h1 class="no-margins" id="fanCount">0</h1>
+                                    <!-- <div class="stat-percent font-bold text-gray"><i class="fa fa-commenting"></i> 1234</div>
+                                    <small>当前总记录数</small> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md4">
+                    <div class="col-xs-6 col-md-3">
+                        <div class="panel layui-bg-orange">
+                            <div class="panel-body">
+                                <div class="panel-title">
+                                    <span class="label pull-right layui-bg-green">实时</span>
+                                    <h5>总浏览数</h5>
+                                </div>
+                                <div class="panel-content">
+                                    <h1 class="no-margins" id="viewCount">0</h1>
+                                    <!-- <div class="stat-percent font-bold text-gray"><i class="fa fa-commenting"></i> 1234</div>
+                                    <small>当前总浏览数</small> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-row" style="height:10px;background-color:#eeeeee">
+        </div>
+        <div class="layui-row">
+            <div class=" layui-card layui-col-md12">
+                <div class="layui-card-header"><i class="fa fa-line-chart icon"></i>报表统计</div>
+                <div class="layui-card-body">
+                    <div id="echarts-records" style="width: 100%;min-height:600px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+    <script src="../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+    <script src="../js/other.js?v=20201222" type="text/javascript"></script>
+    <script src="../lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
+    <script>
+        layui.use(['echarts'], function () {
+            var echarts = layui.echarts;
+
+            var api = function (data, func, url) {
+                url = url + '&token=' + getMainParam('token');
+                $.ajax({
+                    type: "post",
+                    data: data,
+                    url: url,
+                    async: true,
+                    dataType: "json",
+                    success: function (res) {
+                        func && func(res);
+                        console.log(res);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            };
+
+            var echartsRecords = echarts.init(document.getElementById('echarts-records'), 'walden');
+            var optionRecords = {};
+            api({}, function (res) {
+                if (res.ErrorCode == 'A_0') {
+                    $('#viewCount').html(res.ViewCount);
+                    $('#fanCount').html(res.FanCount);
+                    $('#toolCount').html(res.ToolCount);
+                    var xAxisData = ['无数据', '无数据', '无数据', '无数据', '无数据', '无数据', '无数据'];
+                    var weekData = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
+                    var yAxisValueTool = [0, 0, 0, 0, 0, 0, 0];
+                    var yAxisValueFan = [0, 0, 0, 0, 0, 0, 0];
+                    var yAxisValueView = [0, 0, 0, 0, 0, 0, 0];
+                    for (var i = 0; i < res.data.length; i++) {
+                        //组装数据
+                        xAxisData[i] = weekData[res.data[i].Day];
+                        yAxisValueTool[i] = res.data[i].ToolCount;
+                        yAxisValueFan[i] = res.data[i].FanCount;
+                        yAxisValueView[i] = res.data[i].ViewCount;
+                    }
+                    /**
+                    * 报表功能
+                    */
+                    optionRecords = {
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        legend: {
+                            data: ['新增工具数', '新增粉丝数', '浏览数']
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        toolbox: {
+                            feature: {
+                                saveAsImage: {}
+                            }
+                        },
+                        xAxis: {
+                            type: 'category',
+                            boundaryGap: false,
+                            data: xAxisData
+                        },
+                        yAxis: {
+                            type: 'value'
+                        },
+                        series: [
+                            {
+                                name: '新增工具数',
+                                type: 'line',
+                                data: yAxisValueTool
+                            },
+                            {
+                                name: '新增粉丝数',
+                                type: 'line',
+                                data: yAxisValueFan
+                            },
+                            {
+                                name: '浏览数',
+                                type: 'line',
+                                data: yAxisValueView
+                            }
+                        ]
+                    };
+                    echartsRecords.setOption(optionRecords);
+
+                } else {
+                    alert('获取数据失败' + res.ErrorMessage);
+                    //closeCurrent();
+                }
+            }, '../adminhandler.ashx?method=welcomeView');
+
+            // echarts 窗口缩放自适应
+            window.onresize = function () {
+                echartsRecords.resize();
+            }
+        }
+        );
+
+    </script>
+</body>
+
+</html>

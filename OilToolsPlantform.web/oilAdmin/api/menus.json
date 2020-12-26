@@ -1,0 +1,367 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 19,
+  "data": [
+    {
+      "authorityId": 36,
+      "authorityName": "欢迎页面",
+      "menuUrl": null,
+      "menuIcon": "layui-icon-set",
+      "authority": null,
+      "isMenu": 0,
+      "parentId": -1
+    },
+    {
+      "authorityId": 37,
+      "authorityName": "欢迎页面：查看",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": "welcome:view",
+      "isMenu": 2,
+      "parentId": 36
+    },
+    {
+      "authorityId": 1,
+      "authorityName": "工具库管理",
+      "menuUrl": null,
+      "menuIcon": "layui-icon-set",
+      "authority": null,
+      "isMenu": 0,
+      "parentId": -1
+    },
+    {
+      "authorityId": 2,
+      "authorityName": "资料管理",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": null,
+      "isMenu": 0,
+      "parentId": 1
+    },
+    {
+      "authorityId": 4,
+      "authorityName": "工具管理",
+      "menuUrl": "page/tools.html",
+      "menuIcon": "",
+      "authority": null,
+      "isMenu": 1,
+      "parentId": 2
+    },
+    {
+      "authorityId": 5,
+      "authorityName": "工具管理：查询",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": "tools:query",
+      "isMenu": 2,
+      "parentId": 4
+    },
+    {
+      "authorityId": 38,
+      "authorityName": "工具管理：查看",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": "tools:view",
+      "isMenu": 2,
+      "parentId": 4
+    },
+    {
+      "authorityId": 6,
+      "authorityName": "工具管理：修改",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": "tools:modify",
+      "isMenu": 2,
+      "parentId": 4
+    },
+    {
+      "authorityId": 7,
+      "authorityName": "工具管理：审核",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": "tools:audit",
+      "isMenu": 2,
+      "parentId": 4
+    },
+    {
+      "authorityId": 36,
+      "authorityName": "工具管理-目录：查询",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": "cats:query",
+      "isMenu": 2,
+      "parentId": 4
+    },
+    {
+      "authorityId": 3,
+      "authorityName": "数据查询",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": null,
+      "isMenu": 0,
+      "parentId": 1
+    },
+    {
+      "authorityId": 8,
+      "authorityName": "分类查询",
+      "menuUrl": "page/cat.html",
+      "menuIcon": "",
+      "authority": null,
+      "isMenu": 1,
+      "parentId": 3
+    },
+    {
+      "authorityId": 9,
+      "authorityName": "分类查询：查询",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": "cat:query",
+      "isMenu": 2,
+      "parentId": 8
+    },
+    {
+      "authorityId": 10,
+      "authorityName": "应用案例查询",
+      "menuUrl": "page/case.html",
+      "menuIcon": "",
+      "authority": null,
+      "isMenu": 1,
+      "parentId": 3
+    },
+    {
+      "authorityId": 11,
+      "authorityName": "应用案例查询：查询",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": "case:query",
+      "isMenu": 2,
+      "parentId": 10
+    },
+    {
+      "authorityId": 12,
+      "authorityName": "库存查询",
+      "menuUrl": "page/sku.html",
+      "menuIcon": "",
+      "authority": null,
+      "isMenu": 1,
+      "parentId": 3
+    },
+    {
+      "authorityId": 13,
+      "authorityName": "库存查询：查询",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": "sku:query",
+      "isMenu": 2,
+      "parentId": 12
+    },
+    {
+      "authorityId": 14,
+      "authorityName": "系统管理",
+      "menuUrl": null,
+      "menuIcon": "layui-icon-set",
+      "authority": null,
+      "isMenu": 0,
+      "parentId": -1
+    },
+    {
+      "authorityId": 15,
+      "authorityName": "用户管理",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": null,
+      "isMenu": 0,
+      "parentId": 14
+    },
+    {
+      "authorityId": 16,
+      "authorityName": "用户及权限管理",
+      "menuUrl": "page/user.html",
+      "menuIcon": "",
+      "authority": null,
+      "isMenu": 1,
+      "parentId": 15
+    },
+    {
+      "authorityId": 17,
+      "authorityName": "用户及权限管理：查询",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": "user:query",
+      "isMenu": 2,
+      "parentId": 16
+    },
+    {
+      "authorityId": 39,
+      "authorityName": "用户及权限管理：查看",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": "user:view",
+      "isMenu": 2,
+      "parentId": 16
+    },
+    {
+      "authorityId": 18,
+      "authorityName": "用户及权限管理：修改",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": "user:modify",
+      "isMenu": 2,
+      "parentId": 16
+    },
+    {
+      "authorityId": 19,
+      "authorityName": "组织结构",
+      "menuUrl": "page/org.html",
+      "menuIcon": "",
+      "authority": null,
+      "isMenu": 1,
+      "parentId": 15
+    },
+    {
+      "authorityId": 20,
+      "authorityName": "组织结构：查询",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": "org:query",
+      "isMenu": 2,
+      "parentId": 19
+    },
+    {
+      "authorityId": 21,
+      "authorityName": "组织结构：修改",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": "org:modify",
+      "isMenu": 2,
+      "parentId": 19
+    },
+    {
+      "authorityId": 22,
+      "authorityName": "权限管理",
+      "menuUrl": "page/right.html",
+      "menuIcon": "",
+      "authority": null,
+      "isMenu": 1,
+      "parentId": 15
+    },
+    {
+      "authorityId": 23,
+      "authorityName": "权限管理：查询",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": "right:query",
+      "isMenu": 2,
+      "parentId": 22
+    },
+    {
+      "authorityId": 24,
+      "authorityName": "权限管理：修改",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": "right:modify",
+      "isMenu": 2,
+      "parentId": 22
+    },
+    {
+      "authorityId": 34,
+      "authorityName": "权限管理：查看",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": "right:view",
+      "isMenu": 2,
+      "parentId": 22
+    },
+    {
+      "authorityId": 35,
+      "authorityName": "权限管理-角色：修改",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": "role:modify",
+      "isMenu": 2,
+      "parentId": 22
+    },
+    {
+      "authorityId": 25,
+      "authorityName": "系统监测",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": null,
+      "isMenu": 0,
+      "parentId": 14
+    },
+    {
+      "authorityId": 26,
+      "authorityName": "日志监测",
+      "menuUrl": "page/log.html",
+      "menuIcon": "",
+      "authority": null,
+      "isMenu": 1,
+      "parentId": 25
+    },
+    {
+      "authorityId": 27,
+      "authorityName": "日志监测：查询",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": "log:query",
+      "isMenu": 2,
+      "parentId": 26
+    },
+    {
+      "authorityId": 28,
+      "authorityName": "微信管理",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": null,
+      "isMenu": 0,
+      "parentId": 14
+    },
+    {
+      "authorityId": 29,
+      "authorityName": "粉丝管理",
+      "menuUrl": "page/fan.html",
+      "menuIcon": "",
+      "authority": null,
+      "isMenu": 1,
+      "parentId": 28
+    },
+    {
+      "authorityId": 30,
+      "authorityName": "粉丝管理：查询",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": "fan:query",
+      "isMenu": 2,
+      "parentId": 29
+    },
+    {
+      "authorityId": 31,
+      "authorityName": "公众号菜单管理",
+      "menuUrl": "page/menu.html",
+      "menuIcon": "",
+      "authority": null,
+      "isMenu": 1,
+      "parentId": 28
+    },
+    {
+      "authorityId": 32,
+      "authorityName": "公众号菜单管理：查询",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": "menu:query",
+      "isMenu": 2,
+      "parentId": 31
+    },
+    {
+      "authorityId": 33,
+      "authorityName": "公众号菜单管理：修改",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": "menu:modify",
+      "isMenu": 2,
+      "parentId": 31
+    }
+  ]
+}

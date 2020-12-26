@@ -1,0 +1,1306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="OilToolsPlantformModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="tbCatF">
+          <Key>
+            <PropertyRef Name="CatFID" />
+          </Key>
+          <Property Name="CatFID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NameJP" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NameQP" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="CreateUser" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="CreateTime" Type="date" Nullable="false" />
+          <Property Name="UpdateUser" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="UpdateTime" Type="date" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="Enabled" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbCatFPic">
+          <Key>
+            <PropertyRef Name="CatFPicID" />
+          </Key>
+          <Property Name="CatFPicID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CatFID" Type="int" Nullable="false" />
+          <Property Name="PicID" Type="int" Nullable="false" />
+          <Property Name="PicType" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="Enabled" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbCatS">
+          <Key>
+            <PropertyRef Name="CatSID" />
+          </Key>
+          <Property Name="CatSID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CatFID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NameJP" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NameQP" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="CreateUser" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="CreateTime" Type="date" Nullable="false" />
+          <Property Name="UpdateUser" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="UpdateTime" Type="date" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="Enabled" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbCatSPic">
+          <Key>
+            <PropertyRef Name="CatSPicID" />
+          </Key>
+          <Property Name="CatSPicID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CatSID" Type="int" Nullable="false" />
+          <Property Name="PicID" Type="int" Nullable="false" />
+          <Property Name="PicType" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="Enabled" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbCountAna">
+          <Key>
+            <PropertyRef Name="CountAnaID" />
+          </Key>
+          <Property Name="CountAnaID" Type="int" Nullable="false" />
+          <Property Name="Day" Type="date" Nullable="false" />
+          <Property Name="ToolAdd" Type="int" Nullable="false" />
+          <Property Name="FanAdd" Type="int" Nullable="false" />
+          <Property Name="ViewAdd" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbLog">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountNumber" Type="varchar" MaxLength="32" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="Request" Type="nvarchar" MaxLength="500" />
+          <Property Name="Response" Type="nvarchar" MaxLength="500" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="HappenDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbOrg">
+          <Key>
+            <PropertyRef Name="OrgID" />
+          </Key>
+          <Property Name="OrgID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrgName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RealPath" Type="nvarchar" MaxLength="2000" />
+          <Property Name="FullPath" Type="nvarchar" MaxLength="2000" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="2000" />
+          <Property Name="ParentID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbPic">
+          <Key>
+            <PropertyRef Name="PicID" />
+          </Key>
+          <Property Name="PicID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PicName" Type="nvarchar" MaxLength="120" Nullable="false" />
+          <Property Name="StoreName" Type="varchar" MaxLength="120" Nullable="false" />
+          <Property Name="Path" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="ThambName" Type="varchar" MaxLength="120" Nullable="false" />
+          <Property Name="CreateUser" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="CreateTime" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbRole">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RoleType" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="tbRoleDetail">
+          <Key>
+            <PropertyRef Name="RoleDetailID" />
+          </Key>
+          <Property Name="RoleDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleID" Type="int" />
+          <Property Name="FunctionCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbToken">
+          <Key>
+            <PropertyRef Name="TokenID" />
+          </Key>
+          <Property Name="TokenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserAccount" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="token" Type="char" MaxLength="64" Nullable="false" />
+          <Property Name="CreateDate" Type="date" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbTool">
+          <Key>
+            <PropertyRef Name="ToolID" />
+          </Key>
+          <Property Name="ToolID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CatSID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NameJP" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NameQP" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="CreateUser" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="CreateTime" Type="date" Nullable="false" />
+          <Property Name="UpdateUser" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="UpdateTime" Type="date" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="Enabled" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="SearchStr" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbToolDetail">
+          <Key>
+            <PropertyRef Name="ToolDetailID" />
+          </Key>
+          <Property Name="ToolDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ToolID" Type="int" Nullable="false" />
+          <Property Name="DetailIcon" Type="int" Nullable="false" />
+          <Property Name="IconName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NameJP" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NameQP" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="CreateUser" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="CreateTime" Type="date" Nullable="false" />
+          <Property Name="UpdateUser" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="UpdateTime" Type="date" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="Enabled" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbToolExt">
+          <Key>
+            <PropertyRef Name="ToolExtID" />
+          </Key>
+          <Property Name="ToolExtID" Type="int" Nullable="false" />
+          <Property Name="ToolID" Type="int" Nullable="false" />
+          <Property Name="ViewCount" Type="int" Nullable="false" />
+          <Property Name="LikeCount" Type="int" Nullable="false" />
+          <Property Name="FavCount" Type="int" Nullable="false" />
+          <Property Name="CommentCount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbToolPic">
+          <Key>
+            <PropertyRef Name="ToolPicID" />
+          </Key>
+          <Property Name="ToolPicID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ToolID" Type="int" Nullable="false" />
+          <Property Name="PicID" Type="int" Nullable="false" />
+          <Property Name="PicType" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="Enabled" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbUser">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserAccount" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="UserPass" Type="char" MaxLength="64" Nullable="false" />
+          <Property Name="Salt" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLoginTime" Type="datetime" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+          <Property Name="Enabled" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="OrgID" Type="int" />
+          <Property Name="CellPhone" Type="varchar" MaxLength="18" />
+          <Property Name="Email" Type="varchar" MaxLength="200" />
+          <Property Name="WorkNumber" Type="varchar" MaxLength="20" />
+          <Property Name="RoleID" Type="int" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbWechatFan">
+          <Key>
+            <PropertyRef Name="WechatFanID" />
+          </Key>
+          <Property Name="WechatFanID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="openid" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="subscribe" Type="char" MaxLength="1" />
+          <Property Name="nickname" Type="nvarchar" MaxLength="64" />
+          <Property Name="sex" Type="char" MaxLength="1" />
+          <Property Name="city" Type="nvarchar" MaxLength="64" />
+          <Property Name="country" Type="nvarchar" MaxLength="64" />
+          <Property Name="province" Type="nvarchar" MaxLength="64" />
+          <Property Name="language" Type="nvarchar" MaxLength="32" />
+          <Property Name="headimgurl" Type="varchar" MaxLength="1024" />
+          <Property Name="subscribe_time" Type="nvarchar" MaxLength="64" />
+          <Property Name="unionid" Type="nvarchar" MaxLength="64" />
+          <Property Name="remark" Type="nvarchar" MaxLength="1024" />
+          <Property Name="groupid" Type="nvarchar" MaxLength="64" />
+          <Property Name="tagid_list" Type="nvarchar" MaxLength="1024" />
+          <Property Name="subscribe_scene" Type="nvarchar" MaxLength="64" />
+          <Property Name="qr_scene" Type="nvarchar" MaxLength="64" />
+          <Property Name="qr_scene_str" Type="nvarchar" MaxLength="64" />
+        </EntityType>
+        <Association Name="FK_001">
+          <End Role="tbCatF" Type="Self.tbCatF" Multiplicity="1" />
+          <End Role="tbCatS" Type="Self.tbCatS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCatF">
+              <PropertyRef Name="CatFID" />
+            </Principal>
+            <Dependent Role="tbCatS">
+              <PropertyRef Name="CatFID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_002">
+          <End Role="tbCatF" Type="Self.tbCatF" Multiplicity="1" />
+          <End Role="tbCatFPic" Type="Self.tbCatFPic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCatF">
+              <PropertyRef Name="CatFID" />
+            </Principal>
+            <Dependent Role="tbCatFPic">
+              <PropertyRef Name="CatFID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_003">
+          <End Role="tbPic" Type="Self.tbPic" Multiplicity="1" />
+          <End Role="tbCatFPic" Type="Self.tbCatFPic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPic">
+              <PropertyRef Name="PicID" />
+            </Principal>
+            <Dependent Role="tbCatFPic">
+              <PropertyRef Name="PicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_004">
+          <End Role="tbCatS" Type="Self.tbCatS" Multiplicity="1" />
+          <End Role="tbCatSPic" Type="Self.tbCatSPic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCatS">
+              <PropertyRef Name="CatSID" />
+            </Principal>
+            <Dependent Role="tbCatSPic">
+              <PropertyRef Name="CatSID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_005">
+          <End Role="tbPic" Type="Self.tbPic" Multiplicity="1" />
+          <End Role="tbCatSPic" Type="Self.tbCatSPic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPic">
+              <PropertyRef Name="PicID" />
+            </Principal>
+            <Dependent Role="tbCatSPic">
+              <PropertyRef Name="PicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_006">
+          <End Role="tbTool" Type="Self.tbTool" Multiplicity="1" />
+          <End Role="tbToolPic" Type="Self.tbToolPic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTool">
+              <PropertyRef Name="ToolID" />
+            </Principal>
+            <Dependent Role="tbToolPic">
+              <PropertyRef Name="ToolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_007">
+          <End Role="tbPic" Type="Self.tbPic" Multiplicity="1" />
+          <End Role="tbToolPic" Type="Self.tbToolPic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPic">
+              <PropertyRef Name="PicID" />
+            </Principal>
+            <Dependent Role="tbToolPic">
+              <PropertyRef Name="PicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_008">
+          <End Role="tbTool" Type="Self.tbTool" Multiplicity="1" />
+          <End Role="tbToolDetail" Type="Self.tbToolDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTool">
+              <PropertyRef Name="ToolID" />
+            </Principal>
+            <Dependent Role="tbToolDetail">
+              <PropertyRef Name="ToolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_009">
+          <End Role="tbCatS" Type="Self.tbCatS" Multiplicity="1" />
+          <End Role="tbTool" Type="Self.tbTool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCatS">
+              <PropertyRef Name="CatSID" />
+            </Principal>
+            <Dependent Role="tbTool">
+              <PropertyRef Name="CatSID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_010">
+          <End Role="tbOrg" Type="Self.tbOrg" Multiplicity="0..1" />
+          <End Role="tbUser" Type="Self.tbUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbOrg">
+              <PropertyRef Name="OrgID" />
+            </Principal>
+            <Dependent Role="tbUser">
+              <PropertyRef Name="OrgID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_011">
+          <End Role="tbRole" Type="Self.tbRole" Multiplicity="0..1" />
+          <End Role="tbUser" Type="Self.tbUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbRole">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="tbUser">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbRoleDetail_tbRole">
+          <End Role="tbRole" Type="Self.tbRole" Multiplicity="0..1" />
+          <End Role="tbRoleDetail" Type="Self.tbRoleDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbRole">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="tbRoleDetail">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbToolExt_tbTool">
+          <End Role="tbTool" Type="Self.tbTool" Multiplicity="1" />
+          <End Role="tbToolExt" Type="Self.tbToolExt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTool">
+              <PropertyRef Name="ToolID" />
+            </Principal>
+            <Dependent Role="tbToolExt">
+              <PropertyRef Name="ToolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OilToolsPlantformModelStoreContainer">
+          <EntitySet Name="tbCatF" EntityType="Self.tbCatF" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbCatFPic" EntityType="Self.tbCatFPic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbCatS" EntityType="Self.tbCatS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbCatSPic" EntityType="Self.tbCatSPic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbCountAna" EntityType="Self.tbCountAna" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbLog" EntityType="Self.tbLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbOrg" EntityType="Self.tbOrg" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbPic" EntityType="Self.tbPic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbRole" EntityType="Self.tbRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbRoleDetail" EntityType="Self.tbRoleDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbToken" EntityType="Self.tbToken" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbTool" EntityType="Self.tbTool" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbToolDetail" EntityType="Self.tbToolDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbToolExt" EntityType="Self.tbToolExt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbToolPic" EntityType="Self.tbToolPic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbUser" EntityType="Self.tbUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbWechatFan" EntityType="Self.tbWechatFan" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_001" Association="Self.FK_001">
+            <End Role="tbCatF" EntitySet="tbCatF" />
+            <End Role="tbCatS" EntitySet="tbCatS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_002" Association="Self.FK_002">
+            <End Role="tbCatF" EntitySet="tbCatF" />
+            <End Role="tbCatFPic" EntitySet="tbCatFPic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_003" Association="Self.FK_003">
+            <End Role="tbPic" EntitySet="tbPic" />
+            <End Role="tbCatFPic" EntitySet="tbCatFPic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_004" Association="Self.FK_004">
+            <End Role="tbCatS" EntitySet="tbCatS" />
+            <End Role="tbCatSPic" EntitySet="tbCatSPic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_005" Association="Self.FK_005">
+            <End Role="tbPic" EntitySet="tbPic" />
+            <End Role="tbCatSPic" EntitySet="tbCatSPic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_006" Association="Self.FK_006">
+            <End Role="tbTool" EntitySet="tbTool" />
+            <End Role="tbToolPic" EntitySet="tbToolPic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_007" Association="Self.FK_007">
+            <End Role="tbPic" EntitySet="tbPic" />
+            <End Role="tbToolPic" EntitySet="tbToolPic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_008" Association="Self.FK_008">
+            <End Role="tbTool" EntitySet="tbTool" />
+            <End Role="tbToolDetail" EntitySet="tbToolDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_009" Association="Self.FK_009">
+            <End Role="tbCatS" EntitySet="tbCatS" />
+            <End Role="tbTool" EntitySet="tbTool" />
+          </AssociationSet>
+          <AssociationSet Name="FK_010" Association="Self.FK_010">
+            <End Role="tbOrg" EntitySet="tbOrg" />
+            <End Role="tbUser" EntitySet="tbUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_011" Association="Self.FK_011">
+            <End Role="tbRole" EntitySet="tbRole" />
+            <End Role="tbUser" EntitySet="tbUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbRoleDetail_tbRole" Association="Self.FK_tbRoleDetail_tbRole">
+            <End Role="tbRole" EntitySet="tbRole" />
+            <End Role="tbRoleDetail" EntitySet="tbRoleDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbToolExt_tbTool" Association="Self.FK_tbToolExt_tbTool">
+            <End Role="tbTool" EntitySet="tbTool" />
+            <End Role="tbToolExt" EntitySet="tbToolExt" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OilToolsPlantformModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="OilToolsPlantformEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbCatF" EntityType="OilToolsPlantformModel.tbCatF" />
+          <EntitySet Name="tbCatFPic" EntityType="OilToolsPlantformModel.tbCatFPic" />
+          <EntitySet Name="tbCatS" EntityType="OilToolsPlantformModel.tbCatS" />
+          <EntitySet Name="tbCatSPic" EntityType="OilToolsPlantformModel.tbCatSPic" />
+          <EntitySet Name="tbPic" EntityType="OilToolsPlantformModel.tbPic" />
+          <EntitySet Name="tbTool" EntityType="OilToolsPlantformModel.tbTool" />
+          <EntitySet Name="tbToolDetail" EntityType="OilToolsPlantformModel.tbToolDetail" />
+          <EntitySet Name="tbToolPic" EntityType="OilToolsPlantformModel.tbToolPic" />
+          <EntitySet Name="tbUser" EntityType="OilToolsPlantformModel.tbUser" />
+          <AssociationSet Name="FK_001" Association="OilToolsPlantformModel.FK_001">
+            <End Role="tbCatF" EntitySet="tbCatF" />
+            <End Role="tbCatS" EntitySet="tbCatS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_002" Association="OilToolsPlantformModel.FK_002">
+            <End Role="tbCatF" EntitySet="tbCatF" />
+            <End Role="tbCatFPic" EntitySet="tbCatFPic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_003" Association="OilToolsPlantformModel.FK_003">
+            <End Role="tbPic" EntitySet="tbPic" />
+            <End Role="tbCatFPic" EntitySet="tbCatFPic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_004" Association="OilToolsPlantformModel.FK_004">
+            <End Role="tbCatS" EntitySet="tbCatS" />
+            <End Role="tbCatSPic" EntitySet="tbCatSPic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_009" Association="OilToolsPlantformModel.FK_009">
+            <End Role="tbCatS" EntitySet="tbCatS" />
+            <End Role="tbTool" EntitySet="tbTool" />
+          </AssociationSet>
+          <AssociationSet Name="FK_005" Association="OilToolsPlantformModel.FK_005">
+            <End Role="tbPic" EntitySet="tbPic" />
+            <End Role="tbCatSPic" EntitySet="tbCatSPic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_007" Association="OilToolsPlantformModel.FK_007">
+            <End Role="tbPic" EntitySet="tbPic" />
+            <End Role="tbToolPic" EntitySet="tbToolPic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_006" Association="OilToolsPlantformModel.FK_006">
+            <End Role="tbTool" EntitySet="tbTool" />
+            <End Role="tbToolPic" EntitySet="tbToolPic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_008" Association="OilToolsPlantformModel.FK_008">
+            <End Role="tbTool" EntitySet="tbTool" />
+            <End Role="tbToolDetail" EntitySet="tbToolDetail" />
+          </AssociationSet>
+          <EntitySet Name="tbToken" EntityType="OilToolsPlantformModel.tbToken" />
+          <EntitySet Name="tbOrg" EntityType="OilToolsPlantformModel.tbOrg" />
+          <AssociationSet Name="FK_010" Association="OilToolsPlantformModel.FK_010">
+            <End Role="tbOrg" EntitySet="tbOrg" />
+            <End Role="tbUser" EntitySet="tbUser" />
+          </AssociationSet>
+          <EntitySet Name="tbRole" EntityType="OilToolsPlantformModel.tbRole" />
+          <AssociationSet Name="FK_011" Association="OilToolsPlantformModel.FK_011">
+            <End Role="tbRole" EntitySet="tbRole" />
+            <End Role="tbUser" EntitySet="tbUser" />
+          </AssociationSet>
+          <EntitySet Name="tbRoleDetail" EntityType="OilToolsPlantformModel.tbRoleDetail" />
+          <AssociationSet Name="FK_tbRoleDetail_tbRole" Association="OilToolsPlantformModel.FK_tbRoleDetail_tbRole">
+            <End Role="tbRole" EntitySet="tbRole" />
+            <End Role="tbRoleDetail" EntitySet="tbRoleDetail" />
+          </AssociationSet>
+          <EntitySet Name="tbLog" EntityType="OilToolsPlantformModel.tbLog" />
+          <EntitySet Name="tbCountAna" EntityType="OilToolsPlantformModel.tbCountAna" />
+          <EntitySet Name="tbToolExt" EntityType="OilToolsPlantformModel.tbToolExt" />
+          <AssociationSet Name="FK_tbToolExt_tbTool" Association="OilToolsPlantformModel.FK_tbToolExt_tbTool">
+            <End Role="tbTool" EntitySet="tbTool" />
+            <End Role="tbToolExt" EntitySet="tbToolExt" />
+          </AssociationSet>
+          <EntitySet Name="tbWechatFan" EntityType="OilToolsPlantformModel.tbWechatFan" />
+        </EntityContainer>
+        <EntityType Name="tbCatF">
+          <Key>
+            <PropertyRef Name="CatFID" />
+          </Key>
+          <Property Type="Int32" Name="CatFID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NameJP" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NameQP" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CreateUser" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreateTime" Nullable="false" Precision="0" />
+          <Property Type="String" Name="UpdateUser" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="UpdateTime" Nullable="false" Precision="0" />
+          <Property Type="Int32" Name="SortOrder" Nullable="false" />
+          <Property Type="String" Name="Enabled" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="tbCatS" Relationship="OilToolsPlantformModel.FK_001" FromRole="tbCatF" ToRole="tbCatS" />
+          <NavigationProperty Name="tbCatFPic" Relationship="OilToolsPlantformModel.FK_002" FromRole="tbCatF" ToRole="tbCatFPic" />
+        </EntityType>
+        <EntityType Name="tbCatFPic">
+          <Key>
+            <PropertyRef Name="CatFPicID" />
+          </Key>
+          <Property Type="Int32" Name="CatFPicID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="CatFID" Nullable="false" />
+          <Property Type="Int32" Name="PicID" Nullable="false" />
+          <Property Type="String" Name="PicType" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="Int32" Name="SortOrder" Nullable="false" />
+          <Property Type="String" Name="Enabled" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="tbCatF" Relationship="OilToolsPlantformModel.FK_002" FromRole="tbCatFPic" ToRole="tbCatF" />
+          <NavigationProperty Name="tbPic" Relationship="OilToolsPlantformModel.FK_003" FromRole="tbCatFPic" ToRole="tbPic" />
+        </EntityType>
+        <EntityType Name="tbCatS">
+          <Key>
+            <PropertyRef Name="CatSID" />
+          </Key>
+          <Property Type="Int32" Name="CatSID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="CatFID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NameJP" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NameQP" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CreateUser" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreateTime" Nullable="false" Precision="0" />
+          <Property Type="String" Name="UpdateUser" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="UpdateTime" Nullable="false" Precision="0" />
+          <Property Type="Int32" Name="SortOrder" Nullable="false" />
+          <Property Type="String" Name="Enabled" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="tbCatF" Relationship="OilToolsPlantformModel.FK_001" FromRole="tbCatS" ToRole="tbCatF" />
+          <NavigationProperty Name="tbCatSPic" Relationship="OilToolsPlantformModel.FK_004" FromRole="tbCatS" ToRole="tbCatSPic" />
+          <NavigationProperty Name="tbTool" Relationship="OilToolsPlantformModel.FK_009" FromRole="tbCatS" ToRole="tbTool" />
+        </EntityType>
+        <EntityType Name="tbCatSPic">
+          <Key>
+            <PropertyRef Name="CatSPicID" />
+          </Key>
+          <Property Type="Int32" Name="CatSPicID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="CatSID" Nullable="false" />
+          <Property Type="Int32" Name="PicID" Nullable="false" />
+          <Property Type="String" Name="PicType" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="Int32" Name="SortOrder" Nullable="false" />
+          <Property Type="String" Name="Enabled" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="tbCatS" Relationship="OilToolsPlantformModel.FK_004" FromRole="tbCatSPic" ToRole="tbCatS" />
+          <NavigationProperty Name="tbPic" Relationship="OilToolsPlantformModel.FK_005" FromRole="tbCatSPic" ToRole="tbPic" />
+        </EntityType>
+        <EntityType Name="tbPic">
+          <Key>
+            <PropertyRef Name="PicID" />
+          </Key>
+          <Property Type="Int32" Name="PicID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="PicName" Nullable="false" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="StoreName" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Path" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ThambName" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CreateUser" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="tbCatFPic" Relationship="OilToolsPlantformModel.FK_003" FromRole="tbPic" ToRole="tbCatFPic" />
+          <NavigationProperty Name="tbCatSPic" Relationship="OilToolsPlantformModel.FK_005" FromRole="tbPic" ToRole="tbCatSPic" />
+          <NavigationProperty Name="tbToolPic" Relationship="OilToolsPlantformModel.FK_007" FromRole="tbPic" ToRole="tbToolPic" />
+        </EntityType>
+        <EntityType Name="tbTool">
+          <Key>
+            <PropertyRef Name="ToolID" />
+          </Key>
+          <Property Type="Int32" Name="ToolID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="CatSID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NameJP" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NameQP" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CreateUser" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreateTime" Nullable="false" Precision="0" />
+          <Property Type="String" Name="UpdateUser" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="UpdateTime" Nullable="false" Precision="0" />
+          <Property Type="Int32" Name="SortOrder" Nullable="false" />
+          <Property Type="String" Name="Enabled" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="tbCatS" Relationship="OilToolsPlantformModel.FK_009" FromRole="tbTool" ToRole="tbCatS" />
+          <NavigationProperty Name="tbToolPic" Relationship="OilToolsPlantformModel.FK_006" FromRole="tbTool" ToRole="tbToolPic" />
+          <NavigationProperty Name="tbToolDetail" Relationship="OilToolsPlantformModel.FK_008" FromRole="tbTool" ToRole="tbToolDetail" />
+          <Property Type="String" Name="SearchStr" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbToolExt" Relationship="OilToolsPlantformModel.FK_tbToolExt_tbTool" FromRole="tbTool" ToRole="tbToolExt" />
+        </EntityType>
+        <EntityType Name="tbToolDetail">
+          <Key>
+            <PropertyRef Name="ToolDetailID" />
+          </Key>
+          <Property Type="Int32" Name="ToolDetailID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ToolID" Nullable="false" />
+          <Property Type="Int32" Name="DetailIcon" Nullable="false" />
+          <Property Type="String" Name="IconName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NameJP" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NameQP" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CreateUser" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreateTime" Nullable="false" Precision="0" />
+          <Property Type="String" Name="UpdateUser" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="UpdateTime" Nullable="false" Precision="0" />
+          <Property Type="Int32" Name="SortOrder" Nullable="false" />
+          <Property Type="String" Name="Enabled" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="tbTool" Relationship="OilToolsPlantformModel.FK_008" FromRole="tbToolDetail" ToRole="tbTool" />
+        </EntityType>
+        <EntityType Name="tbToolPic">
+          <Key>
+            <PropertyRef Name="ToolPicID" />
+          </Key>
+          <Property Type="Int32" Name="ToolPicID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ToolID" Nullable="false" />
+          <Property Type="Int32" Name="PicID" Nullable="false" />
+          <Property Type="String" Name="PicType" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="Int32" Name="SortOrder" Nullable="false" />
+          <Property Type="String" Name="Enabled" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="tbPic" Relationship="OilToolsPlantformModel.FK_007" FromRole="tbToolPic" ToRole="tbPic" />
+          <NavigationProperty Name="tbTool" Relationship="OilToolsPlantformModel.FK_006" FromRole="tbToolPic" ToRole="tbTool" />
+        </EntityType>
+        <EntityType Name="tbUser">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Type="Int32" Name="UserID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UserAccount" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UserPass" Nullable="false" MaxLength="64" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="Salt" Nullable="false" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Type="DateTime" Name="StartDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="EndDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="LastLoginTime" Precision="3" />
+          <Property Type="DateTime" Name="CreateTime" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="UpdateTime" Nullable="false" Precision="3" />
+          <Property Type="String" Name="Enabled" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="Int32" Name="OrgID" />
+          <NavigationProperty Name="tbOrg" Relationship="OilToolsPlantformModel.FK_010" FromRole="tbUser" ToRole="tbOrg" />
+          <Property Type="String" Name="CellPhone" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Email" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="WorkNumber" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="RoleID" />
+          <NavigationProperty Name="tbRole" Relationship="OilToolsPlantformModel.FK_011" FromRole="tbUser" ToRole="tbRole" />
+          <Property Type="String" Name="UserName" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_001">
+          <End Type="OilToolsPlantformModel.tbCatF" Role="tbCatF" Multiplicity="1" />
+          <End Type="OilToolsPlantformModel.tbCatS" Role="tbCatS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCatF">
+              <PropertyRef Name="CatFID" />
+            </Principal>
+            <Dependent Role="tbCatS">
+              <PropertyRef Name="CatFID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_002">
+          <End Type="OilToolsPlantformModel.tbCatF" Role="tbCatF" Multiplicity="1" />
+          <End Type="OilToolsPlantformModel.tbCatFPic" Role="tbCatFPic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCatF">
+              <PropertyRef Name="CatFID" />
+            </Principal>
+            <Dependent Role="tbCatFPic">
+              <PropertyRef Name="CatFID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_003">
+          <End Type="OilToolsPlantformModel.tbPic" Role="tbPic" Multiplicity="1" />
+          <End Type="OilToolsPlantformModel.tbCatFPic" Role="tbCatFPic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPic">
+              <PropertyRef Name="PicID" />
+            </Principal>
+            <Dependent Role="tbCatFPic">
+              <PropertyRef Name="PicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_004">
+          <End Type="OilToolsPlantformModel.tbCatS" Role="tbCatS" Multiplicity="1" />
+          <End Type="OilToolsPlantformModel.tbCatSPic" Role="tbCatSPic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCatS">
+              <PropertyRef Name="CatSID" />
+            </Principal>
+            <Dependent Role="tbCatSPic">
+              <PropertyRef Name="CatSID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_009">
+          <End Type="OilToolsPlantformModel.tbCatS" Role="tbCatS" Multiplicity="1" />
+          <End Type="OilToolsPlantformModel.tbTool" Role="tbTool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCatS">
+              <PropertyRef Name="CatSID" />
+            </Principal>
+            <Dependent Role="tbTool">
+              <PropertyRef Name="CatSID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_005">
+          <End Type="OilToolsPlantformModel.tbPic" Role="tbPic" Multiplicity="1" />
+          <End Type="OilToolsPlantformModel.tbCatSPic" Role="tbCatSPic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPic">
+              <PropertyRef Name="PicID" />
+            </Principal>
+            <Dependent Role="tbCatSPic">
+              <PropertyRef Name="PicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_007">
+          <End Type="OilToolsPlantformModel.tbPic" Role="tbPic" Multiplicity="1" />
+          <End Type="OilToolsPlantformModel.tbToolPic" Role="tbToolPic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPic">
+              <PropertyRef Name="PicID" />
+            </Principal>
+            <Dependent Role="tbToolPic">
+              <PropertyRef Name="PicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_006">
+          <End Type="OilToolsPlantformModel.tbTool" Role="tbTool" Multiplicity="1" />
+          <End Type="OilToolsPlantformModel.tbToolPic" Role="tbToolPic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTool">
+              <PropertyRef Name="ToolID" />
+            </Principal>
+            <Dependent Role="tbToolPic">
+              <PropertyRef Name="ToolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_008">
+          <End Type="OilToolsPlantformModel.tbTool" Role="tbTool" Multiplicity="1" />
+          <End Type="OilToolsPlantformModel.tbToolDetail" Role="tbToolDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTool">
+              <PropertyRef Name="ToolID" />
+            </Principal>
+            <Dependent Role="tbToolDetail">
+              <PropertyRef Name="ToolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbToken">
+          <Key>
+            <PropertyRef Name="TokenID" />
+          </Key>
+          <Property Type="Int32" Name="TokenID" annotation:StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Type="String" Name="UserAccount" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Type="String" Name="token" MaxLength="64" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDate" Precision="0" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbOrg">
+          <Key>
+            <PropertyRef Name="OrgID" />
+          </Key>
+          <Property Type="Int32" Name="OrgID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="OrgName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="RealPath" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="UpdateTime" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="CreateTime" Nullable="false" Precision="3" />
+          <Property Type="String" Name="Description" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbUser" Relationship="OilToolsPlantformModel.FK_010" FromRole="tbOrg" ToRole="tbUser" />
+          <Property Type="String" Name="FullPath" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ParentID" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_010">
+          <End Type="OilToolsPlantformModel.tbOrg" Role="tbOrg" Multiplicity="0..1" />
+          <End Type="OilToolsPlantformModel.tbUser" Role="tbUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbOrg">
+              <PropertyRef Name="OrgID" />
+            </Principal>
+            <Dependent Role="tbUser">
+              <PropertyRef Name="OrgID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbRole">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Type="Int32" Name="RoleID" Nullable="false" />
+          <Property Type="String" Name="RoleName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="RoleType" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="tbUser" Relationship="OilToolsPlantformModel.FK_011" FromRole="tbRole" ToRole="tbUser" />
+          <NavigationProperty Name="tbRoleDetail" Relationship="OilToolsPlantformModel.FK_tbRoleDetail_tbRole" FromRole="tbRole" ToRole="tbRoleDetail" />
+        </EntityType>
+        <Association Name="FK_011">
+          <End Type="OilToolsPlantformModel.tbRole" Role="tbRole" Multiplicity="0..1" />
+          <End Type="OilToolsPlantformModel.tbUser" Role="tbUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbRole">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="tbUser">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbRoleDetail">
+          <Key>
+            <PropertyRef Name="RoleDetailID" />
+          </Key>
+          <Property Name="RoleDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleID" Type="Int32" />
+          <Property Name="FunctionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbRole" Relationship="OilToolsPlantformModel.FK_tbRoleDetail_tbRole" FromRole="tbRoleDetail" ToRole="tbRole" />
+        </EntityType>
+        <Association Name="FK_tbRoleDetail_tbRole">
+          <End Type="OilToolsPlantformModel.tbRole" Role="tbRole" Multiplicity="0..1" />
+          <End Type="OilToolsPlantformModel.tbRoleDetail" Role="tbRoleDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbRole">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="tbRoleDetail">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbLog">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountNumber" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="Request" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Response" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HappenDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tbCountAna">
+          <Key>
+            <PropertyRef Name="CountAnaID" />
+          </Key>
+          <Property Name="CountAnaID" Type="Int32" Nullable="false" />
+          <Property Name="Day" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ToolAdd" Type="Int32" Nullable="false" />
+          <Property Name="FanAdd" Type="Int32" Nullable="false" />
+          <Property Name="ViewAdd" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbToolExt">
+          <Key>
+            <PropertyRef Name="ToolExtID" />
+          </Key>
+          <Property Name="ToolExtID" Type="Int32" Nullable="false" />
+          <Property Name="ToolID" Type="Int32" Nullable="false" />
+          <Property Name="ViewCount" Type="Int32" Nullable="false" />
+          <Property Name="LikeCount" Type="Int32" Nullable="false" />
+          <Property Name="FavCount" Type="Int32" Nullable="false" />
+          <Property Name="CommentCount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbTool" Relationship="OilToolsPlantformModel.FK_tbToolExt_tbTool" FromRole="tbToolExt" ToRole="tbTool" />
+        </EntityType>
+        <Association Name="FK_tbToolExt_tbTool">
+          <End Type="OilToolsPlantformModel.tbTool" Role="tbTool" Multiplicity="1" />
+          <End Type="OilToolsPlantformModel.tbToolExt" Role="tbToolExt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTool">
+              <PropertyRef Name="ToolID" />
+            </Principal>
+            <Dependent Role="tbToolExt">
+              <PropertyRef Name="ToolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbWechatFan">
+          <Key>
+            <PropertyRef Name="WechatFanID" />
+          </Key>
+          <Property Name="WechatFanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="openid" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="subscribe" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="nickname" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="sex" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="province" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="language" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="headimgurl" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Name="subscribe_time" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="unionid" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="remark" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="groupid" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="tagid_list" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="subscribe_scene" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="qr_scene" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="qr_scene_str" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OilToolsPlantformModelStoreContainer" CdmEntityContainer="OilToolsPlantformEntities">
+          <EntitySetMapping Name="tbCatF">
+            <EntityTypeMapping TypeName="OilToolsPlantformModel.tbCatF">
+              <MappingFragment StoreEntitySet="tbCatF">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="NameQP" ColumnName="NameQP" />
+                <ScalarProperty Name="NameJP" ColumnName="NameJP" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CatFID" ColumnName="CatFID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbCatFPic">
+            <EntityTypeMapping TypeName="OilToolsPlantformModel.tbCatFPic">
+              <MappingFragment StoreEntitySet="tbCatFPic">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="PicType" ColumnName="PicType" />
+                <ScalarProperty Name="PicID" ColumnName="PicID" />
+                <ScalarProperty Name="CatFID" ColumnName="CatFID" />
+                <ScalarProperty Name="CatFPicID" ColumnName="CatFPicID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbCatS">
+            <EntityTypeMapping TypeName="OilToolsPlantformModel.tbCatS">
+              <MappingFragment StoreEntitySet="tbCatS">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="NameQP" ColumnName="NameQP" />
+                <ScalarProperty Name="NameJP" ColumnName="NameJP" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CatFID" ColumnName="CatFID" />
+                <ScalarProperty Name="CatSID" ColumnName="CatSID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbCatSPic">
+            <EntityTypeMapping TypeName="OilToolsPlantformModel.tbCatSPic">
+              <MappingFragment StoreEntitySet="tbCatSPic">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="PicType" ColumnName="PicType" />
+                <ScalarProperty Name="PicID" ColumnName="PicID" />
+                <ScalarProperty Name="CatSID" ColumnName="CatSID" />
+                <ScalarProperty Name="CatSPicID" ColumnName="CatSPicID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbPic">
+            <EntityTypeMapping TypeName="OilToolsPlantformModel.tbPic">
+              <MappingFragment StoreEntitySet="tbPic">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="ThambName" ColumnName="ThambName" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+                <ScalarProperty Name="PicName" ColumnName="PicName" />
+                <ScalarProperty Name="PicID" ColumnName="PicID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbTool">
+            <EntityTypeMapping TypeName="OilToolsPlantformModel.tbTool">
+              <MappingFragment StoreEntitySet="tbTool">
+                <ScalarProperty Name="SearchStr" ColumnName="SearchStr" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="NameQP" ColumnName="NameQP" />
+                <ScalarProperty Name="NameJP" ColumnName="NameJP" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CatSID" ColumnName="CatSID" />
+                <ScalarProperty Name="ToolID" ColumnName="ToolID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbToolDetail">
+            <EntityTypeMapping TypeName="OilToolsPlantformModel.tbToolDetail">
+              <MappingFragment StoreEntitySet="tbToolDetail">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="NameQP" ColumnName="NameQP" />
+                <ScalarProperty Name="NameJP" ColumnName="NameJP" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IconName" ColumnName="IconName" />
+                <ScalarProperty Name="DetailIcon" ColumnName="DetailIcon" />
+                <ScalarProperty Name="ToolID" ColumnName="ToolID" />
+                <ScalarProperty Name="ToolDetailID" ColumnName="ToolDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbToolPic">
+            <EntityTypeMapping TypeName="OilToolsPlantformModel.tbToolPic">
+              <MappingFragment StoreEntitySet="tbToolPic">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="PicType" ColumnName="PicType" />
+                <ScalarProperty Name="PicID" ColumnName="PicID" />
+                <ScalarProperty Name="ToolID" ColumnName="ToolID" />
+                <ScalarProperty Name="ToolPicID" ColumnName="ToolPicID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbUser">
+            <EntityTypeMapping TypeName="OilToolsPlantformModel.tbUser">
+              <MappingFragment StoreEntitySet="tbUser">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="WorkNumber" ColumnName="WorkNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+                <ScalarProperty Name="OrgID" ColumnName="OrgID" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="UserPass" ColumnName="UserPass" />
+                <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbToken">
+            <EntityTypeMapping TypeName="OilToolsPlantformModel.tbToken">
+              <MappingFragment StoreEntitySet="tbToken">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="token" ColumnName="token" />
+                <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+                <ScalarProperty Name="TokenID" ColumnName="TokenID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbOrg">
+            <EntityTypeMapping TypeName="OilToolsPlantformModel.tbOrg">
+              <MappingFragment StoreEntitySet="tbOrg">
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="FullPath" ColumnName="FullPath" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="RealPath" ColumnName="RealPath" />
+                <ScalarProperty Name="OrgName" ColumnName="OrgName" />
+                <ScalarProperty Name="OrgID" ColumnName="OrgID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbRole">
+            <EntityTypeMapping TypeName="OilToolsPlantformModel.tbRole">
+              <MappingFragment StoreEntitySet="tbRole">
+                <ScalarProperty Name="RoleType" ColumnName="RoleType" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbRoleDetail">
+            <EntityTypeMapping TypeName="OilToolsPlantformModel.tbRoleDetail">
+              <MappingFragment StoreEntitySet="tbRoleDetail">
+                <ScalarProperty Name="FunctionCode" ColumnName="FunctionCode" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleDetailID" ColumnName="RoleDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbLog">
+            <EntityTypeMapping TypeName="OilToolsPlantformModel.tbLog">
+              <MappingFragment StoreEntitySet="tbLog">
+                <ScalarProperty Name="HappenDate" ColumnName="HappenDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Response" ColumnName="Response" />
+                <ScalarProperty Name="Request" ColumnName="Request" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbCountAna">
+            <EntityTypeMapping TypeName="OilToolsPlantformModel.tbCountAna">
+              <MappingFragment StoreEntitySet="tbCountAna">
+                <ScalarProperty Name="ViewAdd" ColumnName="ViewAdd" />
+                <ScalarProperty Name="FanAdd" ColumnName="FanAdd" />
+                <ScalarProperty Name="ToolAdd" ColumnName="ToolAdd" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="CountAnaID" ColumnName="CountAnaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbToolExt">
+            <EntityTypeMapping TypeName="OilToolsPlantformModel.tbToolExt">
+              <MappingFragment StoreEntitySet="tbToolExt">
+                <ScalarProperty Name="CommentCount" ColumnName="CommentCount" />
+                <ScalarProperty Name="FavCount" ColumnName="FavCount" />
+                <ScalarProperty Name="LikeCount" ColumnName="LikeCount" />
+                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
+                <ScalarProperty Name="ToolID" ColumnName="ToolID" />
+                <ScalarProperty Name="ToolExtID" ColumnName="ToolExtID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbWechatFan">
+            <EntityTypeMapping TypeName="OilToolsPlantformModel.tbWechatFan">
+              <MappingFragment StoreEntitySet="tbWechatFan">
+                <ScalarProperty Name="qr_scene_str" ColumnName="qr_scene_str" />
+                <ScalarProperty Name="qr_scene" ColumnName="qr_scene" />
+                <ScalarProperty Name="subscribe_scene" ColumnName="subscribe_scene" />
+                <ScalarProperty Name="tagid_list" ColumnName="tagid_list" />
+                <ScalarProperty Name="groupid" ColumnName="groupid" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="unionid" ColumnName="unionid" />
+                <ScalarProperty Name="subscribe_time" ColumnName="subscribe_time" />
+                <ScalarProperty Name="headimgurl" ColumnName="headimgurl" />
+                <ScalarProperty Name="language" ColumnName="language" />
+                <ScalarProperty Name="province" ColumnName="province" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="nickname" ColumnName="nickname" />
+                <ScalarProperty Name="subscribe" ColumnName="subscribe" />
+                <ScalarProperty Name="openid" ColumnName="openid" />
+                <ScalarProperty Name="WechatFanID" ColumnName="WechatFanID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="OilToolsPlantform" ZoomLevel="96">
+        <EntityTypeShape EntityType="OilToolsPlantformModel.tbCatF" Width="1.5" PointX="0.75" PointY="6.5" Height="3.3985807291666674" />
+        <EntityTypeShape EntityType="OilToolsPlantformModel.tbCatFPic" Width="1.5" PointX="3" PointY="6" Height="2.4746101888020817" />
+        <EntityTypeShape EntityType="OilToolsPlantformModel.tbCatS" Width="1.5" PointX="3" PointY="9.5" Height="3.7681689453125031" />
+        <EntityTypeShape EntityType="OilToolsPlantformModel.tbCatSPic" Width="1.5" PointX="5.25" PointY="9.25" Height="2.4746101888020888" />
+        <EntityTypeShape EntityType="OilToolsPlantformModel.tbPic" Width="1.5" PointX="0.75" PointY="2.75" Height="2.8441984049479174" />
+        <EntityTypeShape EntityType="OilToolsPlantformModel.tbTool" Width="1.5" PointX="5.25" PointY="12.75" Height="3.9529630533854174" />
+        <EntityTypeShape EntityType="OilToolsPlantformModel.tbToolDetail" Width="1.5" PointX="7.5" PointY="16" Height="3.7681689453125031" />
+        <EntityTypeShape EntityType="OilToolsPlantformModel.tbToolPic" Width="1.5" PointX="7.5" PointY="12.375" Height="2.4746101888020888" />
+        <EntityTypeShape EntityType="OilToolsPlantformModel.tbUser" Width="1.5" PointX="5" PointY="1" Height="3.2137866210937496" />
+        <AssociationConnector Association="OilToolsPlantformModel.FK_001" >
+          <ConnectorPoint PointX="2.25" PointY="9.6992903648937752" />
+          <ConnectorPoint PointX="3" PointY="9.6992903648937752" />
+        </AssociationConnector>
+        <AssociationConnector Association="OilToolsPlantformModel.FK_002" >
+          <ConnectorPoint PointX="2.25" PointY="7.487305094245821" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="7.48730509424582" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="7.487305094245821" />
+          <ConnectorPoint PointX="3" PointY="7.487305094245821" />
+        </AssociationConnector>
+        <AssociationConnector Association="OilToolsPlantformModel.FK_003" >
+          <ConnectorPoint PointX="2.25" PointY="4.8142988509114577" />
+          <ConnectorPoint PointX="4.40625" PointY="4.8142988509114577" />
+          <ConnectorPoint PointX="4.40625" PointY="6" />
+        </AssociationConnector>
+        <AssociationConnector Association="OilToolsPlantformModel.FK_004" >
+          <ConnectorPoint PointX="4.5" PointY="10.612305094556264" />
+          <ConnectorPoint PointX="5.25" PointY="10.612305094556264" />
+        </AssociationConnector>
+        <AssociationConnector Association="OilToolsPlantformModel.FK_009" >
+          <ConnectorPoint PointX="4.5" PointY="13.00908447234581" />
+          <ConnectorPoint PointX="5.25" PointY="13.00908447234581" />
+        </AssociationConnector>
+        <AssociationConnector Association="OilToolsPlantformModel.FK_005" >
+          <ConnectorPoint PointX="2.2499999996026361" PointY="5.5941984049479174" />
+          <ConnectorPoint PointX="2.625" PointY="5.9691984053452813" />
+          <ConnectorPoint PointX="2.625" PointY="8.87499999991308" />
+          <ConnectorPoint PointX="4.8761528461538459" PointY="8.87499999991308" />
+          <ConnectorPoint PointX="5.2511528462407666" PointY="9.25" />
+        </AssociationConnector>
+        <AssociationConnector Association="OilToolsPlantformModel.FK_007" >
+          <ConnectorPoint PointX="2.25" PointY="5.4583723372395827" />
+          <ConnectorPoint PointX="4.322916666666667" PointY="5.4583723372395818" />
+          <ConnectorPoint PointX="4.489583333333333" PointY="5.4583723372395827" />
+          <ConnectorPoint PointX="8.25" PointY="5.4583723372395827" />
+          <ConnectorPoint PointX="8.25" PointY="12.375" />
+        </AssociationConnector>
+        <AssociationConnector Association="OilToolsPlantformModel.FK_006" >
+          <ConnectorPoint PointX="6.75" PointY="13.799805094202363" />
+          <ConnectorPoint PointX="7.5" PointY="13.799805094202363" />
+        </AssociationConnector>
+        <AssociationConnector Association="OilToolsPlantformModel.FK_008" >
+          <ConnectorPoint PointX="6.75" PointY="16.351481526891391" />
+          <ConnectorPoint PointX="7.5" PointY="16.351481526891391" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="OilToolsPlantformModel.tbToken" Width="1.5" PointX="5.75" PointY="5.75" Height="1.9202278645833326" />
+        <EntityTypeShape EntityType="OilToolsPlantformModel.tbOrg" Width="1.5" PointX="2.75" PointY="1.375" Height="2.4746101888020839" />
+        <AssociationConnector Association="OilToolsPlantformModel.FK_010" >
+          <ConnectorPoint PointX="4.25" PointY="2.6123050944010417" />
+          <ConnectorPoint PointX="5" PointY="2.6123050944010417" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="OilToolsPlantformModel.tbRole" Width="1.5" PointX="7.375" PointY="0.875" Height="1.7354337565104245" />
+        <AssociationConnector Association="OilToolsPlantformModel.FK_011" >
+          <ConnectorPoint PointX="7.375" PointY="1.8052168782552125" />
+          <ConnectorPoint PointX="6.5" PointY="1.8052168782552125" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="OilToolsPlantformModel.tbRoleDetail" Width="1.5" PointX="9.625" PointY="1" />
+        <AssociationConnector Association="OilToolsPlantformModel.FK_tbRoleDetail_tbRole" />
+        <EntityTypeShape EntityType="OilToolsPlantformModel.tbLog" Width="1.5" PointX="8.375" PointY="3.75" />
+        <EntityTypeShape EntityType="OilToolsPlantformModel.tbCountAna" Width="1.5" PointX="10.375" PointY="3.75" />
+        <EntityTypeShape EntityType="OilToolsPlantformModel.tbToolExt" Width="1.5" PointX="7.5" PointY="8.625" />
+        <AssociationConnector Association="OilToolsPlantformModel.FK_tbToolExt_tbTool" />
+        <EntityTypeShape EntityType="OilToolsPlantformModel.tbWechatFan" Width="1.5" PointX="10.375" PointY="6.75" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

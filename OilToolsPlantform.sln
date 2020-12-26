@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OilToolsPlantform.web", "OilToolsPlantform.web\OilToolsPlantform.web.csproj", "{FB235036-029D-4C23-AA34-401535F515D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OilToolsPlantform.Data", "OilToolsPlantform.data\OilToolsPlantform.Data.csproj", "{9BA45BAD-E07D-4DC0-AE1D-3FF94140654B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.Origin.CommonLibrary.Framework", "com.Origin.CommonLibrary.Framework\com.Origin.CommonLibrary.Framework.csproj", "{E91A12AF-E8A1-464E-AD61-225085F52696}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB235036-029D-4C23-AA34-401535F515D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB235036-029D-4C23-AA34-401535F515D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB235036-029D-4C23-AA34-401535F515D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB235036-029D-4C23-AA34-401535F515D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BA45BAD-E07D-4DC0-AE1D-3FF94140654B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BA45BAD-E07D-4DC0-AE1D-3FF94140654B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BA45BAD-E07D-4DC0-AE1D-3FF94140654B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BA45BAD-E07D-4DC0-AE1D-3FF94140654B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E91A12AF-E8A1-464E-AD61-225085F52696}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E91A12AF-E8A1-464E-AD61-225085F52696}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E91A12AF-E8A1-464E-AD61-225085F52696}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E91A12AF-E8A1-464E-AD61-225085F52696}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

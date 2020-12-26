@@ -1,0 +1,418 @@
+﻿<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,maximum-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,Chrome=1">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title></title>
+    <script src="script/flexiable.js"></script>
+    <link rel="stylesheet" href="style/asset.css?v=20200803">
+    <link rel="stylesheet" href="style/product.css?v=20200803">
+    <script src="script/zepto.min.js"></script>
+    <style>
+        .foshid {
+            display: none
+        }
+
+        .product-intr .product-species {
+            padding-top: 0.25rem !important;
+        }
+
+        .product-intr .product-name {
+            padding-top: 0.2rem !important;
+        }
+
+        .product .product-img {
+            overflow: hidden;
+        }
+
+        .search .s-list .s-item .s-img {
+            overflow: hidden !important;
+            max-height: 100%;
+        }
+
+        .search .s-list .s-item .s-img img {
+            max-height: 100% !important;
+        }
+
+        .call {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            z-index: 99;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .call-inner {
+            position: relative;
+            width: 220px;
+            top: 40%;
+            text-align: center;
+            font-size: 18px;
+            color: #FFFFFF;
+            margin: 0 auto;
+        }
+
+        .call-inner p {
+            line-height: 30px;
+        }
+
+        .call-inner p a {
+            color: #FFFFFF;
+            text-decoration: underline;
+        }
+
+        .call-inner .btn-close {
+            width: 0.74rem;
+            height: 0.74rem;
+            margin: 0.8rem auto 0;
+            background: url(assets/btn_close.png) center center no-repeat;
+            background-size: 100% 100%;
+            -webkit-background-size: 100% 100%;
+        }
+
+        section.product .logo {
+            background-image: url("./assets/logo1.png");
+        }
+
+        .btn-family {
+            position: relative;
+            margin: 0 auto;
+            width: 5.6rem;
+            top: 3rem;
+            overflow: hidden;
+        }
+
+        .btn-family img {
+            width: 100%;
+            vertical-align: top;
+        }
+    </style>
+</head>
+
+<body class="bg">
+    <section class="product">
+        <div class="product-img  over-hide" style="display:flex;">
+        </div>
+        <div class="product-intr over-hide text-center cf pr">
+            <p class="product-species" style="font-size: 0.37333rem!important;"></p>
+            <p class="product-name"></p>
+            <!-- <div class="product-info pull-right pa">
+                <span>产品信息</span>
+                <img src="#" alt="产品信息">
+            </div> -->
+        </div>
+        <div class="product-help">
+            <ul class="cf">
+            </ul>
+            <div class="product-memo"></div>
+        </div>
+    </section>
+    <div class="shade-layer hide">
+    </div>
+    <div class="table-layer hide" id="">
+        <table>
+            <tbody>
+                <tr>
+                    <td class="middle">
+                        <div class="pop-ups animated">
+                            <div class="pop-header text-center">
+                                <p class="pro-species"></p>
+                                <p class="pro-name"></p>
+                                <p class="pro-features"></p>
+                            </div>
+                            <ul class="parameters">
+                            </ul>
+                            <p class="pro-beizhu"></p>
+                            <div class="btn-closed text-center">关闭</div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="__loading-box" id="__loading" style="display: none;">
+        <div class="__loading">
+        </div>
+    </div>
+    <script>
+        //数据
+        var DATA = {
+            title: "标题",
+            smallTitle: "小标题",
+            color: "#c0cdd1",
+            img: "",
+            parameters: [
+                //name:xxx,value:xxx
+            ],
+            blocks: [
+
+            ]
+        };
+
+        function getData(data) {
+
+            //重设data
+            //DATA.parameters = data.product.productinfo; //参数
+            DATA.title = data.Name;
+            DATA.smallTitle = data.Description;
+            DATA.img = data.PictureList;
+            DATA.blocks = data.ToolDetailList;
+
+            //color&img
+            $(".product-img").css("background", DATA.color);
+            $(".product-img").html('<img src="' + DATA.img[0].Path + DATA.img[0].StoreName +
+                '" alt="' + DATA.img[0].Name + '" style="max-width:100%;height:auto;width:auto;">');
+
+            //title&product
+            $(".pro-species,.product-species").text(DATA.title);
+            var _title = DATA.smallTitle + "-产品手册";
+            $("title").text(_title);
+            $(".product-name,.pro-name").text(DATA.smallTitle);
+            DATA.smallTitle && $(".pro-features").html(DATA.smallTitle.replace(/\[换行\]/g, "</br>"));
+
+            //block
+            var hHtml = '';
+            var vHtml = '';
+            DATA.blocks.forEach(function (item, index) {
+                hHtml += '<li data-pid="" data-url="#" data-mid="' + item.ToolDetailID +
+                    '" data-tid="" data-qid="" class="pull-left"><div><img src="img/view/' + item.IconName +
+                    '" alt="' + item.Name +
+                    '"></div><span>' + item.Name + '</span></li>';
+                vHtml += '<img class="pro-img" src="img/view/' + item.IconName + '"><strong>' +
+                    item.Name+':</strong><p class="pro-beizhu">' + item.Description + '</p><br>';
+            });
+            $(".product-help >ul").html(hHtml);
+            $(".product-memo").html(vHtml);
+            var listLength = DATA.blocks.length;
+            if (listLength % 3 == 2) {
+                $(".product-help >ul li").eq(listLength - 1).width("50%");
+                $(".product-help >ul li").eq(listLength - 2).width("50%");
+            } else if (listLength % 3 == 1) {
+                $(".product-help >ul li").eq(listLength - 1).width("100%");
+            }
+
+            //参数
+            vHtml = '';
+            DATA.parameters && DATA.parameters.forEach(function (item, index) {
+                vHtml += '<li class="pro-core cf"><span class="pull-left text-left">' + item.name +
+                    '</span> <span class="pull-right text-right">' + item.value + '</span> </li>';
+            });
+            $(".parameters").html(vHtml);
+
+            //绑定按钮的事件
+            $(".product-help >ul li").on("click", function () {
+                $(".shade-layer,.table-layer").removeClass("hide");
+                $(".pop-ups").addClass("fadeInDown").removeClass("hide");
+                var tmpid = parseInt($(this).attr("data-mid"));
+                DATA.blocks.forEach(function (item, index) {
+                    if (tmpid == item.ToolDetailID) {
+                        $(".pro-beizhu").html(item.Description);
+                    }
+                });
+            });
+
+        };
+
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg); //匹配目标参数
+            if (r != null) return unescape(r[2]);
+            return null; //返回参数值
+        }
+
+        //数据
+        window._click = false;
+        window._old = null;
+        window.$ && $(function () {
+
+            var _id = getUrlParam("toolid");
+
+            var formData = {};
+            formData["ToolID"] = _id;
+
+            //获取某产品菜单
+            $.ajax({
+                type: "post",
+                url: "toolhandler.ashx?method=ToolView",
+                async: true,
+                data: {
+                    json: encodeURI(JSON.stringify(formData))
+                },
+                dataType: "json",
+                success: function (res) {
+                    if (res.ErrorCode == "A_0") {
+                        getData(res);
+                    } else {
+                        console.log(res);
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+
+            //close 
+            $(".call .btn-close").on("click", function () {
+                $(".call").addClass("hide");
+            });
+
+            $(".btn-closed").on("click", function () {
+                $(".pop-ups").removeClass("fadeInDown").addClass("hide");
+                $(".table-layer,.shade-layer").addClass("hide");
+            });
+
+            //----
+            try {
+                document.querySelector(".menu-nav").addEventListener("touchmove", function (event) {
+                    event.stopPropagation();
+                    //  console.log(this);
+                }, false);
+            } catch (ex) {
+                //pass
+            }
+
+        });
+
+
+        var canLoad = false,
+            lpd;
+
+        function showLoading(wait) {
+            var dom = document.getElementById("__loading");
+            if (wait === false || wait === "hide" || wait === 0) {
+                dom && dom.style && (dom.style.display = "none");
+            } else {
+                wait = wait || 10 * 1000; //10s
+            }
+            dom && dom.style && (dom.style.display = "block");
+            setTimeout(function () {
+                dom && dom.style && (dom.style.display = "none");
+                dom = null;
+            }, wait);
+        }
+
+        function tpl() {
+            return '<li class="s-item">' +
+                '<div class="s-img">' +
+                '<img src="assets/s1.jpg" alt="">' +
+                '</div>' +
+                '<div class="s-name">' +
+                +Math.random() +
+                '</div>'
+            '</li>'
+        }
+
+
+        /*弹出层函数*/
+        function poptip(txt, time, clickClose) {
+            txt = txt || "";
+            time = time || 2222;
+            clickClose = clickClose || false;
+
+            try {
+                var popdiv = document.querySelector(".poptip");
+                var popcontent = document.querySelector('.poptip .poptip-content');
+                var t = (popdiv ? popdiv : _tpl());
+
+                if (txt.toString() == "hide") {
+                    t.style.display = "none";
+                    return;
+                }
+                if (!window.__poptip__) {
+                    window.__poptip__ = 1;
+                } else {
+                    clearTimeout(window.__poptip__); //清除计时器
+                }
+                if (!popdiv) {
+                    //var div = document.createElement("div");
+                    //t = div;
+                    document.body.appendChild(t);
+                    //t.style.display = "none";
+                }
+                if (clickClose) {
+                    if (!t.onclick) {
+                        t.setAttribute("onclick", "this.style.display='none';return false;");
+                    }
+
+                } else {
+                    t.removeAttribute("onclick");
+                }
+                if (!popcontent) {
+                    popcontent = t.querySelector ? t.querySelector('.poptip-content') : null;
+                }
+                var tmp = t;
+                if (!popcontent) {
+                    while (tmp.childNodes.length) {
+                        if (tmp.childNodes[0].nodeType == 3) {
+                            tmp = tmp.childNodes[1];
+                        }
+                        if (tmp.getAttribute("class") == "poptip-content") {
+                            popcontent = tmp;
+                            break;
+                        }
+
+                    }
+                }
+                popcontent.innerHTML = txt.toString();
+                t.style.display = "block";
+                window.__poptip__ = setTimeout(function () {
+                    if (t.style.display != "none") {
+                        t.style.display = "none";
+                    }
+                    t = null;
+                }, time);
+            } catch (Ex) {
+
+            }
+
+            function _tpl() {
+                var div = document.createElement("div");
+                div.setAttribute('style',
+                    'cursor: pointer; position: fixed; left: 0px; top: 0px; bottom: 0; right: 0; width: 100%; height: 100%; z-index: 19999999; background: transparent; overflow-y: auto; -webkit-overflow-scrolling: touch; display: block;'
+                )
+                div.setAttribute("class", "poptip");
+                div.innerHTML =
+                    '<table style="height: 100%; width: 100%;"> <tbody> <tr> <td style="cursor: pointer;vertical-align:middle;text-align: center;"><div class="poptip-content" style="display:inline-block;min-width: 100px; background-color: rgba(0, 0, 0, 0.8); box-shadow: 0 0 6px -1px #000; white-space: nowrap;color: #fff; height: 44px; line-height: 44px; font-size: 14px; text-align: center; border-radius: 999px; padding: 0 20px;"></div></td> </tr> </tbody> </table>';
+                return div;
+            }
+        }
+
+        function addClick(pid, mid, cb) {
+            $.ajax({
+                type: "post",
+                url: URL + "/server/index.php/Wap/FotileBook/addClick",
+                dataType: 'json',
+                data: {
+                    product_id: pid,
+                    menu_id: mid
+                },
+                success: function (res) {
+                    if (res.code == "00000") {
+                        cb && cb(res);
+                    } else {
+                        alert(res.msg);
+                        cb && cb(res);
+                    }
+                },
+                error: function (res) {
+                    alert("error");
+                    cb && cb(res);
+                },
+                async: true
+            });
+        }
+    </script>
+</body>
+
+</html>

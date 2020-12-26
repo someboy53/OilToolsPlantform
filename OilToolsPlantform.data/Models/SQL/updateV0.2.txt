@@ -1,0 +1,2 @@
+﻿--重置图片路径
+update tbpic set path='/'+path where substring(path,1,1)<>'/';

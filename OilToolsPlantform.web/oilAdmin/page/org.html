@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>org</title>
+    <link rel="stylesheet" href="../lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css" media="all">
+    <style>
+        .layui-btn:not(.layui-btn-lg ):not(.layui-btn-sm):not(.layui-btn-xs) {
+            height: 34px;
+            line-height: 34px;
+            padding: 0 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="layuimini-container">
+        <div class="layuimini-main">
+            <div>
+                <div class="layui-btn-group">
+                    <button class="layui-btn" id="btn-expand">全部展开</button>
+                    <button class="layui-btn layui-btn-normal" id="btn-fold">全部折叠</button>
+                    <button class="layui-btn  layui-btn-warm" id="btnSearch">刷新</button>
+                </div>
+                <table id="munu-table" class="layui-table" lay-filter="munu-table"></table>
+            </div>
+        </div>
+    </div>
+    <!-- 操作列 -->
+    <script type="text/html" id="auth-state">
+        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="add">增加</a>
+        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
+    </script>
+
+    <script src="../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+    <script src="../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+    <script src="../js/other.js?v=20201222" type="text/javascript"></script>
+    <script>
+        layui.use(['table', 'treetable'], function () {
+            var $ = layui.jquery;
+            var table = layui.table;
+            var treetable = layui.treetable;
+
+            var api = function (data, func, url) {
+                url = url + '&token=' + getMainParam('token');
+                $.ajax({
+                    type: "post",
+                    data: data,
+                    url: url,
+                    async: true,
+                    dataType: "json",
+                    success: function (res) {
+                        func && func(res);
+                        console.log(res);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            };
+
+            // 渲染表格
+            layer.load(2);
+            treetable.render({
+                treeColIndex: 1,
+                treeSpid: -1,
+                treeIdName: 'OrgID',
+                treePidName: 'ParentID',
+                elem: '#munu-table',
+                url: '../adminhandler.ashx?method=orgQuery&token=' + getMainParam('token'),
+                page: false,
+                cols: [[
+                    { type: 'numbers' },
+                    { field: 'OrgName', minWidth: 200, title: '部门名称' },
+                    { field: 'Description', title: '部门说明' },
+                    { field: 'OrgID', width: 80, align: 'center', title: '部门ID' },
+                    { toolbar: '#auth-state', maxWidth: 110, minWidth: 110, align: 'center', title: '操作', fixed: 'right' }
+                ]],
+                done: function () {
+                    layer.closeAll('loading');
+                }
+            });
+
+            $('#btn-expand').click(function () {
+                treetable.expandAll('#munu-table');
+            });
+
+            $('#btn-fold').click(function () {
+                treetable.foldAll('#munu-table');
+            });
+
+            var _funcList = {
+                doSearch: function () {
+                    layer.load(2);
+                    treetable.render({
+                        treeColIndex: 1,
+                        treeSpid: -1,
+                        treeIdName: 'OrgID',
+                        treePidName: 'ParentID',
+                        elem: '#munu-table',
+                        url: '../adminhandler.ashx?method=orgQuery&token=' + getMainParam('token'),
+                        page: false,
+                        cols: [[
+                            { type: 'numbers' },
+                            { field: 'OrgName', minWidth: 200, title: '部门名称' },
+                            { field: 'Description', title: '部门说明' },
+                            { field: 'OrgID', width: 80, align: 'center', title: '部门ID' },
+                            { toolbar: '#auth-state', maxWidth: 110, minWidth: 110, align: 'center', title: '操作', fixed: 'right' }
+                        ]],
+                        done: function () {
+                            layer.closeAll('loading');
+                        }
+                    });
+                }
+            };
+
+            window.funcList = _funcList;
+
+            // 监听搜索操作
+            $("#btnSearch").on('click', function () {
+                _funcList.doSearch();
+            });
+
+            //监听工具条
+            table.on('tool(munu-table)', function (obj) {
+                var data = obj.data;
+                var layEvent = obj.event;
+
+                if (layEvent === 'add') {
+                    layer.prompt({
+                        formType: 0,
+                        title: '请输入要增加的部门名称'
+                    }, function (value, index, elem) {
+                        if (value == '' || value == null) {
+                            layer.msg('不能为空');
+                            layer.close(index);
+                        }
+                        layer.prompt({
+                            formType: 0,
+                            title: '请输入此部门的描述'
+                        }, function (value1, index1, elem1) {
+                            if (value1 == '' || value1 == null) {
+                                layer.msg('不能为空');
+                                layer.close(index1);
+                            }
+                            var postdata = {};
+                            postdata.OrgID = 0;
+                            postdata.ParentID = data.OrgID;
+                            postdata.OrgName = value;
+                            postdata.Description = value1;
+                            api({ json: encodeURI(JSON.stringify(postdata)) }, function (res) {
+                                if (res.ErrorCode == 'A_0') {
+                                    layer.msg('增加成功');
+                                    window.funcList.doSearch();
+                                }
+                                else
+                                    layer.msg('增加失败');
+                            }, '../adminhandler.ashx?method=orgModify');
+                            layer.close(index1);
+                        });
+                        layer.close(index);
+                    });
+                } else if (layEvent === 'edit') {
+                    layer.prompt({
+                        formType: 0,
+                        title: '请输入要修改的部门名称'
+                    }, function (value, index, elem) {
+                        if (value == '' || value == null) {
+                            layer.msg('不能为空');
+                            layer.close(index);
+                        }
+                        layer.prompt({
+                            formType: 0,
+                            title: '请输入此部门的描述'
+                        }, function (value1, index1, elem1) {
+                            if (value1 == '' || value1 == null) {
+                                layer.msg('不能为空');
+                                layer.close(index1);
+                            }
+                            var postdata = {};
+                            postdata.OrgID = data.OrgID;
+                            postdata.OrgName = value;
+                            postdata.Description = value1;
+                            api({ json: encodeURI(JSON.stringify(postdata)) }, function (res) {
+                                if (res.ErrorCode == 'A_0') {
+                                    layer.msg('修改成功');
+                                    window.funcList.doSearch();
+                                }
+                                else
+                                    layer.msg('修改失败');
+                            }, '../adminhandler.ashx?method=orgModify');
+                            layer.close(index1);
+                        });
+                        layer.close(index);
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

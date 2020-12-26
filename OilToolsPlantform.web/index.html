@@ -1,0 +1,566 @@
+﻿<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,maximum-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,Chrome=1">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>产品使用指南 – 石油井下工具库</title>
+    <script src="script/flexiable.js"></script>
+    <link rel="stylesheet" href="style/asset.css?v=20200801">
+    <link rel="stylesheet" href="style/product.css?v=20200801">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="57x57" href="/touch-icon-iphone-114.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/touch-icon-iphone-114.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/touch-icon-ipad-144.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/touch-icon-ipad-144.png" />
+    <link rel="stylesheet" href="style/global.css?v=20200801">
+    <style>
+        .search .s-list .s-item .s-img {
+            overflow: hidden !important;
+            max-height: 100%;
+        }
+
+        .search .s-list .s-item .s-img img {
+            max-height: 100% !important;
+        }
+
+        .hidden {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html"></a>
+        </div>
+        <div class="menuIcon hide">
+            <div class="btn-nav"> <span class="icon-bar top"></span> <span class="icon-bar middle"></span> <span
+                    class="icon-bar bottom"></span>
+            </div>
+        </div>
+    </header>
+    <div class="menuMain">
+        <div class="menuBox">
+            <div class="preBox">
+                <ul>
+                    <li class="bBor">
+                        <a href="javascript:;">所有产品</a>
+                        <div class="list proList">
+                            <a href="#" class="bBor n1">修井类工具</a>
+                            <a href="#" class="bBor n2">完井类工具</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="s_catf" class="type-wrap">
+        <!-- <div class="type-wrap-row">
+                <div class="type-item">
+                    <div class="type-img t5">
+                        <img src="assets/t5.png" />
+                    </div>
+                    <h3 data-cid="修井类工具">修井类工具</h3>
+                </div>
+                <div class="type-item">
+                    <div class="type-img t5">
+                        <img src="assets/t5.png" />
+                    </div>
+                    <h3 data-cid="完井类工具">完井类工具</h3>
+                </div>
+                <div class="type-item">
+                    <div class="type-img t5">
+                        <img src="assets/t5.png" />
+                    </div>
+                    <h3 data-cid="绳索类工具">绳索类工具</h3>
+                </div>
+            </div>
+            <div class="type-wrap-row">
+                <div class="type-item">
+                    <div class="type-img t5">
+                        <img src="assets/t5.png" />
+                    </div>
+                    <h3 data-cid="排水采气工具">排水采气工具</h3>
+                </div>
+                <div class="type-item">
+                    <div class="type-img t5">
+                        <img src="assets/t5.png" />
+                    </div>
+                    <h3 data-cid="动态监测工具">动态监测工具</h3>
+                </div>
+            </div> -->
+    </div>
+    <section class="search">
+        <div class="so-header">
+            <form class="relative" action="" onsubmit="return dosearch();" id="search">
+                <button type="submit" class="so-sub"></button>
+                <input type="text" class="so-txt" name="s" value="" data-page="1" data-type="hot" id="s" minlength="2"
+                    maxlength="20" placeholder="搜索">
+            </form>
+            <button type="button" class="so-cancel" id="s-cancel">取消</button>
+        </div>
+        <div class="hot-hd">
+            <h1>热门产品</h1>
+            <p>你可能拥有以下产品</p>
+        </div>
+        <ul class="s-list" id="s_list">
+        </ul>
+        <div class="get-more">
+            <div class="btn-get-more">点击查看更多...</div>
+        </div>
+    </section>
+    <div class="shade-layer hide">
+    </div>
+    <div class="table-layer hide" id="">
+        <table>
+            <tbody>
+                <tr>
+                    <td class="middle">
+                        <div class="pop-ups animated">
+                            <div class="pop-header text-center">
+                                <p class="pro-species"></p>
+                                <p class="pro-name"></p>
+                                <p class="pro-features"></p>
+                            </div>
+                            <ul class="parameters">
+                            </ul>
+                            <p class="pro-beizhu"></p>
+                            <div class="btn-closed text-center">关闭</div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="__loading-box" id="__loading" style="display: none;">
+        <div class="__loading">
+        </div>
+    </div>
+    <footer>
+        <div class="footNav">
+            <ul>
+                <li class="bBor">
+                    <a href="javascript:;">服务与帮助</a>
+                    <div class="list serList">
+                        <a href="#" class="bBor">服务指南</a>
+                        <a href="#" class="bBor">产品使用指南</a>
+                        <a href="#" class="bBor">专卖店查询</a>
+                    </div>
+                </li>
+                <li class="bBor">
+                    <a href="javascript:;">关于我们</a>
+                    <div class="list serList">
+                        <a href="#" class="bBor">联系我们</a>
+                        <a href="#" class="bBor">工程合作</a>
+                    </div>
+                </li>
+            </ul>
+            <div class="icons">
+                <div style="color: rgba(0,0,0,0.6); padding-bottom:10px;text-align: left;">
+                    石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库</div>
+                <div style="color: rgba(0,0,0,0.6); padding-bottom:10px;text-align: left;">
+                    *石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库</div>
+                <div style="color: rgba(0,0,0,0.6); padding-bottom: 10px;text-align: left;">
+                    *石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库
+                </div>
+                <div style="color: rgba(0,0,0,0.6); padding-bottom:10px;text-align: left;">
+                    *石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库</div>
+                <div style="color: rgba(0,0,0,0.6); padding-bottom:10px;text-align: left;">
+                    *石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库</div>
+                <div style="color: rgba(0,0,0,0.6); padding-bottom:10px;text-align: left;">
+                    *石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库
+                </div>
+                <div style="color: rgba(0,0,0,0.6); padding-bottom:10px;text-align: left;">
+                    *石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库石油工具库
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="script/jquery-2.1.1.min.js"></script>
+    <script src="script/jquery.hammer-full.min.js"></script>
+    <script src="script/global.js"></script>
+    <script>
+        //数据
+        window._click = false;
+        window._old = null;
+        random_color = ["#ebd1c8", "#f2e9e5", "#f1e9e3", "#e4eff1"]; //"#c0c8d1",
+        var swiper1;
+        window.$ && $(function () {
+            getCatF();
+
+            getHot();
+
+            $("#s-cancel").on("click", function (e) {
+                if ($("#s").val() != "") {
+                    if ($(".type-item.active").length > 0) {
+                        getClass();
+                    } else {
+                        $("#s").val("");
+                        getHot();
+                    }
+                }
+            });
+
+            $(".product-info").on("click", function () {
+                $(".shade-layer,.table-layer").removeClass("hide");
+                $(".pop-ups").addClass("fadeInDown").removeClass("hide");
+            });
+            $(".btn-closed").on("click", function () {
+                $(".pop-ups").removeClass("fadeInDown").addClass("hide");
+                $(".table-layer,.shade-layer").addClass("hide");
+            });
+            $("#s").on("input", function (e) {
+                if ($('#s').val() == "") {
+                    if ($(".type-item.active").length > 0) {
+                        getClass();
+                    } else {
+                        $("#s").val("");
+                        getHot();
+                    }
+                }
+            });
+            $(".btn-get-more").on("click", function () {
+                if (canLoad) {
+                    canLoad = false;
+                    var formData = {};
+                    formData["Page"] = $("#s").attr("data-page");
+                    formData["PageRow"] = 15;
+                    formData["SearchStr"] = $("#s").attr("data-str");
+                    var data = {
+                        json: encodeURI(JSON.stringify(formData))
+                    };
+                    $('.hot-hd').removeClass("hide");
+                    getSearch(data, function (res) {
+                        if (res.ToolQueryList.length == 0) {
+                            $(".btn-get-more").text("已经没有更多了");
+                            canLoad = false;
+                        } else {
+                            var pHtml = "";
+                            res.ToolQueryList.forEach(function (item, index) {
+                                pHtml +=
+                                    '<a class="s-item" href="../toolview.html?toolid=' +
+                                    item.ToolID +
+                                    '"><div class="s-img" style="background-color: ' +
+                                    random_color[Math.floor(
+                                        Math.random() * random_color.length)] +
+                                    ';"><img src="' + item.Path + item.StoreName +
+                                    '" alt="' + item
+                                    .Description + '"></div><div class="s-name">' +
+                                    item
+                                    .Name +
+                                    '</div></a>';
+                            });
+                            $("#s_list").append(pHtml);
+                            $("#s").attr("data-page", parseInt($("#s").attr("data-page")) +
+                                1);
+                            $(".btn-get-more").text("点击加载更多...");
+                            $(".get-more").removeClass("hide");
+                        }
+
+                    }, "toolhandler.ashx?method=getTool");
+                }
+            });
+
+            //----
+            try {
+                document.querySelector(".menu-nav").addEventListener("touchmove", function (event) {
+                    event.stopPropagation();
+                    //  console.log(this);
+                }, false);
+            } catch (ex) {
+                //pass
+            }
+        });
+
+
+        var canLoad = false,
+            lpd;
+
+        function dosearch() {
+            $("#s").attr("data-page", 1);
+            var s = document.querySelector("#s").value.replace(
+                    /[~!@#\$%\^&\*\(\)_\*\[\]~！￥……（）。｛｝：“”《》？、【】·'";:}{,<-=\/>]+/gi, "")
+                .replace(
+                    /^\s*|\s*$/ig, ""); //清除前后空格和特殊字符
+            if (s == "") {
+                poptip("请输入你要搜的产品");
+            } else if (s.length <= 1) {
+                poptip("至少输入两个字");
+            } else {
+                $("#s").attr("data-str", s);
+                var formData = {};
+                formData["Page"] = $("#s").attr("data-page");
+                formData["PageRow"] = 15;
+                formData["SearchStr"] = $("#s").attr("data-str");
+                var data = {
+                    json: encodeURI(JSON.stringify(formData))
+                };
+                getSearch(data, function (res) {
+                    var _result = res.ToolQueryList;
+                    $('.hot-hd').addClass("hide");
+                    if (_result.length == 0) {
+                        $(".get-more").addClass("hide");
+                        $("#s_list").html("\
+								<div class='text-center so-not-found'>\
+								<img src='img/cry.png?v=20200802' alt='搜不到数据'>\
+								<div class=''>未找到您搜索的产品</div>\
+								</div>\
+								\
+								");
+                    } else {
+                        $(".get-more").removeClass("hide");
+                        if (_result.length == 15) {
+                            $(".btn-get-more").text("点击加载更多...");
+                        } else {
+                            $(".btn-get-more").text("已经没有更多了");
+                        }
+                        var pHtml = '';
+                        _result.forEach(function (item, index) {
+                            pHtml +=
+                                '<a class="s-item" href="../toolview.html?toolid=' +
+                                item.ToolID +
+                                '"><div class="s-img" style="background-color: ' +
+                                random_color[Math.floor(
+                                    Math.random() * random_color.length)] +
+                                ';"><img src="' + item.Path + item.StoreName +
+                                '" alt="' + item
+                                .Description + '"></div><div class="s-name">' +
+                                item
+                                .Name +
+                                '</div></a>';
+                        });
+                        $("#s_list").html(pHtml);
+                        $("#s").attr("data-page", 2);
+                    }
+                    window.returninfo = 1;
+                }, "toolhandler.ashx?method=getTool");
+            } //else end
+            return false;
+        }
+
+
+        function getSearch(d, cb, u) {
+            $.ajax({
+                type: "post",
+                data: d,
+                url: u,
+                async: true,
+                dataType: "json",
+                success: function (res) {
+                    if (res.ErrorCode == "A_0") {
+                        cb && cb(res);
+                        canLoad = true;
+                    } else {
+                        console.log(res);
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+
+        /**
+         * 获取热门产品
+         */
+        function getHot() {
+            $("#s").attr("data-page", 1);
+            $("#s").attr("data-str", "");
+            var formData = {};
+            formData["Page"] = $("#s").attr("data-page");
+            formData["PageRow"] = 15;
+            var data = {
+                json: encodeURI(JSON.stringify(formData))
+            };
+            $('.hot-hd').removeClass("hide");
+            getSearch(data, function (res) {
+                var pHtml = "";
+                res.ToolQueryList.forEach(function (item, index) {
+                    pHtml += '<a class="s-item" href="../toolview.html?toolid=' + item.ToolID +
+                        '"><div class="s-img" style="background-color: ' + random_color[Math.floor(
+                            Math.random() * random_color.length)] +
+                        ';"><img src="' + item.Path + item.StoreName + '" alt="' + item
+                        .Description + '"></div><div class="s-name">' + item.Name +
+                        '</div></a>';
+                });
+                $("#s_list").html(pHtml);
+                $("#s").attr("data-page", parseInt($("#s").attr("data-page")) + 1);
+                $(".btn-get-more").text("点击加载更多...");
+                $(".get-more").removeClass("hide");
+            }, "toolhandler.ashx?method=getTool");
+        }
+
+        /**
+         * 获取分类
+         */
+        function getClass() {
+            $('.hot-hd').addClass("hide");
+            $(".type-item.active").attr("data-page", 1);
+            $("#s").attr("data-str", "");
+            var formData = {};
+            formData["Level"] = "2";
+            formData["CatFID"] = parseInt($(".type-item.active h3").attr("data-cid").substring(5, 8));
+            var data = {
+                json: encodeURI(JSON.stringify(formData))
+            };
+            getSearch(data, function (res) {
+                var pHtml = "";
+                res.catQueryList.forEach(function (item, index) {
+                    pHtml += '<a class="s-item" href="toollist.html?catsid=' + item.CatID +
+                        '"><div class="s-img" style="background-color: ' +
+                        random_color[Math.floor(
+                            Math.random() * random_color.length)] +
+                        ';"><img src="' + item.Path + item.StoreName + '" alt="' + item
+                        .Description + '"></div><div class="s-name">' + item.Name +
+                        '</div></a>';
+                });
+                $("#s_list").html(pHtml);
+                // $(".type-item.active").attr("data-page", 2);
+                // if (res.length == 15) {
+                //     $(".btn-get-more").text("点击加载更多...");
+                // } else {
+                //     $(".btn-get-more").text("已经没有更多了");
+                // }
+                $(".get-more").addClass("hide");
+            }, "toolhandler.ashx?method=getCatS");
+        }
+
+        /**
+         * 获取一级分类
+         */
+        function getCatF() {
+            var data = {};
+            getSearch(data, function (res) {
+                var pHtml = '<div class="type-wrap-row">';
+                res.catQueryList.forEach(function (item, index) {
+                    if (index % 3 == 0 && index > 0)
+                        pHtml += '<div class="type-wrap-row">';
+                    pHtml += '<div class="type-item">' +
+                        '<div class="type-img t5">' +
+                        '<img src="' + item.Path + item.StoreName + '" alt="' + item.Description +
+                        '"/>' +
+                        '</div>' +
+                        '<h3 data-cid="catf_' + item.CatID + '">' + item.Name + '</h3>' +
+                        '</div>';
+                    if (index % 3 == 2)
+                        pHtml += '</div>';
+                });
+                $("#s_catf").html(pHtml);
+
+                //点击一级目录
+                var items = $(".type-item");
+                $(".type-item").on("click", function () {
+                    if ($(this).hasClass("active")) {
+                        $(this).removeClass("active");
+                        getHot();
+                    } else {
+                        items.removeClass("active");
+                        $(this).addClass("active");
+                        getClass();
+                    }
+                });
+
+            }, "toolhandler.ashx?method=getCatF");
+        }
+
+        function showLoading(wait) {
+            var dom = document.getElementById("__loading");
+            if (wait === false || wait === "hide" || wait === 0) {
+                dom && dom.style && (dom.style.display = "none");
+            } else {
+                wait = wait || 10 * 1000; //10s
+            }
+            dom && dom.style && (dom.style.display = "block");
+            setTimeout(function () {
+                dom && dom.style && (dom.style.display = "none");
+                dom = null;
+            }, wait);
+        }
+
+        /*弹出层函数*/
+        function poptip(txt, time, clickClose) {
+            txt = txt || "";
+            time = time || 2222;
+            clickClose = clickClose || false;
+
+            try {
+                var popdiv = document.querySelector(".poptip");
+                var popcontent = document.querySelector('.poptip .poptip-content');
+                var t = (popdiv ? popdiv : _tpl());
+
+                if (txt.toString() == "hide") {
+                    t.style.display = "none";
+                    return;
+                }
+                if (!window.__poptip__) {
+                    window.__poptip__ = 1;
+                } else {
+                    clearTimeout(window.__poptip__); //清除计时器
+                }
+                if (!popdiv) {
+                    //var div = document.createElement("div");
+                    //t = div;
+                    document.body.appendChild(t);
+                    //t.style.display = "none";
+                }
+                if (clickClose) {
+                    if (!t.onclick) {
+                        t.setAttribute("onclick", "this.style.display='none';return false;");
+                    }
+
+                } else {
+                    t.removeAttribute("onclick");
+                }
+                if (!popcontent) {
+                    popcontent = t.querySelector ? t.querySelector('.poptip-content') : null;
+                }
+                var tmp = t;
+                if (!popcontent) {
+                    while (tmp.childNodes.length) {
+                        if (tmp.childNodes[0].nodeType == 3) {
+                            tmp = tmp.childNodes[1];
+                        }
+                        if (tmp.getAttribute("class") == "poptip-content") {
+                            popcontent = tmp;
+                            break;
+                        }
+
+                    }
+                }
+                popcontent.innerHTML = txt.toString();
+                t.style.display = "block";
+                window.__poptip__ = setTimeout(function () {
+                    if (t.style.display != "none") {
+                        t.style.display = "none";
+                    }
+                    t = null;
+                }, time);
+            } catch (Ex) {
+
+            }
+
+            function _tpl() {
+                var div = document.createElement("div");
+                div.setAttribute('style',
+                    'cursor: pointer; position: fixed; left: 0px; top: 0px; bottom: 0; right: 0; width: 100%; height: 100%; z-index: 19999999; background: transparent; overflow-y: auto; -webkit-overflow-scrolling: touch; display: block;'
+                )
+                div.setAttribute("class", "poptip");
+                div.innerHTML =
+                    '<table style="height: 100%; width: 100%;"> <tbody> <tr> <td style="cursor: pointer;vertical-align:middle;text-align: center;"><div class="poptip-content" style="display:inline-block;min-width: 100px; background-color: rgba(0, 0, 0, 0.8); box-shadow: 0 0 6px -1px #000; white-space: nowrap;color: #fff; height: 36px; line-height: 36px; font-size: 14px; text-align: center; border-radius: 14px;-webkit-border-radius: 14px; padding: 0 20px;"></div></td> </tr> </tbody> </table>';
+                return div;
+            }
+        }
+    </script>
+</body>
+
+</html>

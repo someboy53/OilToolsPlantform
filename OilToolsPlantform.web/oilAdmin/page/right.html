@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>menu</title>
+    <link rel="stylesheet" href="../lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css" media="all">
+    <style>
+        .layui-btn:not(.layui-btn-lg ):not(.layui-btn-sm):not(.layui-btn-xs) {
+            height: 34px;
+            line-height: 34px;
+            padding: 0 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="layuimini-container">
+        <div class="layuimini-main">
+            <div>
+                <div class="layui-btn-group">
+                    <button class="layui-btn" id="btn-expand">全部展开</button>
+                    <button class="layui-btn layui-btn-normal" id="btn-fold">全部折叠</button>
+                    <button class="layui-btn  layui-btn-warm" id="btnSearch">刷新</button>
+                </div>
+                <table id="munu-table" class="layui-table" lay-filter="munu-table"></table>
+            </div>
+        </div>
+    </div>
+    <!-- 操作列 -->
+    <!--<script type="text/html" id="auth-state">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+    </script>-->
+
+    <script src="../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+    <script src="../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+    <script src="../js/other.js?v=20201222" type="text/javascript"></script>
+    <script>
+        layui.use(['table', 'treetable'], function () {
+            var $ = layui.jquery;
+            var table = layui.table;
+            var treetable = layui.treetable;
+
+            var api = function (data, func, url) {
+                url = url + '&token=' + getMainParam('token');
+                $.ajax({
+                    type: "post",
+                    data: data,
+                    url: url,
+                    async: true,
+                    dataType: "json",
+                    success: function (res) {
+                        func && func(res);
+                        console.log(res);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            };
+
+            var rightData;
+            api({}, function (res) {
+                if (res.ErrorCode == 'A_0') {
+                    rightData = res.data;
+                    // 渲染表格
+                    layer.load(2);
+                    treetable.render({
+                        treeColIndex: 1,
+                        treeSpid: -1,
+                        treeIdName: 'authorityId',
+                        treePidName: 'parentId',
+                        elem: '#munu-table',
+                        url: '../api/menus.json?t=20201222',
+                        page: false,
+                        cols: [[
+                            { type: 'numbers' },
+                            { field: 'authorityName', minWidth: 210, title: '权限名称' },
+                            { field: 'authority', maxWidth: 80, title: '权限标识' },
+                            { field: 'menuUrl', title: '菜单url' },
+                            {
+                                field: 'roleNames', align: 'center', title: '角色', templet: function (d) {
+                                    if (d.authority != null && d.authority != '') {
+                                        var rStr = '';
+                                        rightData.forEach(function (item) {
+                                            item.FunctionCode = item.FunctionCode.replace("_", ':');
+                                            if (item.FunctionCode == d.authority)
+                                                rStr += ',' + item.RoleName;
+                                        });
+                                        return rStr;
+                                    }
+                                    else
+                                        return '';
+                                }
+                            },
+                            {
+                                field: 'isMenu', width: 80, align: 'center', templet: function (d) {
+                                    if (d.isMenu == 1) {
+                                        return '<span class="layui-badge layui-bg-gray">菜单</span>';
+                                    }
+                                    else if (d.isMenu == 2)
+                                        return '<span class="layui-badge layui-bg-blue">权限</span>';
+                                    else
+                                        return '<span class="layui-badge-rim">目录</span>';
+                                }, title: '类型'
+                            },
+                            {
+                                templet: function (d) {
+                                    if (d.authority != null && d.authority != '')
+                                        return '<a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>';
+                                    else
+                                        return '';
+                                }, width: 80, align: 'center', title: '操作'
+                            }
+                        ]],
+                        done: function () {
+                            layer.closeAll('loading');
+                        }
+                    });
+                } else {
+                    layer.msg('获取数据失败' + res.ErrorMessage, function () {
+                        closeCurrent();
+                    });
+                }
+                return;
+            }, '../adminhandler.ashx?method=rightQuery');
+
+            $('#btn-expand').click(function () {
+                treetable.expandAll('#munu-table');
+            });
+
+            $('#btn-fold').click(function () {
+                treetable.foldAll('#munu-table');
+            });
+
+            var _funcList = {
+                doSearch: function () {
+                    //执行搜索重载
+                    api({}, function (res) {
+                        if (res.ErrorCode == 'A_0') {
+                            rightData = res.data;
+                            // 渲染表格
+                            layer.load(2);
+                            treetable.render({
+                                treeColIndex: 1,
+                                treeSpid: -1,
+                                treeIdName: 'authorityId',
+                                treePidName: 'parentId',
+                                elem: '#munu-table',
+                                url: '../api/menus.json',
+                                page: false,
+                                cols: [[
+                                    { type: 'numbers' },
+                                    { field: 'authorityName', minWidth: 210, title: '权限名称' },
+                                    { field: 'authority', maxWidth: 80, title: '权限标识' },
+                                    { field: 'menuUrl', title: '菜单url' },
+                                    {
+                                        field: 'roleNames', align: 'center', title: '角色', templet: function (d) {
+                                            if (d.authority != null && d.authority != '') {
+                                                var rStr = '';
+                                                rightData.forEach(function (item) {
+                                                    item.FunctionCode = item.FunctionCode.replace("_", ':');
+                                                    if (item.FunctionCode == d.authority)
+                                                        rStr += ',' + item.RoleName;
+                                                });
+                                                return rStr;
+                                            }
+                                            else
+                                                return '';
+                                        }
+                                    },
+                                    {
+                                        field: 'isMenu', width: 80, align: 'center', templet: function (d) {
+                                            if (d.isMenu == 1) {
+                                                return '<span class="layui-badge layui-bg-gray">菜单</span>';
+                                            }
+                                            else if (d.isMenu == 2)
+                                                return '<span class="layui-badge layui-bg-blue">权限</span>';
+                                            else
+                                                return '<span class="layui-badge-rim">目录</span>';
+                                        }, title: '类型'
+                                    },
+                                    {
+                                        templet: function (d) {
+                                            if (d.authority != null && d.authority != '')
+                                                return '<a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>';
+                                            else
+                                                return '';
+                                        }, width: 80, align: 'center', title: '操作'
+                                    }
+                                ]],
+                                done: function () {
+                                    layer.closeAll('loading');
+                                }
+                            });
+                        } else {
+                            layer.msg('获取数据失败' + res.ErrorMessage, function () {
+                                closeCurrent();
+                            });
+                        }
+                        return;
+                    }, '../adminhandler.ashx?method=rightQuery');
+                }
+            }
+            window.funcList = _funcList;
+
+            // 监听搜索操作
+            $("#btnSearch").on('click', function () {
+                _funcList.doSearch();
+            });
+
+            //监听工具条
+            table.on('tool(munu-table)', function (obj) {
+                var data = obj.data;
+                var layEvent = obj.event;
+
+                if (layEvent === 'del') {
+                    layer.msg('删除' + data.id);
+                } else if (layEvent === 'edit') {
+                    var index = layer.open({
+                        title: '编辑权限',
+                        type: 2,
+                        shade: 0.2,
+                        maxmin: true,
+                        shadeClose: true,
+                        area: ['100%', '100%'],
+                        content: '../page/right/edit.html?t=' + Math.random() + '&id=' + data.authority,
+                    });
+                    $(window).on("resize", function () {
+                        layer.full(index);
+                    });
+                    return false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
