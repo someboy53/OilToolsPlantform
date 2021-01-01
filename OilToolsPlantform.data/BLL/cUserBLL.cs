@@ -335,6 +335,50 @@ namespace OilToolsPlantform.Data.BLL
             return response;
         }
 
+        public DTO.PSRegist Regist(DTO.PQRegist request)
+        {
+            DTO.PSRegist response = new DTO.PSRegist();
+            try
+            {
+                using (var scope = new System.Transactions.TransactionScope())
+                {
+                    List<Models.tbUser> objs = con.tbUser.Where(p => p.UserAccount == request.account).ToList<Models.tbUser>();
+                    if (objs.Count >= 1)
+                    {
+                        response.ErrorCode = "A_DATA_ERROR";
+                        response.ErrorMessage = rm.GetString(response.ErrorCode);
+                        return response;
+                    }
+                    //根据老密码生成密文
+                    Models.tbUser obj = new Models.tbUser();
+                    obj.Salt = new Random().Next(100000, 999999).ToString();
+                    SHA1 sha = SHA1.Create();
+                    ASCIIEncoding enc = new ASCIIEncoding();
+                    byte[] oData = enc.GetBytes(request.passwd + obj.Salt);
+                    byte[] dData = sha.ComputeHash(oData);
+                    obj.UserPass = BitConverter.ToString(dData).Replace("-", "");
+                    obj.UserName = request.name;
+                    obj.CreateTime = DateTime.Now;
+                    obj.Email = "";
+                    obj.Enabled = "0";
+                    obj.StartDate = DateTime.Now;
+                    obj.EndDate = DateTime.Now;
+                    obj.UserAccount = request.account;
+                    //存储token
+                    con.SaveChanges();
+                    scope.Complete();
+                    response.ErrorCode = "A_0";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error("cUserBLL.Regist出错！", ex);
+                throw;
+            }
+            response.ErrorMessage = rm.GetString(response.ErrorCode);
+            return response;
+        }
+
         public DTO.PSLogModify LogModify(DTO.PQLogModify request)
         {
             DTO.PSLogModify response = new DTO.PSLogModify();

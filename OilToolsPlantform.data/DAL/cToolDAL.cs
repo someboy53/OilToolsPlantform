@@ -109,5 +109,24 @@ namespace OilToolsPlantform.Data.DAL
         {
             con.Database.ExecuteSqlCommand("update tbToolExt te set te.ViewCount=te.ViewCount+1 where te.toolid=" + request.ToolID);
         }
+
+        internal void CaseQueryBuild(PQCaseQuery request)
+        {
+            this.AppendInit();
+            this.AppendFieldRownum("t.SortOrder desc,t.ToolID desc");
+            this.AppendFieldStr("t.ToolID");
+            this.AppendFieldStr("t.Name");
+            this.AppendFieldStr("s.Name CatSName");
+            this.AppendFieldStr("f.Name CatFName");
+            this.AppendFieldStr("t.Description");
+            this.AppendFieldStr("td.Description CaseContent");
+            this.AppendFromStr("from tbTool t,tbCatS s,tbCatF f,tbToolDetail td");
+            this.AppendFromStr("where t.CatSID=s.CatSID and s.CatFID=f.CatFID and t.toolID=td.toolID and td.IconName='case.png'");
+            this.AppendWhereLike("t.name", request.ToolName);
+            this.AppendWhereLike("s.name", request.CatSName);
+            this.AppendWhereLike("f.name", request.CatFName);
+            this.AppendWhereContains("td.Description", request.CaseContent);
+            this.AppendComplete(request.Page, request.PageRow);
+        }
     }
 }

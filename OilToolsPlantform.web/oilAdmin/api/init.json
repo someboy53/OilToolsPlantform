@@ -25,6 +25,7 @@
               "title": "工具管理",
               "href": "page/tools.html",
               "icon": "fa fa-anchor",
+              "memo": "增加审核，审核权限和功能权限并存，以部门进行划分。",
               "target": "_self"
             }
           ]
@@ -36,15 +37,10 @@
           "target": "_self",
           "child": [
             {
-              "title": "分类查询",
-              "href": "page/catquery.html",
-              "icon": "fa fa-suitcase",
-              "target": "_self"
-            },
-            {
               "title": "应用案例查询",
-              "href": "",
+              "href": "page/case.html",
               "icon": "fa fa-camera",
+              "memo": "",
               "target": "_self"
             },
             {
@@ -73,6 +69,7 @@
               "title": "用户及权限管理",
               "href": "page/user.html",
               "icon": "fa fa-user-secret",
+              "memo": "新增的用户的默认权限只有工具的新增",
               "target": "_self"
             },
             {
@@ -114,12 +111,6 @@
               "href": "page/fans.html",
               "icon": "fa fa-heart",
               "target": ""
-            },
-            {
-              "title": "公众号菜单管理",
-              "href": "page/menu.html",
-              "icon": "fa fa-book",
-              "target": "_self"
             }
           ]
         }

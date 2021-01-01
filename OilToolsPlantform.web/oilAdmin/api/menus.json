@@ -103,24 +103,6 @@
       "parentId": 3
     },
     {
-      "authorityId": 12,
-      "authorityName": "分类查询",
-      "menuUrl": "page/cat.html",
-      "menuIcon": "",
-      "authority": null,
-      "isMenu": 1,
-      "parentId": 11
-    },
-    {
-      "authorityId": 13,
-      "authorityName": "分类查询：查询",
-      "menuUrl": null,
-      "menuIcon": "",
-      "authority": "cat:query",
-      "isMenu": 2,
-      "parentId": 12
-    },
-    {
       "authorityId": 14,
       "authorityName": "应用案例查询",
       "menuUrl": "page/case.html",
@@ -335,33 +317,6 @@
       "authority": "fans:query",
       "isMenu": 2,
       "parentId": 35
-    },
-    {
-      "authorityId": 37,
-      "authorityName": "公众号菜单管理",
-      "menuUrl": "page/menu.html",
-      "menuIcon": "",
-      "authority": null,
-      "isMenu": 1,
-      "parentId": 34
-    },
-    {
-      "authorityId": 38,
-      "authorityName": "公众号菜单管理：查询",
-      "menuUrl": null,
-      "menuIcon": "",
-      "authority": "menu:query",
-      "isMenu": 2,
-      "parentId": 37
-    },
-    {
-      "authorityId": 39,
-      "authorityName": "公众号菜单管理：修改",
-      "menuUrl": null,
-      "menuIcon": "",
-      "authority": "menu:modify",
-      "isMenu": 2,
-      "parentId": 37
     }
   ]
 }

@@ -247,10 +247,10 @@
     <Content Include="oilAdmin\lib\layui-v2.5.5\lay\modules\tree.js" />
     <Content Include="oilAdmin\lib\layui-v2.5.5\lay\modules\upload.js" />
     <Content Include="oilAdmin\lib\layui-v2.5.5\lay\modules\util.js" />
+    <Content Include="oilAdmin\page\case.html" />
+    <Content Include="oilAdmin\reg.html" />
     <Content Include="oilAdmin\login.html" />
     <Content Include="oilAdmin\page\404.html" />
-    <Content Include="oilAdmin\page\case.html" />
-    <Content Include="oilAdmin\page\catquery.html" />
     <Content Include="oilAdmin\page\chpwd.html" />
     <Content Include="oilAdmin\page\log.html" />
     <Content Include="oilAdmin\page\menu.html" />

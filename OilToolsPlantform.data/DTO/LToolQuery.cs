@@ -21,6 +21,8 @@ namespace OilToolsPlantform.Data.DTO
 
         public string CatSName { get; set; }
 
+        public string CaseContent { get; set; }
+
         public Nullable<int> DetailCount { get; set; }
     }
 }

@@ -203,6 +203,10 @@
     <Compile Include="DTO\LLog.cs" />
     <Compile Include="DTO\PQLogQuery.cs" />
     <Compile Include="DTO\PSLogQuery.cs" />
+    <Compile Include="OilToolsPlantform\Data\DTO\PQCaseQuery.cs" />
+    <Compile Include="OilToolsPlantform\Data\DTO\PQRegist.cs" />
+    <Compile Include="OilToolsPlantform\Data\DTO\PSCaseQuery.cs" />
+    <Compile Include="OilToolsPlantform\Data\DTO\PSRegist.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -230,7 +234,6 @@
   <ItemGroup>
     <Folder Include="Models\Partial\" />
     <Folder Include="Models\Procedures\" />
-    <Folder Include="OilToolsPlantform\Data\DTO\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="BLL\readme.txt" />

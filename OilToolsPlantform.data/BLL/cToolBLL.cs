@@ -230,6 +230,37 @@ namespace OilToolsPlantform.Data.BLL
         }
 
         /// <summary>
+        /// 查询案例
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public DTO.PSCaseQuery CaseQuery(DTO.PQCaseQuery request)
+        {
+            DTO.PSCaseQuery response = new DTO.PSCaseQuery();
+            try
+            {
+                DAL.cToolDAL dal = new DAL.cToolDAL(con);
+                dal.CaseQueryBuild(request);
+                response.data = dal.Query<DTO.LToolQuery>();
+                int num = dal.Count();
+                response.Page = request.Page;
+                response.MaxNum = num;
+                response.count = num;
+                response.MaxPage = MathExpansion.CaculatPage(num, request.PageRow);
+
+                response.ErrorMessage = rm.GetString(response.ErrorCode);
+                response.code = response.ErrorCode == "A_0" ? "0" : response.ErrorCode;
+                response.msg = response.ErrorMessage;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error("cUserBLL.QueryUser出错！", ex);
+                throw;
+            }
+            return response;
+        }
+
+        /// <summary>
         /// 查询工具
         /// </summary>
         /// <param name="request"></param>
@@ -312,7 +343,9 @@ namespace OilToolsPlantform.Data.BLL
                             tool.UpdateTime = DateTime.Now;
                             tool.SortOrder = 0;
                             tool.Enabled = "1";
+                            tool.SearchStr = "";
                             tool=con.tbTool.Add(tool);
+                            con.SaveChanges();
                             searchStr = string.Format("|-|{0}|-|{1}|-|{2}|-|{3}", tool.Name, tool.NameJP, tool.NameQP, tool.Description.Length > 100 ? tool.Description.Substring(0, 100) : tool.Description);
                             //图片
                             foreach (DTO.LPicture picture in request.Pictures)
@@ -325,6 +358,7 @@ namespace OilToolsPlantform.Data.BLL
                                 pic.CreateUser = request.AccountNumber;
                                 pic.CreateTime = DateTime.Now;
                                 pic = con.tbPic.Add(pic);
+                                con.SaveChanges();
                                 Models.tbToolPic toolPic = new Models.tbToolPic();
                                 toolPic.ToolID = tool.ToolID;
                                 toolPic.PicID = pic.PicID;
@@ -365,6 +399,8 @@ namespace OilToolsPlantform.Data.BLL
                             //详情
                             foreach (DTO.LToolDetail detail in request.ToolDetails)
                             {
+                                if ("1".Equals(detail.IsDel))
+                                    continue;
                                 toolDetail = con.tbToolDetail.Create();
                                 toolDetail.ToolID = tool.ToolID;
                                 toolDetail.DetailIcon = detail.DetailIcon;

@@ -126,7 +126,7 @@ namespace OilToolsPlantform.oilAdmin
         {
             //Hashtable user = GetUser();
             //if (user.role == "admin" && methodName == "remove") throw .    
-            if (methodName == "login" || methodName == "passwordModify")
+            if (methodName == "login" || methodName == "passwordModify" || methodName == "regist")
                 return;
             foreach (string method in methodList)
             {
@@ -199,6 +199,17 @@ namespace OilToolsPlantform.oilAdmin
             Data.DTO.PSLogin response = new Data.DTO.PSLogin();
             Data.BLL.cUserBLL client = new Data.BLL.cUserBLL();
             response = client.Login(request);
+            string strResponse = this.Obj2Json(response);
+            return strResponse;
+        }
+
+        public string regist()
+        {
+            Data.DTO.PQRegist request = new Data.DTO.PQRegist();
+            request = this.Json2Obj(jsonStr, request.GetType()) as Data.DTO.PQRegist;
+            Data.DTO.PSRegist response = new Data.DTO.PSRegist();
+            Data.BLL.cUserBLL client = new Data.BLL.cUserBLL();
+            response = client.Regist(request);
             string strResponse = this.Obj2Json(response);
             return strResponse;
         }
@@ -323,6 +334,20 @@ namespace OilToolsPlantform.oilAdmin
             Data.DTO.PSCatSQuery response = new Data.DTO.PSCatSQuery();
             Data.BLL.cToolBLL client = new Data.BLL.cToolBLL();
             response = client.CatSQuery(request);
+            string strResponse = this.Obj2Json(response);
+            return strResponse;
+        }
+
+        #endregion
+
+        #region 案例处理
+        public string caseQuery()
+        {
+            Data.DTO.PQCaseQuery request = new Data.DTO.PQCaseQuery();
+            request = this.Json2Obj(jsonStr, request.GetType()) as Data.DTO.PQCaseQuery;
+            Data.DTO.PSCaseQuery response = new Data.DTO.PSCaseQuery();
+            Data.BLL.cToolBLL client = new Data.BLL.cToolBLL();
+            response = client.CaseQuery(request);
             string strResponse = this.Obj2Json(response);
             return strResponse;
         }
