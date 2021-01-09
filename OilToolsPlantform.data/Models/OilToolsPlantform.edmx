@@ -5,6 +5,40 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="OilToolsPlantformModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="tbAudit">
+          <Key>
+            <PropertyRef Name="AuditID" />
+          </Key>
+          <Property Name="AuditID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TargetTableName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TargetTableID" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Status_Desc" Type="nvarchar" MaxLength="500" />
+          <Property Name="NextAuditOrgID" Type="int" />
+          <Property Name="NextAuditStep" Type="int" />
+          <Property Name="LastAuditName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastAuditDate" Type="date" />
+          <Property Name="AuditID1" Type="int" />
+          <Property Name="AuditName1" Type="nvarchar" MaxLength="50" />
+          <Property Name="AuditStatus1" Type="int" />
+          <Property Name="AuditDate1" Type="date" />
+          <Property Name="AuditID2" Type="int" />
+          <Property Name="AuditName2" Type="nvarchar" MaxLength="50" />
+          <Property Name="AuditStatus2" Type="int" />
+          <Property Name="AuditDate2" Type="date" />
+          <Property Name="AuditID3" Type="int" />
+          <Property Name="AuditName3" Type="nvarchar" MaxLength="50" />
+          <Property Name="AuditStatus3" Type="int" />
+          <Property Name="AuditDate3" Type="date" />
+          <Property Name="AuditID4" Type="int" />
+          <Property Name="AuditName4" Type="nvarchar" MaxLength="50" />
+          <Property Name="AuditStatus4" Type="int" />
+          <Property Name="AuditDate4" Type="date" />
+          <Property Name="AuditID5" Type="int" />
+          <Property Name="AuditName5" Type="nvarchar" MaxLength="50" />
+          <Property Name="AuditStatus5" Type="int" />
+          <Property Name="AuditDate5" Type="date" />
+        </EntityType>
         <EntityType Name="tbCatF">
           <Key>
             <PropertyRef Name="CatFID" />
@@ -174,7 +208,7 @@
           <Key>
             <PropertyRef Name="ToolExtID" />
           </Key>
-          <Property Name="ToolExtID" Type="int" Nullable="false" />
+          <Property Name="ToolExtID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ToolID" Type="int" Nullable="false" />
           <Property Name="ViewCount" Type="int" Nullable="false" />
           <Property Name="LikeCount" Type="int" Nullable="false" />
@@ -393,6 +427,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="OilToolsPlantformModelStoreContainer">
+          <EntitySet Name="tbAudit" EntityType="Self.tbAudit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbCatF" EntityType="Self.tbCatF" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbCatFPic" EntityType="Self.tbCatFPic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbCatS" EntityType="Self.tbCatS" Schema="dbo" store:Type="Tables" />
@@ -537,6 +572,7 @@
             <End Role="tbToolExt" EntitySet="tbToolExt" />
           </AssociationSet>
           <EntitySet Name="tbWechatFan" EntityType="OilToolsPlantformModel.tbWechatFan" />
+          <EntitySet Name="tbAudit" EntityType="OilToolsPlantformModel.tbAudit" />
         </EntityContainer>
         <EntityType Name="tbCatF">
           <Key>
@@ -951,6 +987,40 @@
           <Property Name="qr_scene" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="qr_scene_str" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="tbAudit">
+          <Key>
+            <PropertyRef Name="AuditID" />
+          </Key>
+          <Property Name="AuditID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TargetTableName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TargetTableID" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Status_Desc" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AuditID1" Type="Int32" />
+          <Property Name="AuditName1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AuditStatus1" Type="Int32" />
+          <Property Name="AuditDate1" Type="DateTime" Precision="0" />
+          <Property Name="AuditID2" Type="Int32" />
+          <Property Name="AuditName2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AuditStatus2" Type="Int32" />
+          <Property Name="AuditDate2" Type="DateTime" Precision="0" />
+          <Property Name="AuditID3" Type="Int32" />
+          <Property Name="AuditName3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AuditStatus3" Type="Int32" />
+          <Property Name="AuditDate3" Type="DateTime" Precision="0" />
+          <Property Name="AuditID4" Type="Int32" />
+          <Property Name="AuditName4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AuditStatus4" Type="Int32" />
+          <Property Name="AuditDate4" Type="DateTime" Precision="0" />
+          <Property Name="AuditID5" Type="Int32" />
+          <Property Name="AuditName5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AuditStatus5" Type="Int32" />
+          <Property Name="AuditDate5" Type="DateTime" Precision="0" />
+          <Property Name="NextAuditOrgID" Type="Int32" />
+          <Property Name="LastAuditName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastAuditDate" Type="DateTime" Precision="0" />
+          <Property Name="NextAuditStep" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1205,6 +1275,41 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tbAudit">
+            <EntityTypeMapping TypeName="OilToolsPlantformModel.tbAudit">
+              <MappingFragment StoreEntitySet="tbAudit">
+                <ScalarProperty Name="NextAuditStep" ColumnName="NextAuditStep" />
+                <ScalarProperty Name="LastAuditDate" ColumnName="LastAuditDate" />
+                <ScalarProperty Name="LastAuditName" ColumnName="LastAuditName" />
+                <ScalarProperty Name="NextAuditOrgID" ColumnName="NextAuditOrgID" />
+                <ScalarProperty Name="AuditDate5" ColumnName="AuditDate5" />
+                <ScalarProperty Name="AuditStatus5" ColumnName="AuditStatus5" />
+                <ScalarProperty Name="AuditName5" ColumnName="AuditName5" />
+                <ScalarProperty Name="AuditID5" ColumnName="AuditID5" />
+                <ScalarProperty Name="AuditDate4" ColumnName="AuditDate4" />
+                <ScalarProperty Name="AuditStatus4" ColumnName="AuditStatus4" />
+                <ScalarProperty Name="AuditName4" ColumnName="AuditName4" />
+                <ScalarProperty Name="AuditID4" ColumnName="AuditID4" />
+                <ScalarProperty Name="AuditDate3" ColumnName="AuditDate3" />
+                <ScalarProperty Name="AuditStatus3" ColumnName="AuditStatus3" />
+                <ScalarProperty Name="AuditName3" ColumnName="AuditName3" />
+                <ScalarProperty Name="AuditID3" ColumnName="AuditID3" />
+                <ScalarProperty Name="AuditDate2" ColumnName="AuditDate2" />
+                <ScalarProperty Name="AuditStatus2" ColumnName="AuditStatus2" />
+                <ScalarProperty Name="AuditName2" ColumnName="AuditName2" />
+                <ScalarProperty Name="AuditID2" ColumnName="AuditID2" />
+                <ScalarProperty Name="AuditDate1" ColumnName="AuditDate1" />
+                <ScalarProperty Name="AuditStatus1" ColumnName="AuditStatus1" />
+                <ScalarProperty Name="AuditName1" ColumnName="AuditName1" />
+                <ScalarProperty Name="AuditID1" ColumnName="AuditID1" />
+                <ScalarProperty Name="Status_Desc" ColumnName="Status_Desc" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TargetTableID" ColumnName="TargetTableID" />
+                <ScalarProperty Name="TargetTableName" ColumnName="TargetTableName" />
+                <ScalarProperty Name="AuditID" ColumnName="AuditID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1300,6 +1405,7 @@
         <EntityTypeShape EntityType="OilToolsPlantformModel.tbToolExt" Width="1.5" PointX="7.5" PointY="8.625" />
         <AssociationConnector Association="OilToolsPlantformModel.FK_tbToolExt_tbTool" />
         <EntityTypeShape EntityType="OilToolsPlantformModel.tbWechatFan" Width="1.5" PointX="10.375" PointY="6.75" />
+        <EntityTypeShape EntityType="OilToolsPlantformModel.tbAudit" Width="1.5" PointX="12.375" PointY="0.75" />
       </Diagram>
     </Diagrams>
   </Designer>

@@ -325,6 +325,10 @@
                         <span class="icon icon-2"></span>
                         <input type="text" name="name" lay-verify="required" placeholder="请输入昵称" maxlength="24" />
                     </div>
+                    <div class="item">
+                        <span class="icon icon-2"></span>
+                        <input type="text" name="phone" lay-verify="phone" placeholder="请输入手机" maxlength="24" />
+                    </div>
                     <div id="validatePanel" class="item" style="width: 137px;">
                         <input type="text" name="captcha" placeholder="请输入验证码" maxlength="4">
                         <canvas id="captchaCanvas" class="validateImg"></canvas>
@@ -396,7 +400,7 @@
                     };
                     api(data, function (res) {
                         if (res.ErrorCode == 'A_0') {
-                            layer.msg('注册成功', function () {
+                            layer.msg('注册成功,请联系管理员以启用帐户。', function () {
                                 window.location = 'login.html';
                             });
                         } else {

@@ -344,6 +344,7 @@
     <None Include="oilAdmin\lib\layui-v2.5.5\font\iconfont.woff" />
     <None Include="oilAdmin\lib\layui-v2.5.5\font\iconfont.woff2" />
     <Content Include="toolhandler.ashx" />
+    <Content Include="oilAdmin\web.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="img\det\" />

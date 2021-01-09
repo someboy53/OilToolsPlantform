@@ -334,8 +334,9 @@
                             closeCurrent(true);
                         });
                     } else {
-                        layer.msg('新增失败' + res.ErrorMessage);
-                        closeCurrent(false);
+                        layer.msg('新增失败' + res.ErrorMessage, function () {
+                            closeCurrent(false);
+                        });
                     }
                 }, '../../adminhandler.ashx?method=toolModify');
                 return false;

@@ -163,18 +163,35 @@ namespace OilToolsPlantform.Data.BLL
                         }
                         else
                         {
-                            //修改
-                            u = con.tbUser.Find(request.UserID);
-                            u.UserName = request.UserName;
-                            u.UserAccount = request.UserAccount;
-                            u.UpdateTime = DateTime.Now;
-                            u.Enabled = "1";
-                            u.OrgID = request.OrgID;
-                            u.CellPhone = request.CellPhone;
-                            u.EndDate = DateTime.Parse(request.EndDate);
-                            u.Email = request.Email;
-                            u.WorkNumber = request.WorkNumber;
-                            u.RoleID = request.RoleID;
+                            if (request.Enabled == null)
+                            {
+                                //修改
+                                u = con.tbUser.Find(request.UserID);
+                                u.UserName = request.UserName;
+                                u.UserAccount = request.UserAccount;
+                                u.UpdateTime = DateTime.Now;
+                                u.Enabled = "1";
+                                u.OrgID = request.OrgID;
+                                u.CellPhone = request.CellPhone;
+                                u.EndDate = DateTime.Parse(request.EndDate);
+                                u.Email = request.Email;
+                                u.WorkNumber = request.WorkNumber;
+                                u.RoleID = request.RoleID;
+                            }
+                            else
+                            {
+                                if (request.Enabled == "1")
+                                {
+                                    //激活
+                                    u = con.tbUser.Find(request.UserID);
+                                    u.Enabled = "1";
+                                    u.StartDate = DateTime.Now;
+                                    u.EndDate = DateTime.Now.AddYears(2);
+                                    string tmp = System.Configuration.ConfigurationManager.AppSettings["defaultRoleForOutPerson"];
+                                    if (!string.IsNullOrEmpty(tmp))
+                                        u.RoleID = int.Parse(tmp);
+                                }
+                            }
                         }
                     }
                     con.SaveChanges();
@@ -289,7 +306,7 @@ namespace OilToolsPlantform.Data.BLL
             {
                 using (var scope = new System.Transactions.TransactionScope())
                 {
-                    List<Models.tbUser> objs = con.tbUser.Where(p => p.UserAccount == request.account).ToList<Models.tbUser>();
+                    List<Models.tbUser> objs = con.tbUser.Where(p => p.UserAccount == request.account && p.Enabled == "1").ToList<Models.tbUser>();
                     if (objs.Count != 1)
                     {
                         response.ErrorCode = "A_DATA_ERROR";
@@ -361,13 +378,22 @@ namespace OilToolsPlantform.Data.BLL
                     obj.CreateTime = DateTime.Now;
                     obj.Email = "";
                     obj.Enabled = "0";
+                    string tmp = System.Configuration.ConfigurationManager.AppSettings["OutPersonOrgID"];
+                    obj.CellPhone = request.phone;
                     obj.StartDate = DateTime.Now;
                     obj.EndDate = DateTime.Now;
                     obj.UserAccount = request.account;
-                    //存储token
-                    con.SaveChanges();
-                    scope.Complete();
-                    response.ErrorCode = "A_0";
+                    if (!string.IsNullOrEmpty(tmp))
+                    {
+                        obj.OrgID = int.Parse(tmp);
+                        con.SaveChanges();
+                        scope.Complete();
+                        response.ErrorCode = "A_0";
+                    }
+                    else
+                    {
+                        response.ErrorCode = "A_OUT_PERSON_ORG_NOT_SET";
+                    }
                 }
             }
             catch (Exception ex)
@@ -567,10 +593,10 @@ namespace OilToolsPlantform.Data.BLL
                     List<Models.tbRoleDetail> tmps = con.tbRoleDetail.Where(p => p.FunctionCode == response.FunctionCode).ToList();
                     foreach (Models.tbRoleDetail tmp in tmps)
                     {
-                        response.RoleIDs.Add(tmp.RoleID==null?0:(int)tmp.RoleID);
+                        response.RoleIDs.Add(tmp.RoleID == null ? 0 : (int)tmp.RoleID);
                     }
                     response.Roles = con.tbRole.Select(p => new DTO.LRole() { RoleID = p.RoleID, RoleName = p.RoleName, RoleType = p.RoleType }).ToList();
-                    
+
                     response.ErrorCode = "A_0";
                 }
             }
@@ -622,7 +648,8 @@ namespace OilToolsPlantform.Data.BLL
                         role = con.tbRole.Find(request.RoleID);
                         con.tbRole.Remove(role);
                     }
-                    else {
+                    else
+                    {
                         if (request.RoleID > 0)
                         {
                             role = con.tbRole.Find(request.RoleID);

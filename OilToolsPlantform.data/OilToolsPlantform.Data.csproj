@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\BllBase.cs" />
+    <Compile Include="BLL\cAuditBLL.cs" />
     <Compile Include="BLL\cToolBLL.cs" />
     <Compile Include="BLL\cOtherBLL.cs" />
     <Compile Include="BLL\cUserBLL.cs" />
@@ -132,6 +133,9 @@
     <Compile Include="Models\OilToolsPlantformModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>OilToolsPlantformModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbAudit.cs">
       <DependentUpon>OilToolsPlantformModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbCatF.cs">
@@ -243,6 +247,7 @@
     <Content Include="Models\Functions\dbo.fn_getPying.sql" />
     <Content Include="Models\InitData\datascript.sql" />
     <Content Include="Models\InitData\test.sql" />
+    <Content Include="Models\SQL\updateV0.3.txt" />
     <Content Include="Models\SQL\updateV0.2.txt" />
   </ItemGroup>
   <ItemGroup>

@@ -16,5 +16,6 @@ namespace OilToolsPlantform.Data.DTO
         public string Cellphone { get; set; }
 
         public string WorkNumber { get; set; }
+        public string Enabled { get; set; }
     }
 }

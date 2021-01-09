@@ -1,0 +1,3 @@
+﻿--增加工具审核信息
+insert into tbAudit (TargetTableName,TargetTableID,Status) select 'tbTool',t.toolID,4 from tbTool t;
+update tbTool set Enabled='1';

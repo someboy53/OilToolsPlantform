@@ -42,5 +42,6 @@ namespace OilToolsPlantform.Data.Models
         public DbSet<tbCountAna> tbCountAna { get; set; }
         public DbSet<tbToolExt> tbToolExt { get; set; }
         public DbSet<tbWechatFan> tbWechatFan { get; set; }
+        public DbSet<tbAudit> tbAudit { get; set; }
     }
 }

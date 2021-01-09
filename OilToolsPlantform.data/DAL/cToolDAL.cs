@@ -76,7 +76,7 @@ namespace OilToolsPlantform.Data.DAL
             this.AppendFieldStr("p.Path");
             this.AppendFieldStr("p.ThambName");
             this.AppendFromStr("from tbTool t,(select ROW_NUMBER() over (partition by tp.toolID order by tp.sortorder desc) no1,tp.ToolID,tp.PicType,p.* from tbToolPic tp,tbPic p where tp.PicID=p.PicID and tp.Enabled='1') p");
-            this.AppendFromStr("where t.ToolID=p.ToolID and p.no1=1");
+            this.AppendFromStr("where t.ToolID=p.ToolID and p.no1=1 and t.Enabled='1'");
             this.AppendWhereEqual("t.CatSID", request.CatSID);
             this.AppendWhereContains("t.SearchStr", request.SearchStr);
             this.AppendComplete(request.Page, request.PageRow);
@@ -96,7 +96,9 @@ namespace OilToolsPlantform.Data.DAL
             this.AppendFieldStr("f.Name CatFName");
             this.AppendFieldStr("t.Description");
             this.AppendFieldStr("ISNULL(d.cc,0) DetailCount");
-            this.AppendFromStr("from tbTool t left join (select td.ToolID,count(1) cc from tbToolDetail td group by td.ToolID) d on t.ToolID=d.ToolID,tbCatS s,tbCatF f");
+            this.AppendFieldStr("t.Enabled");
+            this.AppendFieldStr("au.status");
+            this.AppendFromStr("from tbTool t left join (select td.ToolID,count(1) cc from tbToolDetail td group by td.ToolID) d on t.ToolID=d.ToolID left join (select row_number() over (partition by a.TargetTableID order by a.AuditID desc) n,a.TargetTableID,a.status from tbAudit a where a.TargetTableName='tbTool') au on t.ToolID=au.TargetTableID and au.n=1,tbCatS s,tbCatF f");
             this.AppendFromStr("where t.CatSID=s.CatSID and s.CatFID=f.CatFID");
             this.AppendWhereLike("t.name", request.ToolName);
             this.AppendWhereLike("s.name", request.CatSName);
@@ -107,7 +109,7 @@ namespace OilToolsPlantform.Data.DAL
 
         public void ViewTool(PQToolView request)
         {
-            con.Database.ExecuteSqlCommand("update tbToolExt te set te.ViewCount=te.ViewCount+1 where te.toolid=" + request.ToolID);
+            con.Database.ExecuteSqlCommand("update tbToolExt set ViewCount=ViewCount+1 where toolid=" + request.ToolID);
         }
 
         internal void CaseQueryBuild(PQCaseQuery request)

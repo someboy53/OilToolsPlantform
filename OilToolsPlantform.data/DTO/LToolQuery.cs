@@ -24,5 +24,9 @@ namespace OilToolsPlantform.Data.DTO
         public string CaseContent { get; set; }
 
         public Nullable<int> DetailCount { get; set; }
+
+        public int Status { get; set; }
+
+        public string Enabled { get; set; }
     }
 }

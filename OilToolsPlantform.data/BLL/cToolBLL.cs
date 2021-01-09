@@ -309,22 +309,32 @@ namespace OilToolsPlantform.Data.BLL
                     Models.tbToolExt toolExt = new Models.tbToolExt();
                     if ("1".Equals(request.IsDel))
                     {
+                        //修改删除为作废
+                        //tool = con.tbTool.Find(request.ToolID);
+                        //foreach (Models.tbToolDetail tmp in tool.tbToolDetail)
+                        //{
+                        //    con.tbToolDetail.Remove(tmp);
+                        //}
+                        //foreach (Models.tbToolPic tmp in tool.tbToolPic)
+                        //{
+                        //    Models.tbPic p = con.tbPic.Find(tmp.PicID);
+                        //    con.tbPic.Remove(p);
+                        //    con.tbToolPic.Remove(tmp);
+                        //}
+                        //foreach (Models.tbToolExt tmp in tool.tbToolExt)
+                        //{
+                        //    con.tbToolExt.Remove(tmp);
+                        //}
+                        //con.tbTool.Remove(tool);
                         tool = con.tbTool.Find(request.ToolID);
-                        foreach (Models.tbToolDetail tmp in tool.tbToolDetail)
+                        if (tool.CreateUser == request.AccountNumber)
                         {
-                            con.tbToolDetail.Remove(tmp);
+                            tool.Enabled = "0";
                         }
-                        foreach (Models.tbToolPic tmp in tool.tbToolPic)
+                        else
                         {
-                            Models.tbPic p = con.tbPic.Find(tmp.PicID);
-                            con.tbPic.Remove(p);
-                            con.tbToolPic.Remove(tmp);
+                            response.ErrorCode = "A_NOT_CREATOR";
                         }
-                        foreach (Models.tbToolExt tmp in tool.tbToolExt)
-                        {
-                            con.tbToolExt.Remove(tmp);
-                        }
-                        con.tbTool.Remove(tool);
                     }
                     else
                     {
@@ -431,6 +441,15 @@ namespace OilToolsPlantform.Data.BLL
                         }
                         else
                         {
+                            //需要检查是否已经审核过了，没有审核才可以修改
+                            List<Models.tbAudit> objs = con.tbAudit.Where(p => p.TargetTableName == "tbTool" && p.TargetTableID == request.ToolID).OrderByDescending(p=>p.AuditID).ToList();
+                            if (objs[0].AuditID2 != null)
+                            {
+                                //说明已经审核了，不能修改
+                                response.ErrorCode = "A_AUDITED_NO_MODIFY";
+                                response.ErrorMessage = rm.GetString(response.ErrorCode);
+                                return response;
+                            }
                             tool = con.tbTool.Find(request.ToolID);
                             tool.Name = request.Name;
                             tool.NameJP = Spell.ChineseJP(request.Name);
@@ -565,6 +584,11 @@ namespace OilToolsPlantform.Data.BLL
                             }
                         }
                         tool.SearchStr = searchStr.Length > 500 ? searchStr.Substring(0, 500) : searchStr;
+                        cAuditBLL ab = new cAuditBLL();
+                        if (!ab.Audit("tbTool", tool.ToolID, 4, request.UID))
+                        {
+                            throw new Exception("A_AUDIT_FAIL");
+                        }
                     }
                     if (con.Entry<Models.tbTool>(tool).State != System.Data.Entity.EntityState.Unchanged || con.Entry<Models.tbPic>(pic).State != System.Data.Entity.EntityState.Unchanged || con.Entry<Models.tbToolDetail>(toolDetail).State != System.Data.Entity.EntityState.Unchanged)
                         con.SaveChanges();

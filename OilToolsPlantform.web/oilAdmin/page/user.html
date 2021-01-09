@@ -77,6 +77,7 @@
             <script type="text/html" id="currentTableBar">
                 <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
                 <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="repwd">重置密码</a>
+                <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="active">激活</a>
                 <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
             </script>
         </div>
@@ -129,6 +130,7 @@
                     { field: 'CellPhone', width: 100, title: '手机' },
                     { field: 'Email', width: 100, title: '电子邮箱' },
                     { field: 'WorkNumber', width: 100, title: '工号' },
+                    { field: 'Enabled', width: 100, title: '激活' },
                     { title: '操作', minWidth: 120, maxWidth: 120, toolbar: '#currentTableBar', align: "center", fixed: 'right' }
                 ]],
                 limits: [10, 15, 20, 25, 50, 100],
@@ -228,6 +230,25 @@
                             }
                             else
                                 layer.msg('删除失败,原因为' + res.ErrorMessage);
+                        }, '../adminhandler.ashx?method=userModify');
+                        layer.close(index);
+                    });
+                } else if (obj.event === 'active') {
+                    if (data.Enabled == "1") {
+                        layer.msg('该用户已经激活！')
+                        return;
+                    }
+                    layer.confirm('真的激活此用户吗', function (index) {
+                        var postdata = {};
+                        postdata.Enabled = '1';
+                        postdata.UserID = data.UserID;
+                        var jdata = { json: encodeURI(JSON.stringify(postdata)) };
+                        api(jdata, function (res) {
+                            if (res.ErrorCode == 'A_0') {
+                                layer.msg('激活成功');
+                            }
+                            else
+                                layer.msg('激活失败,原因为' + res.ErrorMessage);
                         }, '../adminhandler.ashx?method=userModify');
                         layer.close(index);
                     });

@@ -14,5 +14,6 @@
         /// 用户昵称
         /// </summary>
         public string name { get; set; }
+        public string phone { get; set; }
     }
 }

@@ -38,6 +38,7 @@ namespace OilToolsPlantform.Data.DTO
         public string WorkNumber { get; set; }
 
         public string IsDel { get; set; }
+        public string Enabled { get; set; }
 
         public PQUserModify() { 
             this.IsDel = "0";
