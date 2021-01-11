@@ -59,7 +59,7 @@ namespace OilToolsPlantform.oilAdmin
                 jsonStr = System.Web.HttpUtility.UrlDecode(jsonStr);
                 //过滤掉登录方法和登录初始化方法, 验证认证
                 Data.DTO.PSTokenView response = new Data.DTO.PSTokenView();
-                if (methodName != "login")
+                if (methodName != "login" && methodName != "getFans")
                 {
                     Data.DTO.PQTokenView request = new Data.DTO.PQTokenView();
                     request.token = Request["token"];
@@ -99,7 +99,7 @@ namespace OilToolsPlantform.oilAdmin
                 else
                 {
                     BeforeInvoke(methodName, response.FunctionCodes);
-                    respStr = (string)method.Invoke(this, null);
+                    respStr = (string)method.Invoke(this, new object[] { response.FunctionCodes });
                 }
                 context.Response.Write(respStr);
             }
@@ -126,7 +126,7 @@ namespace OilToolsPlantform.oilAdmin
         {
             //Hashtable user = GetUser();
             //if (user.role == "admin" && methodName == "remove") throw .    
-            if (methodName == "login" || methodName == "passwordModify" || methodName == "regist")
+            if (methodName == "login" || methodName == "passwordModify" || methodName == "regist" || methodName == "getFans")
                 return;
             foreach (string method in methodList)
             {
@@ -293,13 +293,13 @@ namespace OilToolsPlantform.oilAdmin
         #endregion
 
         #region 工具处理
-        public string toolQuery()
+        public string toolQuery(List<string> functionCodes)
         {
             Data.DTO.PQToolQuery request = new Data.DTO.PQToolQuery();
             request = this.Json2Obj(jsonStr, request.GetType()) as Data.DTO.PQToolQuery;
             Data.DTO.PSToolQuery response = new Data.DTO.PSToolQuery();
             Data.BLL.cToolBLL client = new Data.BLL.cToolBLL();
-            response = client.ToolQuery(request);
+            response = client.ToolQuery(request,functionCodes);
             string strResponse = this.Obj2Json(response);
             return strResponse;
         }
@@ -422,6 +422,20 @@ namespace OilToolsPlantform.oilAdmin
             Data.DTO.PSWechatFanQuery response = new Data.DTO.PSWechatFanQuery();
             Data.BLL.cOtherBLL client = new Data.BLL.cOtherBLL();
             response = client.WechatFanQuery(request);
+            string strResponse = this.Obj2Json(response);
+            return strResponse;
+        }
+
+        /// <summary>
+        /// 由内部定时器调用，通知WEB去批量取微信的粉丝数据
+        /// 不需要有参数后台处理
+        /// </summary>
+        /// <returns></returns>
+        public string getFans()
+        {
+            Data.DTO.ResponseBase response = new Data.DTO.ResponseBase();
+            Data.BLL.cOtherBLL client = new Data.BLL.cOtherBLL();
+            response = client.PullFans();
             string strResponse = this.Obj2Json(response);
             return strResponse;
         }

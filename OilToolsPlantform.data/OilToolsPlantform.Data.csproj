@@ -115,6 +115,7 @@
     <Compile Include="DTO\Base\RequestBase.cs" />
     <Compile Include="DTO\Base\ResponseBase.cs" />
     <Compile Include="DTO\LUser.cs" />
+    <Compile Include="DTO\WCUserList.cs" />
     <Compile Include="ErrorCode.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -230,6 +231,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>OilToolsPlantformModel.cs</LastGenOutput>
     </None>
+    <None Include="Models\WCFanTrigger.cmd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -249,6 +251,7 @@
     <Content Include="Models\InitData\test.sql" />
     <Content Include="Models\SQL\updateV0.3.txt" />
     <Content Include="Models\SQL\updateV0.2.txt" />
+    <Content Include="Models\wget.exe" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\com.Origin.CommonLibrary.Framework\com.Origin.CommonLibrary.Framework.csproj">

@@ -18,7 +18,7 @@ namespace OilToolsPlantform.Data.DTO
         public List<LToolQuery> data { get; set; }
         public string CatSName { get; set; }
 
-        public PSToolQuery()
+        public PSToolQuery() : base()
         {
             this.ToolQueryList = new List<LToolQuery>();
             this.data = new List<LToolQuery>();

@@ -126,10 +126,10 @@
                             var returnStr = '';
                             if(d.Enabled=='1')
                                 returnStr += '<a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">作废</a>';
-                            if (d.Status == 2)
+                            else if (d.CanAudit == '1')
                                 returnStr += '<a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">审核</a>';
-                            else if (d.Status == 3)
-                                returnStr += '<a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">审核</a>';
+                            else if (d.Status == 4)
+                                returnStr += '<a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="view">查看</a>';
                             return returnStr;
                         }, minWidth: 120, maxWidth: 120, align: 'center', title: '操作', fixed: 'right'
                     }
@@ -203,7 +203,22 @@
                         layer.full(index);
                     });
                     return false;
-                } else if (obj.event === 'delete') {
+                } else if (obj.event === 'view') {
+                    var index = layer.open({
+                        title: '查看工具',
+                        type: 2,
+                        shade: 0.2,
+                        maxmin: true,
+                        shadeClose: true,
+                        area: ['100%', '100%'],
+                        content: '../page/tools/view.html?t=t=' + Math.random() + '&id=' + data.ToolID,
+                    });
+                    $(window).on("resize", function () {
+                        layer.full(index);
+                    });
+                    return false;
+                }
+                else if (obj.event === 'delete') {
                     layer.confirm('真的作废此工具吗，只能作废自己创建的工具', function (index) {
                         var postdata = {};
                         postdata.IsDel = '1';

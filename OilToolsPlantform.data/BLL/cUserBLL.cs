@@ -513,6 +513,8 @@ namespace OilToolsPlantform.Data.BLL
                             o = con.tbOrg.Find(request.OrgID);
                             o.OrgName = request.OrgName;
                             o.Description = request.Description;
+                            Models.tbOrg p = con.tbOrg.Find(o.ParentID);
+                            o.FullPath = p.FullPath + o.OrgName + "/";
                             o.UpdateTime = DateTime.Now;
                         }
                     }

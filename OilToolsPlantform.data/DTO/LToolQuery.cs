@@ -28,5 +28,7 @@ namespace OilToolsPlantform.Data.DTO
         public int Status { get; set; }
 
         public string Enabled { get; set; }
+
+        public string CanAudit { get; set; }
     }
 }

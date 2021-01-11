@@ -137,6 +137,8 @@ namespace OilToolsPlantform.Data.BLL
                     }
                     currentStep = int.Parse(steps[(int)audit.NextAuditStep - 1]);
                 }
+                audit.LastAuditDate = DateTime.Now;
+                audit.LastAuditName = user.UserName;
                 audit.NextAuditOrgID = currentStep;
                 if (objs.Count == 0)
                     con.tbAudit.Add(audit);
@@ -144,7 +146,7 @@ namespace OilToolsPlantform.Data.BLL
             }
             catch (Exception ex)
             {
-                LogHelper.Error("cAuditBLL.WelcomeView出错！", ex);
+                LogHelper.Error("cAuditBLL.Audit出错！", ex);
                 throw;
             }
             return true;

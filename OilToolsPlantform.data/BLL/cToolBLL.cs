@@ -265,7 +265,7 @@ namespace OilToolsPlantform.Data.BLL
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public DTO.PSToolQuery ToolQuery(DTO.PQToolQuery request)
+        public DTO.PSToolQuery ToolQuery(DTO.PQToolQuery request, List<string> functionCodes)
         {
             DTO.PSToolQuery response = new DTO.PSToolQuery();
             try
@@ -278,6 +278,7 @@ namespace OilToolsPlantform.Data.BLL
                 response.MaxNum = num;
                 response.count = num;
                 response.MaxPage = MathExpansion.CaculatPage(num, request.PageRow);
+                response.SetRight(functionCodes, "tool");
 
                 response.ErrorMessage = rm.GetString(response.ErrorCode);
                 response.code = response.ErrorCode == "A_0" ? "0" : response.ErrorCode;
@@ -352,7 +353,7 @@ namespace OilToolsPlantform.Data.BLL
                             tool.UpdateUser = request.AccountNumber;
                             tool.UpdateTime = DateTime.Now;
                             tool.SortOrder = 0;
-                            tool.Enabled = "1";
+                            tool.Enabled = "0";
                             tool.SearchStr = "";
                             tool=con.tbTool.Add(tool);
                             con.SaveChanges();
