@@ -16,7 +16,7 @@
 </head>
 <body>
     <div class="layui-form layuimini-form" lay-filter="formdata">
-        <div class="layui-form-item">
+        <div class="layui-form-item" id="btnAddRole">
             <button class="layui-btn layui-btn-normal" id="btnAddRole">增加角色</button>
         </div>
         <div class="layui-form-item">
@@ -28,13 +28,13 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <div class="layui-input-block">
+            <div class="layui-input-block" id="btnAdd">
                 <button id="saveBtn" class="layui-btn layui-btn-normal" lay-submit lay-filter="formdata">确认保存</button>
             </div>
         </div>
     </div>
     <script src="../../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
-    <script src="../../js/other.js?v=20201222" type="text/javascript"></script>
+    <script src="../../js/other.js?v=20210117" type="text/javascript"></script>
     <script>
         layui.use(['form', 'laydate'], function () {
             var $ = layui.jquery,
@@ -148,6 +148,11 @@
                     layer.close(index);
                 });
             });
+
+            if (curAccess.indexOf("modify") < 0) {
+                $("#btnAdd").html("");
+                $("#btnAddRole").html("");
+            }
         });
     </script>
 </body>

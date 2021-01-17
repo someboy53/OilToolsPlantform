@@ -134,14 +134,24 @@
     <script src="lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
     <script src="js/lay-config.js?v=2.0.0" charset="utf-8"></script>
     <script>
-        layui.use(['jquery', 'layer', 'miniAdmin', 'miniTongji'], function () {
+        var curAccess = "";
+        layui.use(['jquery', 'layer', 'miniAdmin', 'miniTongji', 'element'], function () {
             var $ = layui.jquery,
                 layer = layui.layer,
                 miniAdmin = layui.miniAdmin,
+                element = layui.element,
                 miniTongji = layui.miniTongji;
 
+            //获取顶层url中的参数
+            var getMainParam = function (name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$|#)"); //构造一个含有目标参数的正则表达式对象
+                var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+                if (r != null) return unescape(r[2]); return null; //返回参数值
+            };
+
             var options = {
-                iniUrl: "api/init.json?t="+ Math.random(),    // 初始化接口
+                iniUrl: "./adminhandler.ashx?method=initQuery&token=" + getMainParam("token"),
+                //iniUrl: "api/init.json",
                 clearUrl: "api/clear.json", // 缓存清理接口
                 urlHashLocation: true,      // 是否打开hash定位
                 bgColorDefault: 4,      // 主题默认配置
@@ -161,6 +171,10 @@
             //         'xx.xxx.cn'
             //     ],
             // });
+
+            element.on('nav(navMenu)', function (elem) {
+                curAccess = elem.attr("layuisome-access");
+            });
 
             $('.login-out').on("click", function () {
                 layer.msg('退出登录成功', function () {

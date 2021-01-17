@@ -33,6 +33,10 @@ namespace OilToolsPlantform.oilAdmin
             return strJson;
         }
 
+        /// <summary>
+        /// 主处理函数
+        /// </summary>
+        /// <param name="context"></param>
         public void ProcessRequest(HttpContext context)
         {
             string methodName = string.Empty;
@@ -96,10 +100,14 @@ namespace OilToolsPlantform.oilAdmin
                 {
                     respStr = this.uploadImg(context.Server, Request.Files);
                 }
+                else if (methodName.Equals("initQuery"))
+                {
+                    respStr = this.initQuery(context.Server, response.FunctionCodes);
+                }
                 else
                 {
                     BeforeInvoke(methodName, response.FunctionCodes);
-                    respStr = (string)method.Invoke(this, new object[] { response.FunctionCodes });
+                    respStr = (string)method.Invoke(this, null);
                 }
                 context.Response.Write(respStr);
             }
@@ -176,6 +184,106 @@ namespace OilToolsPlantform.oilAdmin
         protected object Json2Obj(string json, Type type)
         {
             return PluSoft.Utils.JSON.Decode(json, type);
+        }
+
+        /// <summary>
+        /// 将权限值写入菜单的对象中，方便在每个页面打开时取值
+        /// </summary>
+        /// <param name="server">server context 对象</param>
+        /// <param name="functionCodes">当前用户的权限列表</param>
+        /// <returns></returns>
+        public string initQuery(HttpServerUtility server, List<string> functionCodes)
+        {
+            string response = string.Empty;
+            System.IO.TextReader tr = System.IO.File.OpenText(server.MapPath("./api/init.json"));
+            response = tr.ReadToEnd();
+            tr.Close();
+            tr.Dispose();
+            Newtonsoft.Json.Linq.JObject jo = Newtonsoft.Json.Linq.JObject.Parse(response);
+            //开始重新生成初始化数据以设置菜单显示
+            foreach (Newtonsoft.Json.Linq.JToken jt in jo["menuInfo"])
+            {
+                Newtonsoft.Json.Linq.JToken jtTag = jt["tag"];
+                string tagStr = string.Empty;
+                if (jtTag != null)
+                    tagStr = jtTag.ToString();
+                //第一层菜单
+                if (tagStr!=string.Empty)
+                {
+                    //有权限控
+                    if (!functionCodes.Contains(tagStr))
+                    {
+                        jt.Remove();
+                        continue;
+                    }
+                    else
+                    {
+                        string func = tagStr.Split('_')[0];
+                        foreach (string funright in functionCodes)
+                        {
+                            if (funright.IndexOf(func) > -1)
+                                jt["access"] = jt["access"] + "," + funright.Replace(func + "_", "");
+                        }
+                    }
+                }
+                //开始下一级
+                foreach (Newtonsoft.Json.Linq.JToken ch in jt["child"])
+                {
+                    Newtonsoft.Json.Linq.JToken jtTag1 = ch["tag"];
+                    string tagStr1 = string.Empty;
+                    if (jtTag1 != null)
+                        tagStr1 = jtTag1.ToString();
+                    //第一层菜单
+                    if (tagStr1 != string.Empty)
+                    {
+                        //有权限控
+                        if (!functionCodes.Contains(tagStr1))
+                        {
+                            ch.Remove();
+                            continue;
+                        }
+                        else
+                        {
+                            string func = tagStr1.Split('_')[0];
+                            foreach (string funright in functionCodes)
+                            {
+                                if (funright.IndexOf(func) > -1)
+                                    ch["access"] = ch["access"] + "," + funright.Replace(func + "_", "");
+                            }
+                        }
+                    }
+                    //开始下一级
+                    foreach (Newtonsoft.Json.Linq.JToken ch1 in ch["child"])
+                    {
+                        Newtonsoft.Json.Linq.JToken jtTag2 = ch1["tag"];
+                        string tagStr2 = string.Empty;
+                        if (jtTag2 != null)
+                            tagStr2 = jtTag2.ToString();
+                        //第一层菜单
+                        if (tagStr2 != string.Empty)
+                        {
+                            //有权限控
+                            if (!functionCodes.Contains(tagStr2))
+                            {
+                                ch1.Remove();
+                                continue;
+                            }
+                            else
+                            {
+                                string func = tagStr2.Split('_')[0];
+                                foreach (string funright in functionCodes)
+                                {
+                                    if (funright.IndexOf(func) > -1)
+                                        ch1["access"] = ch1["access"] + "," + funright.Replace(func + "_", "");
+                                }
+                            }
+                        }
+                        //不进行下一级了
+                    }
+
+                }
+            }
+            return jo.ToString();
         }
 
         public bool IsReusable
@@ -293,13 +401,13 @@ namespace OilToolsPlantform.oilAdmin
         #endregion
 
         #region 工具处理
-        public string toolQuery(List<string> functionCodes)
+        public string toolQuery()
         {
             Data.DTO.PQToolQuery request = new Data.DTO.PQToolQuery();
             request = this.Json2Obj(jsonStr, request.GetType()) as Data.DTO.PQToolQuery;
             Data.DTO.PSToolQuery response = new Data.DTO.PSToolQuery();
             Data.BLL.cToolBLL client = new Data.BLL.cToolBLL();
-            response = client.ToolQuery(request,functionCodes);
+            response = client.ToolQuery(request);
             string strResponse = this.Obj2Json(response);
             return strResponse;
         }

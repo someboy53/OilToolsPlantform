@@ -37,5 +37,7 @@ namespace OilToolsPlantform.Data.DTO
 
         public string WorkNumber { get; set; }
 
+        public string Enabled { get; set; }
+
     }
 }

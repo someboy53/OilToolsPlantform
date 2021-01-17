@@ -33,7 +33,7 @@
 
     <script src="../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
     <script src="../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
-    <script src="../js/other.js?v=20201222" type="text/javascript"></script>
+    <script src="../js/other.js?v=20210117" type="text/javascript"></script>
     <script>
         layui.use(['table', 'treetable'], function () {
             var $ = layui.jquery;
@@ -105,8 +105,14 @@
                             },
                             {
                                 templet: function (d) {
-                                    if (d.authority != null && d.authority != '')
-                                        return '<a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>';
+                                    if (d.authority != null && d.authority != '') {
+                                        if (curAccess.indexOf("modify") > -1)
+                                            return '<a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>';
+                                        else if (curAccess.indexOf("view") > -1)
+                                            return '<a class="layui-btn layui-btn-xs" lay-event="edit">查看</a>';
+                                        else
+                                            return "";
+                                    }
                                     else
                                         return '';
                                 }, width: 80, align: 'center', title: '操作'

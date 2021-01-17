@@ -25,7 +25,8 @@
               "title": "工具管理",
               "href": "page/tools.html",
               "icon": "fa fa-anchor",
-              "memo": "增加审核，审核权限和功能权限并存，以部门进行划分。",
+              "tag": "tool_query",
+              "access": "",
               "target": "_self"
             }
           ]
@@ -40,13 +41,16 @@
               "title": "应用案例查询",
               "href": "page/case.html",
               "icon": "fa fa-camera",
-              "memo": "",
+              "tag": "case_query",
+              "access": "",
               "target": "_self"
             },
             {
               "title": "库存查询(todo)",
               "href": "",
               "icon": "fa fa-cube",
+              "tag": "sku_query",
+              "access": "",
               "target": "_self"
             }
           ]
@@ -69,19 +73,24 @@
               "title": "用户及权限管理",
               "href": "page/user.html",
               "icon": "fa fa-user-secret",
-              "memo": "新增的用户的默认权限只有工具的新增",
+              "tag": "user_query",
+              "access": "",
               "target": "_self"
             },
             {
               "title": "组织结构",
               "href": "page/org.html",
               "icon": "fa fa-sitemap",
+              "tag": "org_query",
+              "access": "",
               "target": "_self"
             },
             {
               "title": "权限管理",
               "href": "page/right.html",
               "icon": "fa fa-lock",
+              "tag": "right_query",
+              "access": "",
               "target": "_self"
             }
           ]
@@ -96,6 +105,8 @@
               "title": "日志监测",
               "href": "page/log.html",
               "icon": "fa fa-file",
+              "tag": "log_query",
+              "access": "",
               "target": "_self"
             }
           ]
@@ -110,6 +121,8 @@
               "title": "粉丝管理",
               "href": "page/fans.html",
               "icon": "fa fa-heart",
+              "tag": "fans_query",
+              "access": "",
               "target": ""
             }
           ]

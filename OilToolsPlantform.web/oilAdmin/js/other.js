@@ -21,3 +21,5 @@ var closeCurrent = function (needQuery) {
     }
 };
 
+var curAccess = window.top.curAccess;
+

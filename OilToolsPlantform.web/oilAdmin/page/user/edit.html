@@ -81,13 +81,13 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <div class="layui-input-block">
+            <div class="layui-input-block" id="btnAdd">
                 <button id="saveBtn" class="layui-btn layui-btn-normal" lay-submit lay-filter="formdata">确认保存</button>
             </div>
         </div>
     </div>
     <script src="../../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
-    <script src="../../js/other.js?v=20201222" type="text/javascript"></script>
+    <script src="../../js/other.js?v=20210117" type="text/javascript"></script>
     <script>
         layui.use(['form', 'laydate'], function () {
             var $ = layui.jquery,
@@ -144,6 +144,9 @@
                 }
                 return;
             }, '../../adminhandler.ashx?method=userView');
+
+            if (curAccess.indexOf("modify") < 0)
+                $("#btnAdd").html("");
 
             form.on('submit(formdata)', function (data) {
                 var formData = data.field;

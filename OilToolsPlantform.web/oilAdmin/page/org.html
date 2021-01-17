@@ -27,14 +27,10 @@
         </div>
     </div>
     <!-- 操作列 -->
-    <script type="text/html" id="auth-state">
-        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="add">增加</a>
-        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
-    </script>
 
     <script src="../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
     <script src="../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
-    <script src="../js/other.js?v=20201222" type="text/javascript"></script>
+    <script src="../js/other.js?v=20210117" type="text/javascript"></script>
     <script>
         layui.use(['table', 'treetable'], function () {
             var $ = layui.jquery;
@@ -74,7 +70,16 @@
                     { field: 'OrgName', minWidth: 200, title: '部门名称' },
                     { field: 'Description', title: '部门说明' },
                     { field: 'OrgID', width: 80, align: 'center', title: '部门ID' },
-                    { toolbar: '#auth-state', maxWidth: 110, minWidth: 110, align: 'center', title: '操作', fixed: 'right' }
+                    {
+                        width: 110, align: 'center', title: '操作', fixed: 'right', templet: function (d) {
+                            if (curAccess.indexOf("modify") > -1) {
+                                return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="add">增加</a>' +
+                                    '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit"> 修改</a >';
+                            }
+                            else
+                                return "";
+                        }
+                    }
                 ]],
                 done: function () {
                     layer.closeAll('loading');
