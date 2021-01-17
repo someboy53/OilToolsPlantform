@@ -85,6 +85,15 @@
       "parentId": 5
     },
     {
+      "authorityId": 37,
+      "authorityName": "工具管理：作废",
+      "menuUrl": null,
+      "menuIcon": "",
+      "authority": "tool:cancel",
+      "isMenu": 2,
+      "parentId": 5
+    },
+    {
       "authorityId": 10,
       "authorityName": "工具管理-目录：查询",
       "menuUrl": null,

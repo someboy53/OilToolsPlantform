@@ -98,8 +98,8 @@ namespace OilToolsPlantform.Data.DAL
             this.AppendFieldStr("ISNULL(d.cc,0) DetailCount");
             this.AppendFieldStr("t.Enabled");
             this.AppendFieldStr("au.status");
-            this.AppendFieldStr("case when au.status='3' and au.NextAuditOrgID=(select u.orgID from tbUser u where u.UserID=" + request.UID.ToString() +") then '1' else '0' canAudit");
-            this.AppendFromStr("from tbTool t left join (select td.ToolID,count(1) cc from tbToolDetail td group by td.ToolID) d on t.ToolID=d.ToolID left join (select row_number() over (partition by a.TargetTableID order by a.AuditID desc) n,a.TargetTableID,a.status from tbAudit a where a.TargetTableName='tbTool') au on t.ToolID=au.TargetTableID and au.n=1,tbCatS s,tbCatF f");
+            this.AppendFieldStr("case when au.status='3' and au.NextAuditOrgID=(select u.orgID from tbUser u where u.UserID=" + request.UID.ToString() +") then '1' else '0' end canAudit");
+            this.AppendFromStr("from tbTool t left join (select td.ToolID,count(1) cc from tbToolDetail td group by td.ToolID) d on t.ToolID=d.ToolID left join (select row_number() over (partition by a.TargetTableID order by a.AuditID desc) n,a.TargetTableID,a.status,a.NextAuditOrgID from tbAudit a where a.TargetTableName='tbTool') au on t.ToolID=au.TargetTableID and au.n=1,tbCatS s,tbCatF f");
             this.AppendFromStr("where t.CatSID=s.CatSID and s.CatFID=f.CatFID");
             this.AppendWhereLike("t.name", request.ToolName);
             this.AppendWhereLike("s.name", request.CatSName);
