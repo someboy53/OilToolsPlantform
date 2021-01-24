@@ -38,6 +38,11 @@
           <Property Name="AuditName5" Type="nvarchar" MaxLength="50" />
           <Property Name="AuditStatus5" Type="int" />
           <Property Name="AuditDate5" Type="date" />
+          <Property Name="AuditAdvice1" Type="nvarchar" MaxLength="500" />
+          <Property Name="AuditAdvice2" Type="nvarchar" MaxLength="500" />
+          <Property Name="AuditAdvice3" Type="nvarchar" MaxLength="500" />
+          <Property Name="AuditAdvice4" Type="nvarchar" MaxLength="500" />
+          <Property Name="AuditAdvice5" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="tbCatF">
           <Key>
@@ -269,6 +274,7 @@
           <Property Name="subscribe_scene" Type="nvarchar" MaxLength="64" />
           <Property Name="qr_scene" Type="nvarchar" MaxLength="64" />
           <Property Name="qr_scene_str" Type="nvarchar" MaxLength="64" />
+          <Property Name="updatetime" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK_001">
           <End Role="tbCatF" Type="Self.tbCatF" Multiplicity="1" />
@@ -986,6 +992,7 @@
           <Property Name="subscribe_scene" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="qr_scene" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="qr_scene_str" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="updatetime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="tbAudit">
           <Key>
@@ -1020,6 +1027,11 @@
           <Property Name="LastAuditName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastAuditDate" Type="DateTime" Precision="0" />
           <Property Name="NextAuditStep" Type="Int32" />
+          <Property Name="AuditAdvice1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AuditAdvice2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AuditAdvice3" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AuditAdvice4" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AuditAdvice5" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1254,6 +1266,7 @@
           <EntitySetMapping Name="tbWechatFan">
             <EntityTypeMapping TypeName="OilToolsPlantformModel.tbWechatFan">
               <MappingFragment StoreEntitySet="tbWechatFan">
+                <ScalarProperty Name="updatetime" ColumnName="updatetime" />
                 <ScalarProperty Name="qr_scene_str" ColumnName="qr_scene_str" />
                 <ScalarProperty Name="qr_scene" ColumnName="qr_scene" />
                 <ScalarProperty Name="subscribe_scene" ColumnName="subscribe_scene" />
@@ -1278,6 +1291,11 @@
           <EntitySetMapping Name="tbAudit">
             <EntityTypeMapping TypeName="OilToolsPlantformModel.tbAudit">
               <MappingFragment StoreEntitySet="tbAudit">
+                <ScalarProperty Name="AuditAdvice5" ColumnName="AuditAdvice5" />
+                <ScalarProperty Name="AuditAdvice4" ColumnName="AuditAdvice4" />
+                <ScalarProperty Name="AuditAdvice3" ColumnName="AuditAdvice3" />
+                <ScalarProperty Name="AuditAdvice2" ColumnName="AuditAdvice2" />
+                <ScalarProperty Name="AuditAdvice1" ColumnName="AuditAdvice1" />
                 <ScalarProperty Name="NextAuditStep" ColumnName="NextAuditStep" />
                 <ScalarProperty Name="LastAuditDate" ColumnName="LastAuditDate" />
                 <ScalarProperty Name="LastAuditName" ColumnName="LastAuditName" />

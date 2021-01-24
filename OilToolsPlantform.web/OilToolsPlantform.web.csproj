@@ -248,6 +248,7 @@
     <Content Include="oilAdmin\lib\layui-v2.5.5\lay\modules\upload.js" />
     <Content Include="oilAdmin\lib\layui-v2.5.5\lay\modules\util.js" />
     <Content Include="oilAdmin\page\case.html" />
+    <Content Include="oilAdmin\page\tools\audit.html" />
     <Content Include="oilAdmin\page\tools\view.html" />
     <Content Include="oilAdmin\reg.html" />
     <Content Include="oilAdmin\login.html" />

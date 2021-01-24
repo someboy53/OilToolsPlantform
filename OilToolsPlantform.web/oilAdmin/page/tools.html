@@ -121,6 +121,7 @@
                             }
                         }, minWidth: 120, maxWidth: 120, align: 'center', title: '状态', fixed: 'right'
                     },
+                    { field: 'NextAuditOrgName', width: 120, title: '下一审核部门' },
                     {
                         templet: function (d) {
                             var returnStr = '';
@@ -131,7 +132,7 @@
                             }
                             else if (d.CanAudit == '1') {
                                 if (curAccess.indexOf("audit") > -1) {
-                                    returnStr += '<a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">审核</a>';
+                                    returnStr += '<a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="audit">审核</a>';
                                 }
                             }
                             else if (d.Status == 4) {
@@ -224,6 +225,20 @@
                         shadeClose: true,
                         area: ['100%', '100%'],
                         content: '../page/tools/view.html?t=t=' + Math.random() + '&id=' + data.ToolID,
+                    });
+                    $(window).on("resize", function () {
+                        layer.full(index);
+                    });
+                    return false;
+                } else if (obj.event === 'audit') {
+                    var index = layer.open({
+                        title: '审核工具',
+                        type: 2,
+                        shade: 0.2,
+                        maxmin: true,
+                        shadeClose: true,
+                        area: ['100%', '100%'],
+                        content: '../page/tools/audit.html?t=t=' + Math.random() + '&id=' + data.ToolID,
                     });
                     $(window).on("resize", function () {
                         layer.full(index);

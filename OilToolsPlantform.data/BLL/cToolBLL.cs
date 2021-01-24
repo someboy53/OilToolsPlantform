@@ -586,7 +586,7 @@ namespace OilToolsPlantform.Data.BLL
                         }
                         tool.SearchStr = searchStr.Length > 500 ? searchStr.Substring(0, 500) : searchStr;
                         cAuditBLL ab = new cAuditBLL();
-                        if (!ab.Audit("tbTool", tool.ToolID, 4, request.UID))
+                        if (!ab.Audit("tbTool", tool.ToolID, 4, request.UID, "保存提交"))
                         {
                             throw new Exception("A_AUDIT_FAIL");
                         }
@@ -599,6 +599,37 @@ namespace OilToolsPlantform.Data.BLL
             catch (Exception ex)
             {
                 LogHelper.Error("cToolBLL.ToolModify出错！", ex);
+                throw;
+            }
+            response.ErrorMessage = rm.GetString(response.ErrorCode);
+            return response;
+        }
+
+        public DTO.PSToolAudit ToolAudit(DTO.PQToolAudit request)
+        {
+            DTO.PSToolAudit response = new DTO.PSToolAudit();
+            try
+            {
+                using (var scope = new System.Transactions.TransactionScope())
+                {
+                    Models.tbTool tool = new Models.tbTool();
+                    Models.tbAudit audit = new Models.tbAudit();
+                    string searchStr = string.Empty;
+                    if (request.ToolID == 0)
+                    {
+                        throw new Exception("A_INALID_PARAM");
+                    }
+                    cAuditBLL ab = new cAuditBLL();
+                    if (!ab.Audit("tbTool", request.ToolID, 4, request.UID,request.PassDesc))
+                    {
+                        throw new Exception("A_AUDIT_FAIL");
+                    }
+                    scope.Complete();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error("cToolBLL.ToolAudit出错！", ex);
                 throw;
             }
             response.ErrorMessage = rm.GetString(response.ErrorCode);

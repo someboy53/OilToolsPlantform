@@ -133,5 +133,25 @@ namespace OilToolsPlantform.Data.Models
         /// 
         /// </summary>
         public Nullable<int> NextAuditStep { get; set; }
+    	/// <summary>
+        /// 
+        /// </summary>
+        public string AuditAdvice1 { get; set; }
+    	/// <summary>
+        /// 
+        /// </summary>
+        public string AuditAdvice2 { get; set; }
+    	/// <summary>
+        /// 
+        /// </summary>
+        public string AuditAdvice3 { get; set; }
+    	/// <summary>
+        /// 
+        /// </summary>
+        public string AuditAdvice4 { get; set; }
+    	/// <summary>
+        /// 
+        /// </summary>
+        public string AuditAdvice5 { get; set; }
     }
 }

@@ -47,6 +47,7 @@ layui.define(["jquery", "miniMenu", "element","miniTab", "miniTheme"], function 
                 } else {
                     miniAdmin.renderLogo(data.logoInfo);
                     miniAdmin.renderClear(options.clearUrl);
+                    miniAdmin.renderName(data.AccountNumber);
                     miniAdmin.renderHome(data.homeInfo);
                     miniAdmin.renderAnim(options.pageAnim);
                     miniAdmin.listen();
@@ -104,6 +105,14 @@ layui.define(["jquery", "miniMenu", "element","miniTab", "miniTheme"], function 
          */
         renderClear: function (clearUrl) {
             $('.layuimini-clear').attr('data-href',clearUrl);
+        },
+
+        /**
+        * 初始化缓存地址
+        * @param clearUrl
+        */
+        renderName: function (nameTitle) {
+            $('.layuimini-setting-name').html(nameTitle);
         },
 
         /**

@@ -210,8 +210,10 @@
     <Compile Include="DTO\PSLogQuery.cs" />
     <Compile Include="OilToolsPlantform\Data\DTO\PQCaseQuery.cs" />
     <Compile Include="OilToolsPlantform\Data\DTO\PQRegist.cs" />
+    <Compile Include="OilToolsPlantform\Data\DTO\PQToolAudit.cs" />
     <Compile Include="OilToolsPlantform\Data\DTO\PSCaseQuery.cs" />
     <Compile Include="OilToolsPlantform\Data\DTO\PSRegist.cs" />
+    <Compile Include="OilToolsPlantform\Data\DTO\PSToolAudit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

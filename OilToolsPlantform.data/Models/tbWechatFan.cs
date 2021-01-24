@@ -89,5 +89,9 @@ namespace OilToolsPlantform.Data.Models
         /// 
         /// </summary>
         public string qr_scene_str { get; set; }
+    	/// <summary>
+        /// 
+        /// </summary>
+        public System.DateTime updatetime { get; set; }
     }
 }

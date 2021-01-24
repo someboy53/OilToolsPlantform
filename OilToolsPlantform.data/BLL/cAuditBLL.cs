@@ -21,7 +21,7 @@ namespace OilToolsPlantform.Data.BLL
         /// <param name="Pass">1-不通过2-返回修改4-通过</param>
         /// <param name="UserID">当前用户ID</param>
         /// <returns></returns>
-        public bool Audit(string TargetTableName, int TargetTableID, int Pass, int UserID)
+        public bool Audit(string TargetTableName, int TargetTableID, int Pass, int UserID,string PassDesc)
         {
             try
             {
@@ -80,30 +80,35 @@ namespace OilToolsPlantform.Data.BLL
                         audit.AuditName1 = user.UserName;
                         audit.AuditStatus1 = Pass;
                         audit.AuditDate1 = DateTime.Now;
+                        audit.AuditAdvice1 = PassDesc;
                         break;
                     case 2:
                         audit.AuditID2 = UserID;
                         audit.AuditName2 = user.UserName;
                         audit.AuditStatus2 = Pass;
                         audit.AuditDate2 = DateTime.Now;
+                        audit.AuditAdvice2 = PassDesc;
                         break;
                     case 3:
                         audit.AuditID3 = UserID;
                         audit.AuditName3 = user.UserName;
                         audit.AuditStatus3 = Pass;
                         audit.AuditDate3 = DateTime.Now;
+                        audit.AuditAdvice3 = PassDesc;
                         break;
                     case 4:
                         audit.AuditID4 = UserID;
                         audit.AuditName4 = user.UserName;
                         audit.AuditStatus4 = Pass;
                         audit.AuditDate4 = DateTime.Now;
+                        audit.AuditAdvice4 = PassDesc;
                         break;
                     case 5:
                         audit.AuditID5 = UserID;
                         audit.AuditName5 = user.UserName;
                         audit.AuditStatus5 = Pass;
                         audit.AuditDate5 = DateTime.Now;
+                        audit.AuditAdvice5 = PassDesc;
                         break;
                     default:
                         throw new Exception("A_AUDIT_OUT_RANGE");
@@ -114,11 +119,11 @@ namespace OilToolsPlantform.Data.BLL
                 else
                     steps = new string[] { };
                 int currentStep = 0;
+                audit.Status = Pass;
                 if (audit.NextAuditStep > steps.Length)
                 {
                     //超过了
                     audit.NextAuditStep -= 1;
-                    audit.Status = Pass;
                     switch (TargetTableName)
                     {
                         case "tbTool":
@@ -130,12 +135,8 @@ namespace OilToolsPlantform.Data.BLL
                 }
                 else
                 {
-                    audit.Status = Pass;
-                    if (Pass == 4)
-                    {
-                        audit.Status -= 1;
-                    }
-                    currentStep = int.Parse(steps[(int)audit.NextAuditStep - 1]);
+                    if(audit.Status==4)
+                        currentStep = int.Parse(steps[(int)audit.NextAuditStep - 1]);
                 }
                 audit.LastAuditDate = DateTime.Now;
                 audit.LastAuditName = user.UserName;

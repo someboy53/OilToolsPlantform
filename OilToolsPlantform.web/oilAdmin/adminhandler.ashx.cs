@@ -103,6 +103,7 @@ namespace OilToolsPlantform.oilAdmin
                 else if (methodName.Equals("initQuery"))
                 {
                     respStr = this.initQuery(context.Server, response.FunctionCodes);
+                    respStr = AddJsonInfo(respStr, "AccountNumber", response.UserAccount);
                 }
                 else
                 {
@@ -423,6 +424,17 @@ namespace OilToolsPlantform.oilAdmin
             return strResponse;
         }
 
+
+        public string toolAudit()
+        {
+            Data.DTO.PQToolAudit request = new Data.DTO.PQToolAudit();
+            request = this.Json2Obj(jsonStr, request.GetType()) as Data.DTO.PQToolAudit;
+            Data.DTO.PSToolAudit response = new Data.DTO.PSToolAudit();
+            Data.BLL.cToolBLL client = new Data.BLL.cToolBLL();
+            response = client.ToolAudit(request);
+            string strResponse = this.Obj2Json(response);
+            return strResponse;
+        }
 
         public string toolView()
         {
