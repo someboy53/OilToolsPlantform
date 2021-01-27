@@ -90,7 +90,7 @@
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">内容</label>
                         <div class="layui-input-block">
-                            <textarea id="FuncDesc"  name="FuncDesc" placeholder="请输入内容" readonly="readonly" class="layui-textarea" lay-filter="formdata"></textarea>
+                            <textarea id="FuncDesc" name="FuncDesc" placeholder="请输入内容" readonly="readonly" class="layui-textarea" lay-filter="formdata"></textarea>
                         </div>
                     </div>
                 </div>
@@ -152,21 +152,23 @@
                 </div>
             </div>
         </div>
+        
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            <legend>审核流水</legend>
+        </fieldset>
+        <ul class="layui-timeline">
+        </ul>
+
         <div class="layui-form-item">
-            <div class="layui-form-item">
-                <label class="layui-form-label">是否通过</label>
-                <div class="layui-input-block">
-                    <input type="checkbox" name="isPass" lay-skin="switch" lay-filter="formdata">
-                </div>
-            </div>
             <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">内容</label>
+                <label class="layui-form-label">审核意见</label>
                 <div class="layui-input-block">
                     <textarea id="PassDesc" name="PassDesc" placeholder="请输入审核意见" class="layui-textarea" lay-filter="formdata"></textarea>
                 </div>
             </div>
             <div class="layui-input-block">
-                <button id="auditBtn" class="layui-btn layui-btn-normal" lay-submit lay-filter="formdata">审核</button>
+                <button id="auditPassBtn" class="layui-btn layui-btn-normal" lay-submit lay-filter="formpass">审核通过</button>
+                <button id="auditRejectBtn" class="layui-btn layui-btn-normal" lay-submit lay-filter="formreject">不通过</button>
             </div>
         </div>
     </div>
@@ -263,6 +265,14 @@
                     });
                     form.val('formdata', res);
                     form.render('select'); //刷新select选择框渲染
+                    //开始做审核流程
+                    var templete1 = '<li class="layui-timeline-item"><i class="layui-icon layui-timeline-axis layui-icon-circle" ></i><div class="layui-timeline-content layui-text"><div class="layui-timeline-title">';
+                    var templete2 = '</div ></div></li >';
+                    var auditHistory = "";
+                    res.AuditHist.forEach(function (item) {
+                        auditHistory = auditHistory + templete1 + item + templete2;
+                    });
+                    $(".layui-timeline").html(auditHistory);
                     //准备图片
                     $('#ToolPic').attr('src', res.PictureList[0].Path + res.PictureList[0].StoreName);
                     layui.sessionData('ToolPic', { key: 'pics', value: res.PictureList });
@@ -274,20 +284,40 @@
                 return;
             }, '../../adminhandler.ashx?method=toolView');
 
-            form.on('submit(formdata)', function (data) {
+            form.on('submit(formpass)', function (data) {
                 var formData = data.field;
-
+                formData.IsPass = "1";
                 var jdata = {
                     json: encodeURI(JSON.stringify(formData))
                 };
                 api(jdata, function (res) {
                     if (res.ErrorCode == 'A_0') {
-                        layer.msg('修改成功', function () {
+                        layer.msg('审核通过', function () {
                             parent.document.getElementById("btnSearch").click();
                             closeCurrent(true);
                         });
                     } else {
-                        layer.msg('修改失败' + res.ErrorMessage);
+                        layer.msg('审核失败' + res.ErrorMessage);
+                        closeCurrent(false);
+                    }
+                }, '../../adminhandler.ashx?method=toolAudit');
+                return false;
+            });
+
+            form.on('submit(formreject)', function (data) {
+                var formData = data.field;
+                formData.IsPass = "0";
+                var jdata = {
+                    json: encodeURI(JSON.stringify(formData))
+                };
+                api(jdata, function (res) {
+                    if (res.ErrorCode == 'A_0') {
+                        layer.msg('审核不通过', function () {
+                            parent.document.getElementById("btnSearch").click();
+                            closeCurrent(true);
+                        });
+                    } else {
+                        layer.msg('审核失败' + res.ErrorMessage);
                         closeCurrent(false);
                     }
                 }, '../../adminhandler.ashx?method=toolAudit');

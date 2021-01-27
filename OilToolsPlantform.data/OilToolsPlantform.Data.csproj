@@ -251,6 +251,7 @@
     <Content Include="Models\Functions\dbo.fn_getPying.sql" />
     <Content Include="Models\InitData\datascript.sql" />
     <Content Include="Models\InitData\test.sql" />
+    <Content Include="Models\SQL\OilToolDataV1.0.sql" />
     <Content Include="Models\SQL\updateV0.3.txt" />
     <Content Include="Models\SQL\updateV0.2.txt" />
     <Content Include="Models\wget.exe" />

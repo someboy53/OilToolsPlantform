@@ -78,7 +78,7 @@ namespace OilToolsPlantform.Data.BLL
                     case 1:
                         audit.AuditID1 = UserID;
                         audit.AuditName1 = user.UserName;
-                        audit.AuditStatus1 = Pass;
+                        audit.AuditStatus1 = 0;
                         audit.AuditDate1 = DateTime.Now;
                         audit.AuditAdvice1 = PassDesc;
                         break;
@@ -119,24 +119,34 @@ namespace OilToolsPlantform.Data.BLL
                 else
                     steps = new string[] { };
                 int currentStep = 0;
-                audit.Status = Pass;
                 if (audit.NextAuditStep > steps.Length)
                 {
                     //超过了
-                    audit.NextAuditStep -= 1;
-                    switch (TargetTableName)
+                    if (Pass == 4)
                     {
-                        case "tbTool":
-                            Models.tbTool t = con.tbTool.Find(TargetTableID);
-                            t.Enabled = "1";
-                            break;
+                        switch (TargetTableName)
+                        {
+                            case "tbTool":
+                                Models.tbTool t = con.tbTool.Find(TargetTableID);
+                                t.Enabled = "1";
+                                break;
+                        }
                     }
+                    audit.Status = Pass;
+                    audit.NextAuditStep = 0;
                     currentStep = 0;
                 }
                 else
                 {
-                    if(audit.Status==4)
+                    if (Pass == 4)
+                    {
                         currentStep = int.Parse(steps[(int)audit.NextAuditStep - 1]);
+                        audit.Status = 3;
+                    }
+                    else
+                    {
+                        audit.Status = Pass;
+                    }
                 }
                 audit.LastAuditDate = DateTime.Now;
                 audit.LastAuditName = user.UserName;
@@ -151,6 +161,49 @@ namespace OilToolsPlantform.Data.BLL
                 throw;
             }
             return true;
+        }
+
+        public List<string> GetAuditHist(string TargetTableName,int TargetTableID)
+        {
+            List<string> resp = new List<string>();
+            Models.tbAudit audit = new Models.tbAudit();
+            List<Models.tbAudit> objs = con.tbAudit.Where(p => p.TargetTableName == TargetTableName && p.TargetTableID == TargetTableID).OrderByDescending(p => p.AuditID).ToList();
+            if (objs.Count > 0)
+            {
+                audit = objs[0];
+                string respTemp = "{0}于{1}{2},审核意见为:{3}";
+                string[] staticStatus = new string[] { "提交", "审核不通过", "草稿", "审核中", "审核通过" };
+                if (audit.AuditID1 != null && audit.AuditID1 > 0)
+                {
+                    //0-作废1-不通过2-草稿3-审核中4-审核完成
+                    resp.Add(string.Format(respTemp, audit.AuditName1, ((DateTime)(audit.AuditDate1)).ToString("yyyy-MM-dd HH:mm:ss"), staticStatus[(int)audit.AuditStatus1], audit.AuditAdvice1));
+                }
+                if (audit.AuditID2 != null && audit.AuditID2 > 0)
+                {
+                    //0-作废1-不通过2-草稿3-审核中4-审核完成
+                    resp.Add(string.Format(respTemp, audit.AuditName2, ((DateTime)(audit.AuditDate2)).ToString("yyyy-MM-dd HH:mm:ss"), staticStatus[(int)audit.AuditStatus2], audit.AuditAdvice2));
+                }
+                if (audit.AuditID3 != null && audit.AuditID3 > 0)
+                {
+                    //0-作废3-不通过2-草稿3-审核中4-审核完成
+                    resp.Add(string.Format(respTemp, audit.AuditName3, ((DateTime)(audit.AuditDate3)).ToString("yyyy-MM-dd HH:mm:ss"), staticStatus[(int)audit.AuditStatus3], audit.AuditAdvice3));
+                }
+                if (audit.AuditID4 != null && audit.AuditID4 > 0)
+                {
+                    //0-作废4-不通过2-草稿3-审核中4-审核完成
+                    resp.Add(string.Format(respTemp, audit.AuditName4, ((DateTime)(audit.AuditDate4)).ToString("yyyy-MM-dd HH:mm:ss"), staticStatus[(int)audit.AuditStatus4], audit.AuditAdvice4));
+                }
+                if (audit.AuditID5 != null && audit.AuditID5 > 0)
+                {
+                    //0-作废5-不通过2-草稿3-审核中4-审核完成
+                    resp.Add(string.Format(respTemp, audit.AuditName5, ((DateTime)(audit.AuditDate5)).ToString("yyyy-MM-dd HH:mm:ss"), staticStatus[(int)audit.AuditStatus5], audit.AuditAdvice5));
+                }
+                return resp;
+            }
+            else
+            {
+                return resp;
+            }
         }
 
         #endregion

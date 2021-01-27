@@ -90,7 +90,7 @@
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">内容</label>
                         <div class="layui-input-block">
-                            <textarea id="FuncDesc"  name="FuncDesc" placeholder="请输入内容" readonly="readonly" class="layui-textarea" lay-filter="formdata"></textarea>
+                            <textarea id="FuncDesc" name="FuncDesc" placeholder="请输入内容" readonly="readonly" class="layui-textarea" lay-filter="formdata"></textarea>
                         </div>
                     </div>
                 </div>
@@ -152,6 +152,13 @@
                 </div>
             </div>
         </div>
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            <legend>审核流水</legend>
+        </fieldset>
+        <ul class="layui-timeline">
+
+        </ul>
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button id="closeBtn" class="layui-btn layui-btn-normal" lay-submit lay-filter="formdata">关闭</button>
@@ -251,6 +258,14 @@
                     });
                     form.val('formdata', res);
                     form.render('select'); //刷新select选择框渲染
+                    //开始做审核流程
+                    var templete1 = '<li class="layui-timeline-item"><i class="layui-icon layui-timeline-axis layui-icon-circle" ></i><div class="layui-timeline-content layui-text"><div class="layui-timeline-title">';
+                    var templete2 = '</div ></div></li >';
+                    var auditHistory = "";
+                    res.AuditHist.forEach(function (item) {
+                        auditHistory = auditHistory + templete1 + item + templete2;
+                    });
+                    $(".layui-timeline").html(auditHistory);
                     //准备图片
                     $('#ToolPic').attr('src', res.PictureList[0].Path + res.PictureList[0].StoreName);
                     layui.sessionData('ToolPic', { key: 'pics', value: res.PictureList });

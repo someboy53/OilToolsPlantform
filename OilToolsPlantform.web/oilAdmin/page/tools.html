@@ -130,12 +130,12 @@
                                     returnStr += '<a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">作废</a>';
                                 }
                             }
-                            else if (d.CanAudit == '1') {
+                            if (d.CanAudit == '1') {
                                 if (curAccess.indexOf("audit") > -1) {
                                     returnStr += '<a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="audit">审核</a>';
                                 }
                             }
-                            else if (d.Status == 4) {
+                            if (d.Status == 4) {
                                 if (curAccess.indexOf("view") > -1) {
                                     returnStr += '<a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="view">查看</a>';
                                 }

@@ -21,10 +21,12 @@ namespace OilToolsPlantform.Data.DTO
         
         public List<System.Collections.Generic.KeyValuePair<int, string>> CatSList { get; set; }
 
+        public List<string> AuditHist { get; set; }
         public PSToolView()
         {
             this.PictureList = new List<LPicture>();
             this.ToolDetailList = new List<LToolDetail>();
+            this.AuditHist = new List<string>();
         }
     }
 }

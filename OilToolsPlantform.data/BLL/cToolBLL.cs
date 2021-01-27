@@ -620,7 +620,7 @@ namespace OilToolsPlantform.Data.BLL
                         throw new Exception("A_INALID_PARAM");
                     }
                     cAuditBLL ab = new cAuditBLL();
-                    if (!ab.Audit("tbTool", request.ToolID, 4, request.UID,request.PassDesc))
+                    if (!ab.Audit("tbTool", request.ToolID, request.IsPass == "1" ? 4 : 1, request.UID, request.PassDesc))
                     {
                         throw new Exception("A_AUDIT_FAIL");
                     }
@@ -676,6 +676,8 @@ namespace OilToolsPlantform.Data.BLL
                         response.CatSList = this.CatSQuery(response.CatFID).Select(p => new KeyValuePair<int, string>(p.CatSID, p.Name)).ToList();
                     }
                     response.CatFList = this.CatFQuery().Select(p => new KeyValuePair<int, string>(p.CatFID, p.Name)).ToList();
+                    cAuditBLL audit = new cAuditBLL();
+                    response.AuditHist = audit.GetAuditHist("tbTool", request.ToolID);
 
                     response.ErrorCode = "A_0";
                 }
